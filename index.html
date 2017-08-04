@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="utf-8" />
+	<title>交互空间</title>
+	<link rel="shortcut icon" href="./favicon.ico" />
+	<link type="text/css" rel="stylesheet" href="style.css" />
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> 
+</head>
+
+<body>
+	<div id="main">
+		<h1><a href="index.html"><img src="./images/main.png" alt="交互空间" /></a></h1>
+		<div id="content">
+			<div id="uid">
+				<h2><img src="./images/uid.png" alt="交互设计" /></h2>
+				<ul class="content-list">
+					<li id="zhiyin" class="list-item">
+						<img class="intro-img left" src="./images/zhiyin/intro.png" alt="知音" />
+						<div class="intro-char right">
+							<h3>知音</h3>
+							<p>
+			                  古语云“君子之交淡如水”，又有诗云“高山流水觅知音”。简单、懂你，这就是知音。
+							</p>
+						</div>
+					</li>
+					<li id="jianshu" class="list-item">
+						<img class="intro-img right" src="./images/jianshu/intro.png" alt="简书" />
+						<div class="intro-char left">
+							<h3>简书 · 导航重设计</h3>
+							<p>
+			                  以“书”的形式表达简单之美，用简单的导航带给你浸入式的阅读体验。
+							</p>
+						</div>
+					</li>
+					<li id="jiyibi" class="list-item">
+						<img class="intro-img left" src="./images/jiyibi/intro.png" alt="记一笔" />
+						<div class="intro-char right">
+							<h3>支付宝 · “记一笔”重设计</h3>
+							<p>
+			                  简单的排版，人性化的交互方式，让“记一笔”不再那么复杂。
+							</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div id="front-end">
+				<h2><img src="./images/front-end.png" alt="前端开发" /></h2>
+				<ul class="content-list">
+					<li id="cssjm" class="list-item">
+						<img class="intro-img left" src="./images/cssjm/intro.png" alt="CSS揭秘" />
+						<div class="intro-char right">
+							<h3>CSS揭秘</h3>
+							<p>
+			                  全新解答网页设计经典难题，纯CSS实现《CSS揭秘》的所有案例。
+							</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div id="pulley">
+		<span id="slider"></span>
+		<span id="line"></span>
+		<a id="about" href="./contact.html">contact me</a>
+	</div>
+	
+	<script>
+	
+		/*滑轮*/
+		var down=0;
+		
+		var windowH=parseInt($("#pulley").css("height"));
+		var ranH=Math.floor(0.7*windowH);
+		var lineT=parseInt($("#line").css("top"));
+		var lineH=parseInt($("#line").css("height"));
+		
+		var bodyH=parseInt($("body").css("height"));
+		
+		$("#slider").mousedown(function(){
+			down=1;
+		});
+		$(document).mouseup(function(){
+			down=0;
+		});
+		$(document).mousemove(function(event){
+			var scrollTop=$(document).scrollTop();
+			if(down){
+				if(event.pageY-scrollTop>lineT+lineH && event.pageY-scrollTop<0.9*windowH){
+				
+					$("#line").css("height",event.pageY-lineT-scrollTop+"px");
+					$("#slider").css("top",event.pageY-15-scrollTop+"px");
+					
+					$(document).scrollTop((event.pageY-lineT-scrollTop-lineH)*(bodyH-windowH)/ranH);
+					
+					$("#about").css("bottom",parseInt($("#slider").css("top"))-0.6*windowH+"px");
+					
+				}
+			}
+		});
+		$(document).scroll(function(){
+			var scrollTop=$(document).scrollTop();
+			$("#line").css("height",Math.floor(scrollTop/(bodyH-windowH)*ranH+lineH)+"px");
+			$("#slider").css("top",Math.floor(scrollTop/(bodyH-windowH)*ranH+lineH+lineT-15)+"px");
+			
+			$("#about").css("bottom",parseInt($("#slider").css("top"))-0.6*windowH+"px");
+			
+		});
+		
+		/*页面跳转*/
+		$(".intro-img,.intro-char h3").click(function(){
+			if($(this).is("img")){
+				var name=$(this).parent().attr("id");
+				var cName=$(this).parent().parent().parent().attr("id");
+				
+				window.open("./"+cName+"/"+name+"/"+name+".html");
+				
+			}else{
+				
+				var name=$(this).parent().parent().attr("id");
+				var cName=$(this).parent().parent().parent().parent().attr("id");
+				
+				window.open("./"+cName+"/"+name+"/"+name+".html");
+				
+			}
+			
+		});
+	</script>
+</body>
+
+</html>

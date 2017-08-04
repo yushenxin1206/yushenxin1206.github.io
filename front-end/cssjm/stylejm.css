@@ -1,0 +1,1463 @@
+html{
+	font-size: 14px;/*rem是相对于html的font-size*/
+	background-color: whitesmoke;
+	tab-size: 4;
+	font-family: sans-serif;
+	overflow: hidden;
+	/*
+		浏览器自己的滚动条在回流重绘后会自动回到顶部 故禁用
+		但也导致href="#" 回不了顶部
+	*/
+}
+
+/**
+	导航
+*/
+main{
+	width: 100%;
+	height: 100vh;
+	float: right;
+	transition: width .5s;
+	overflow-y: auto; /*为元素加滚动条 避免直接回顶部*/
+}
+nav{
+	width: 0;
+	position: fixed;
+	top: 0; left: 0;
+	background: #58a;
+	padding: 0em;
+	box-sizing: border-box;
+	height: 100vh;
+	white-space: nowrap;
+	overflow-x: hidden;
+	overflow-y: auto;
+	transition: width .5s, padding .5s;
+}
+nav h2{
+	font-size: 160%;
+}
+nav h3{
+	font-size: 140%;
+}
+nav section.chapters a{
+	display: block;
+	font: bold 120% sans-serif;
+	margin: 1em;
+	color: inherit;
+    text-decoration: none;
+}
+nav section.chapters a:hover{
+	color: #ddd;
+	text-decoration: underline;
+}
+input#show-menu{
+	position: absolute;
+	top: 0; left: 0;
+	clip: rect(0,0,0,0);
+}
+input#show-menu+label{
+	position: fixed;
+	z-index: 1;
+	left: .8em;
+	top: .2em;
+	width: 1.5em;
+	height: 2em;
+	background: linear-gradient(transparent 75%, #58a) 0 0 / 100% .7em;
+	cursor: pointer;
+}
+input#show-menu+label:hover{
+	background-image: linear-gradient(transparent 70%, darkgreen);
+}
+input#show-menu:checked+label{
+	background-image: linear-gradient(transparent 80%, #ccc);
+}
+input#show-menu:checked+label:hover{
+	background-image: linear-gradient(transparent 70%, #ddd);
+}
+input#show-menu:checked~nav{
+	width: 21em;/*min-content不能解析为一个值 不能产生过渡效果*/
+	padding: 2em;
+}
+input#show-menu:checked~main{
+	width: calc(100% - 21em);
+}
+/*回顶部标签*/
+a#go-top{
+	display: block;
+	text-decoration: none;
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	right: 3em;
+	bottom: 3em;
+	font: bold 120% sans-serif;
+	color: white;
+	line-height: 60px;
+	text-align: center;
+	background: linear-gradient(135deg, transparent 17.5px, rgba(0,0,0,.3) 0),
+				linear-gradient(-135deg, transparent 17.5px, rgba(0,0,0,.3) 0);
+	background-position: top left, right top;
+	background-size: 25px 50px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+a#go-top:hover{
+	background-image: linear-gradient(135deg, transparent 17.5px, rgba(0,0,0,.5) 0),
+						linear-gradient(-135deg, transparent 17.5px, rgba(0,0,0,.5) 0);
+}
+
+/**
+	标签和类样式设置
+*/
+h1{
+	padding-left: 3rem;
+	padding-top: .67em;/*使锚点能够定位到顶部*/
+	margin-top: 0;
+}
+pre.css-skills-code{
+	background: tan;
+	border: 1px solid gray;
+	background-color: tan;
+	padding: 1em;
+}
+section.css-skills{
+	padding-top: 1em;
+	padding-bottom: 1em;
+	background-color: floralwhite;
+	padding-left: 3rem;
+	overflow: hidden;/*清除浮动 bfc原理*/
+}
+section.css-skills div.skills-parts{
+	float: left;
+}
+section.css-skills div.skills-parts:nth-child(n+1){
+	margin-right: 2em;/*margin尽量用right 自适应强*/
+}
+/*图形中显示代码*/
+section.css-skills div.skills-parts>p{
+	display: flex;
+	width: 20em;
+	height: 20em;
+	background: darkseagreen
+}
+section.css-skills div.skills-parts>p>code{
+	margin: auto;
+}
+/*代码块*/
+section.css-skills div.skills-parts p.css-skills-code{
+	display: block;
+	width: auto;
+	height: auto;
+	border: 1px solid gray;
+	background-color: tan;
+	padding: 1em;
+}
+section.css-skills div.skills-parts p.css-skills-code code{
+	display: block;
+	margin-top: 1em;
+	margin-left: 2em;
+}
+
+
+
+/*1 半透明边框*/
+section#css-skills-1 p{
+	border: 10px solid hsla(0,0%,100%,.5);
+	background: #58a;
+}
+
+div#css-skills-1-2 p{
+	background-clip: padding-box;
+}
+
+/*2 多重边框*/
+section#css-skills-2 p{
+	box-shadow: 0 0 0 10px #655,
+				0 0 0 15px cadetblue;
+	margin: 2em 1em;/*shadow不占位*/
+}
+
+div#css-skills-2-2 p{
+	box-shadow: none;
+	margin: 0;
+	border: 10px solid #655;
+	outline: 5px solid cadetblue;
+}
+
+/*3 灵活的背景定位*/
+section#css-skills-3 p{
+	width: 25em;
+	height: 25em;
+	background: url(images/css-skills-3-1.jpg) no-repeat bottom right #58a;
+	background-position: right 20px bottom 10px;
+}
+div#css-skills-3-2 p{
+	width: 23em;
+	height: 23em;
+	padding: 1em;
+	background: url(images/css-skills-3-1.jpg) no-repeat bottom right #58a;
+	background-origin: content-box;
+}
+div#css-skills-3-3 p{
+	background: url(images/css-skills-3-1.jpg) no-repeat #58a;
+	background-position: calc(100% - 20px) calc(100% - 10px);
+}
+
+/*4 边框内圆角*/
+div#css-skills-4-1 div#css-skills-show-4-1{
+	background: #655;
+	padding: .8em;
+}
+div#css-skills-4-1 div#css-skills-show-4-1>div{
+	background: tan;
+	border-radius: .8em;
+	padding: 1em;
+}
+div#css-skills-4-2 p{
+	background: tan;
+	border-radius: .8em;
+	padding: 1em;
+	box-shadow: 0 0 0 .6em #655;
+	outline: .6em solid #655;/*outline和box-shadow一样不占位,不响应鼠标事件*/
+	margin: 1.6em .6em;
+}
+p#css-skills-code-4-1{
+	padding: 1.8em 3em; 
+}
+
+/*5 条纹背景*/
+section#css-skills-5 p>code{
+	background-color: tan;
+	padding: .6em;
+}
+div#css-skills-5-1 p{
+	background: linear-gradient(#EEDC82 50%,#58a 0);/*只需两个色标 头尾省略*/
+	background-size: 100% 30px;
+}
+div#css-skills-5-2 p{
+	background: linear-gradient(90deg,#EEDC82 50%,#58a 0);
+	background-size: 30px 100%;
+}
+div#css-skills-5-3 p{
+	background: linear-gradient(45deg,#EEDC82 25%,#58a 0,#58a 50%,
+				  #EEDC82 0,#EEDC82 75%,#58a 0);
+	background-size: 40px 40px;
+}
+div#css-skills-5-4 p{
+	width: 20rem;
+	height: 20rem;
+	background:	repeating-linear-gradient(60deg,
+				  #EEDC82,#EEDC82 15px,#58a 0,#58a 30px);/*需要四个色标（头尾不能省略）*/
+	/*chrome默认font-size小于12px无效 实际为12px*/
+	font-size: .8em;
+}
+div#css-skills-5-5 p{
+	width: 20rem;/*宽度一致 更能自适应布局*/
+	height: 20rem;
+	background: #58a;
+	background-image: repeating-linear-gradient(60deg,
+						transparent, transparent 15px,
+						hsla(0,0%,100%,.2) 0,
+						hsla(0,0%,100%,.2) 30px);
+	font-size: .8em;
+}
+
+/*半透明黑色用于加深 半透明白色用于浅化*/
+
+/*6 复杂的背景图案*/   
+section#css-skills-6 p>code{
+	background-color: tan;
+	padding: .6em;
+}
+div#css-skills-6-1 p{
+	background: #58a;
+	background-image: 	linear-gradient(white 1px,transparent 0),
+						linear-gradient(90deg,white 1px,transparent 0);
+	background-size: 30px 30px;
+}
+div#css-skills-6-2 p{
+	background: #655;
+	background-image: 	radial-gradient(tan 20%,transparent 0),
+						radial-gradient(tan 20%,transparent 0);
+	background-size: 30px 30px;
+	background-position: 0 0,15px 15px;
+}
+div#css-skills-show-6-3{
+	width: 100%;
+	height: 5em;
+	background: #eee;
+	background-image: linear-gradient(45deg,rgba(0,0,0,.25) 25%,
+						transparent 0, transparent 75%,rgba(0,0,0,.25) 0),
+					  linear-gradient(45deg,rgba(0,0,0,.25) 25%,
+						transparent 0, transparent 75%,rgba(0,0,0,.25) 0);
+	background-size: 30px 30px;
+	background-position: 0 0,15px 15px;
+}
+p#css-skills-code-6-3{
+	padding: .5em;
+}
+/*换行符"\" 在前面最好加空格" \" 否则容易出现歧义，如' "\ '就会有错误*/
+div#css-skills-show-6-4{
+	width: 100%;
+	height: 5em;
+	background: #eee url('data:image/svg+xml,\
+	<svg xmlns="http://www.w3.org/2000/svg" \
+		width="100" height="100" \
+		fill-opacity=".25"> \
+	<rect x="50" width="50" height="50"/> \
+	<rect y="50" width="50" height="50"/> \
+	</svg>');
+	background-size: 30px 30px;
+}
+p#css-skills-code-6-4{
+	padding: 1.05em;
+}
+
+/*7 伪随机背景*/
+div#css-skills-show-7-1{
+	width: 100%;
+	height: 5em;
+	background:hsl(20,40%,90%);
+	background-image: 	linear-gradient(90deg,#58a 3px,transparent 0),
+						linear-gradient(90deg,#EEDC82 5px,transparent 0),
+						linear-gradient(90deg,#655 7px,transparent 0);
+	background-size: 11px 100%, 13px 100%, 17px 100%;
+}
+
+/*8 连续的图像边框*/
+div#css-skills-8-1 p{
+	border: 1em solid transparent;
+	background: linear-gradient(tan,tan) padding-box,/*origin和clip都是padding-box*/
+				url(./images/stone-art.png) border-box 0 / cover ;
+}
+div#css-skills-show-8-2{
+	height: 5em;
+	border: .8em solid transparent;
+	background: linear-gradient(white,white) padding-box,
+				repeating-linear-gradient(135deg,red 0,red .5em,
+					transparent 0,transparent 1em,#58a 0,#58a 1.5em,
+					transparent 0,transparent 2em) border-box;
+}
+p#css-skills-code-8-2{
+	padding: 1.5em;
+}
+div#css-skills-show-8-3{
+	height: 5em;
+	border: .8em solid transparent;/*生成的图像大小为元素大小 切割后刚好只剩边框 若为本地图像 大小则不能自适应*/
+	border-image: 11 repeating-linear-gradient(135deg,red 0,red .5em,
+						transparent 0,transparent 1em,#58a 0,#58a 1.5em,
+						transparent 0,transparent 2em);/*此处默认在border-box内生成图像*/
+}
+p#css-skills-code-8-3{
+	padding: 2.1em;
+}
+
+@keyframes ants{
+	to{background-position: 100%;}
+}
+div#css-skills-show-8-4{/*设置background 颜色要放最后一层 否则报错 颜色也可以设置clip属性与图像一样 如yellow border-box;*/
+	height: 5em;
+	border: 1px solid transparent;
+	background: linear-gradient(white,white) padding-box,
+					repeating-linear-gradient(135deg, black 0,black 25%,white 0,white 50%) 0 / .6em .6em;
+	animation: ants 12s linear infinite;				
+}
+
+/*font-size的em相对于父元素(其实也是本身继承值) 其余的相对于本身的font-size*/
+div#css-skills-show-8-5{
+	font-weight: bold;
+	padding: 1em;
+	border-top: .2em solid transparent;
+	border-image: 100% 0 0 linear-gradient(90deg,currentColor 25%,transparent 0);
+}
+p#css-skills-code-8-5{
+	padding: 4.3em 1em;
+	margin-top: 3em;
+}
+
+/*9 自适应的椭圆*/
+div#css-skills-9-1 p{
+	height: 15em; 
+	border-radius: 50%;
+}
+div#css-skills-9-2 p{
+	height: 13em; 
+	border-radius: 50% / 100% 100% 0 0;
+	padding-top: 2em;
+}
+div#css-skills-9-3 p{
+	height: 13em;
+	width: 18em;
+	border-radius: 100% 0 0 0;
+	padding-top: 2em;
+	padding-left: 2em;
+}
+
+/*10 平行四边形*/
+section#css-skills-10 .skills-parts{
+	margin-right: 3em;
+}
+div#css-skills-show-10-1{
+	background: #58a;
+	color: white;
+	font-weight: bold;
+	transform: skewX(-45deg);
+	transform-origin: center bottom;
+}
+div#css-skills-show-10-1>div{
+	transform: skewX(45deg);
+	transform-origin: center bottom;
+	margin-left: 5em; 
+}p#css-skills-code-10-1{
+	padding: 3.8em 2em; 
+}
+div#css-skills-show-10-2{
+	color: white;
+	font-weight: bold;
+	position: relative;
+	padding-left: 5em;
+	z-index: 0;/*先确定父元素的层级 子元素再相对于父元素*/
+}
+div#css-skills-show-10-2::before{
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
+	background: #58a;
+	transform: skewX(-45deg);
+	transform-origin: center bottom;
+}
+
+/*11 菱形图片*/
+div#css-skills-show-11-1{
+	width: 163px;
+	height: 163px;
+	transform: rotate(45deg);
+	overflow: hidden;
+	margin: 3em auto;
+}
+div#css-skills-show-11-1>img{
+	transform: rotate(-45deg) scale(1.42);
+}
+div#css-skills-show-11-2{
+	width: 229px;
+	height: 229px;
+	margin: 0 auto;
+	background:url("./images/cat.png") 0 / cover;
+	-webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+	clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+p#css-skills-code-11-2{
+	padding: 4em 1em;
+	margin-top: 0;
+}
+
+/*12 切角效果*/
+div#css-skills-12-1 p{
+	width: 22.7em;
+	height: 22.7em;
+	background: linear-gradient(-45deg, transparent 1em, #58a 0);
+}
+div#css-skills-show-12-2{
+	width: 10em;
+	height: 6em;
+	background: #58a;
+	background: radial-gradient(circle at top left, transparent 1em, #58a 0) top left,
+				radial-gradient(circle at top right, transparent 1em, #58a 0) top right,
+				radial-gradient(circle at bottom right, transparent 1em, #58a 0) bottom right,
+				radial-gradient(circle at bottom left, transparent 1em, #58a 0) bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+	margin: 1em auto;
+}
+div#css-skills-show-12-3{
+	width: 8em;
+	height: 4em;
+	border: 1em solid transparent;
+	background: #58a;
+	background-clip: padding-box;
+	margin: 1em auto;
+	border-image: 1 url('data:image/svg+xml, \
+		<svg xmlns="http://www.w3.org/2000/svg" \
+		width="3" height="3" fill="%2358a"> \
+		<polygon points="0,1 1,0 2,0 3,1 3,2 2,3 1,3 0,2" /> \
+		</svg>'); 
+}
+
+p#css-skills-code-12-3{
+	padding: 1.6em;
+}
+div#css-skills-12-4 p{
+	width: 22.7em;
+	height: 22.7em;
+	background: #58a;
+	-webkit-clip-path: polygon(1em 0, calc(100% - 1em) 0, 100% 1em, 100% calc(100% - 1em),
+						calc(100% - 1em) 100%, 1em 100%, 0 calc(100% - 1em), 0 1em);
+	clip-path: polygon(1em 0, calc(100% - 1em) 0, 100% 1em, 100% calc(100% - 1em),
+						calc(100% - 1em) 100%, 1em 100%, 0 calc(100% - 1em), 0 1em);
+}
+
+/*13 梯形标签页*/
+div#css-skills-show-13-1{
+	position: relative;
+	height: 6em;
+	z-index: 0;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	line-height: 6em;
+}
+div#css-skills-show-13-1::before{
+	content: '';
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
+	z-index: -1;
+	background: #58a;
+	transform: perspective(5em) rotateX(10deg);
+	transform-origin: bottom;
+}
+div#css-skills-show-13-2{
+	position: relative;
+	height: 6em;
+	z-index: 0;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	line-height: 6em;
+}
+div#css-skills-show-13-2::before{
+	content: '';
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
+	z-index: -1;
+	background: #58a;
+	transform: perspective(5em) rotateX(10deg);
+	transform-origin:left bottom;
+}
+
+/*14 简单的饼图*/
+div#css-skills-show-14-1,div#css-skills-show-14-2{
+	width: 10em;
+	height: 10em;
+	background: #58a;
+	background-image: linear-gradient(90deg, #58a 50%, #655 0);
+	border-radius: 50%;
+	margin: 0 auto;
+}
+@keyframes spin{
+	to{transform: rotate(.5turn);}
+}
+@keyframes bg{
+	50%{background: #655;}
+}
+div#css-skills-show-14-1::before,div#css-skills-show-14-2::before{
+	display: block;
+	content: '';
+	margin-left: 50%; 
+	height: 100%;
+	border-radius: 0 100% 100% 0 / 50%;
+	background-color: inherit;
+	transform-origin: left;
+	animation: spin 3s linear infinite,
+				bg 6s step-end infinite;
+}
+p#css-skills-code-14-1{
+	padding: 3em 3em;
+}
+div#css-skills-show-14-2::before{
+	animation: spin 50s linear infinite,
+				bg 100s step-end infinite;
+	animation-delay: -20s;
+	animation-play-state: paused;
+}
+p#css-skills-code-14-2{
+	padding: 1.9em 3em;
+}
+div#css-skills-show-14-3{
+	height: 10em;
+}
+@keyframes spin21{
+	to{stroke-dasharray: 100 100;}
+}
+div#css-skills-show-14-3 circle{
+	fill: #58a;
+	stroke: #655;
+	stroke-width: 32;
+	stroke-dasharray: 0 100;
+	animation: spin21 6s linear infinite;
+}
+div#css-skills-show-14-3 svg{
+	display: block;
+	width: 10em;
+	height: 10em;
+	margin: 0 auto;
+	border-radius: 50%;
+	transform: rotate(-90deg);
+}
+p#css-skills-code-14-3{
+	padding: 5.3em 3em;
+}
+
+/*15 单侧投影*/
+div#css-skills-15-1 p{
+	box-shadow: .8em 0 .5em -0.5em rgba(0,0,0,.5);
+}
+div#css-skills-15-2 p{
+	box-shadow: .5em .5em .5em rgba(0,0,0,.5);
+}
+div#css-skills-15-3 p{
+	box-shadow: .8em 0 .5em -0.5em rgba(0,0,0,.5),
+				-0.8em 0 .5em -0.5em rgba(0,0,0,.5);
+}
+
+/*16 不规则的投影*/
+div#css-skills-16-1 p{
+	background:  transparent;
+	width: 18em;
+	height: 18em;
+	border: 1em dotted #fb3;
+	filter: drop-shadow(.5em .5em .5em rgba(0,0,0,.5)); 
+}
+div#css-skills-16-1 p code{
+	padding-left: .5em;
+}
+
+/*17 染色效果*/
+div#css-skills-show-17-1>img{
+	transition: 1s filter;
+	filter: sepia(1) saturate(4) hue-rotate(295deg);
+}
+div#css-skills-show-17-1>img:hover{
+	filter: none;
+}
+p#css-skills-code-17-1{
+	padding: 2.6em 2em;
+}
+div#css-skills-show-17-2{
+	transition: 1s background;
+	background: hsl(335, 50%, 50%);
+	isolation: isolate;/*与下层阻隔 仅混合透明背景*/
+}
+div#css-skills-show-17-2>img{
+	display: block;
+	height: 100%;
+	mix-blend-mode: luminosity;
+}
+div#css-skills-show-17-2:hover{
+	 background: transparent;
+}
+
+/*18 毛玻璃效果*/
+div#css-skills-show-18-1{
+	width: calc(.6 * 800px);
+	height: calc(.6 * 555px);
+	background: url("./images/tiger.png") 0 / cover;
+	padding: 1px;
+}
+div#css-skills-show-18-1 p{
+	position: relative;
+	font-size: 1.5em;
+	font-style: italic;
+	width: 25rem;
+	height: auto;
+	text-indent: 1rem;
+	text-align: justify;
+	margin: 18% auto;
+	padding: 1rem;
+	background: hsla(0,0%,100%,.25);/*背景在元素最底层 文字在第0层*/
+	z-index: 0;
+	overflow: hidden;
+}
+div#css-skills-show-18-1 p::before{
+	content: '';
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
+	background: url("./images/tiger.png") calc(13.5rem - .3 * 800px - .5px + 30px) 
+				calc(1px - .18 * .6 * 800px + 30px) / calc(.6 * 800px) calc(.6 * 555px);
+	filter: blur(20px);
+	z-index: -1;
+	margin: -30px;
+}
+
+/*19 折角效果*/
+div#css-skills-show-19-1{
+	height:10em;
+	background: #58a;
+	background: linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.4) 0) 
+				100% 0 / 2em 2em no-repeat,
+				linear-gradient(-135deg, transparent 1.4em, #58a 0);
+}
+p#css-skills-code-19-1{
+	padding: 10.1em 1em;
+}
+div#css-skills-show-19-2{
+	position: relative;
+	height:10em;
+	background: #58a;
+	background: linear-gradient(-150deg, transparent 2em, #58a 0);
+	border-radius: .5em;
+}
+div#css-skills-show-19-2::before{
+	content: '';
+	position: absolute;
+	top: 0; right: 0;
+	width: 2.3em;
+	height: 4em;
+	background: linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.2) 0, rgba(0,0,0,.4));
+	transform: translateY(-1.7em) rotate(-30deg); /*rotate时 坐标轴也会变 因此放后面*/
+	transform-origin: bottom right;
+	border-bottom-left-radius: inherit;
+	box-shadow: -.2em .2em .3em -.1em rgba(0,0,0,.15);
+}
+
+/*20 连字符断行*/
+/*浏览器不支持*/
+
+/*21 插入换行*/
+div#css-skills-show-21-1 dd{
+	margin: 0;	
+	font-weight: bold;
+}
+div#css-skills-show-21-1 dt,dd{
+	display: inline;/*inline-block内容为块级元素 换行会在内部进行*/
+}
+div#css-skills-show-21-1 dd::after{
+	content: '\A';
+	white-space: pre;
+}
+
+/*22 文本行的斑马条纹*/
+div#css-skills-show-22-1>pre{
+	padding: .5em;
+	line-height: 1.5;
+	background: linear-gradient(rgba(0,0,0,.2) 50%,transparent 0) 0 0 / auto 3em content-box;
+}
+
+/*23 调整tab的宽度*/
+
+/*24 连字*/
+div#css-skills-show-24-1{
+	font: 150%/1.6 "Adobe Caslon Pro", Baskerville, serif;
+	font-variant-ligatures: common-ligatures discretionary-ligatures historical-ligatures;
+}
+
+/*25 华丽的&符号*/
+@font-face{
+	font-family: Ampersand;
+	src: url(./fonts/BallantinesSerial-Black.ttf);
+	unicode-range: U+26;
+}
+div#css-skills-show-25-1{
+	font: 200%/1.6 Ampersand, Helvetica, sans-serif;
+}
+
+/*26 自定义下划线*/
+div#css-skills-show-26-1{
+	width: 25rem;
+	font-size: 1.5em;
+	text-align: justify;
+	line-height: 1.5;
+	background: linear-gradient(transparent 1.2em, gray 0, gray 1.3em,transparent 0) 0 0 / 100% 1.5em;
+	text-shadow: .05em 0 white, -.05em 0 white;
+}
+div#css-skills-show-26-2{
+	width: 25rem;
+	font-size: 1.5em;
+	text-align: justify;
+	line-height: 1.5;
+	background: linear-gradient(90deg, gray 60%, transparent 0) 0 1.2em / .5em .1em repeat-x;
+	text-shadow: .05em 0 white, -.05em 0 white;
+}
+pre#css-skills-code-26-2{
+	padding: 1.6em 1em;
+}
+div#css-skills-show-26-3 code{
+	font-weight: bold;
+}
+
+/*27 现实中的文字效果*/
+section#css-skills-27 div.css-skills-show{
+	font: 200%/1.6 Ampersand, Helvetica, sans-serif;
+}
+div#css-skills-show-27-1{
+	background: hsl(210, 13%, 60%);
+	color: hsl(210, 13%, 30%);
+	padding: 1em;
+	text-shadow: 0 1px 1px hsla(0,0%,100%,.8);
+}
+div#css-skills-show-27-2{
+	background: hsl(210, 13%, 40%);
+	color: hsl(210, 13%, 75%);
+	padding: 1em;
+	text-shadow: 0 -1px 1px black;/*外部阴影都是凸起 只有内部才是凹陷*/
+}
+div#css-skills-show-27-3{
+	background: hsl(210, 13%, 40%);
+	color: hsl(210, 13%, 75%);
+	padding: 1em;
+	text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black;
+}
+div#css-skills-show-27-4{
+	background: hsl(210, 13%, 40%);
+	color: hsl(210, 13%, 75%);
+	padding: 1em;
+	text-shadow: 0 0 1px black, 0 0 1px black, 
+				 0 0 1px black, 0 0 1px black,
+				 0 0 1px black,0 0 1px black;
+}
+div#css-skills-show-27-5{
+	background: hsl(210, 13%, 40%);
+	color: hsl(210, 13%, 75%);
+	padding: 1em;
+}
+div#css-skills-show-27-5 svg{
+	fill: currentColor;
+	stroke: black;
+	stroke-width: 1;
+	stroke-linejoin: round;
+}
+div#css-skills-show-27-6{
+	background: hsl(210, 13%, 40%);
+	color: hsl(210, 13%, 75%);
+	padding: 1em;
+	transition: 1s;
+}
+div#css-skills-show-27-6:hover{ 
+	text-shadow: 0 0 .1em, 0 0 .3em;
+}
+pre#css-skills-code-27-6{
+	padding: 1.7em 2em;
+}
+div#css-skills-show-27-7{
+	background: hsl(210, 13%, 40%);
+	color: white;
+	padding: 1em;
+	text-shadow: 0 1px hsl(0,0%,85%),/*从明到暗堆砌出立体感*/
+				 0 2px hsl(0,0%,80%),
+				 0 3px hsl(0,0%,75%),
+				 0 4px hsl(0,0%,70%),
+				 0 4px 5px black;
+}
+pre#css-skills-code-27-7{
+	padding: 1.7em 1em;
+}
+
+/*28 环形文字*/
+div#css-skills-show-28-1{
+	width: 20em;
+}
+div#css-skills-show-28-1 svg{
+	overflow: visible;
+	margin: 2em;
+}
+div#css-skills-show-28-1 svg path{
+	fill: none;
+}
+
+/*29 选用合适的鼠标光标*/
+div#css-skills-29-1 p{
+	cursor: not-allowed;
+}
+div#css-skills-29-2 p{
+	cursor: none;
+}
+
+/*30 扩大可点击区域*/
+div#css-skills-show-30-1  span,div#css-skills-show-30-2  button{/*button元素设置边框会挤压内部空间（像内边框）*/
+	display: block;
+	width: 2rem;
+	height: 2rem;
+	color: white;
+	font-size: 2em;
+	font-weight: bold;
+	text-align: center;
+	line-height: 2rem;
+	background: #58a;
+	margin: auto;
+	border-radius: 50%;
+	border: 10px solid transparent;
+	background-clip: padding-box;
+	outline: none;
+	cursor: pointer;
+}
+pre#css-skills-code-30-1{
+	padding: 5em 1em;
+}
+div#css-skills-show-30-2 button{
+	position: relative;
+	border: none;
+	margin: calc(1rem + 10px) auto;
+}
+div#css-skills-show-30-2 button::before{
+	content: '';
+	position: absolute;
+	top: -10px; right: -10px; 
+	bottom: -10px; left: -10px;
+}
+
+/*31 自定义复选框*/
+section#css-skills-31 input[type="checkbox"]+label{
+	font: bold 200% sans-serif;
+	display: inline-block;
+	padding: .3em .5em;
+	cursor: pointer;
+	user-select: none;
+}
+section#css-skills-31  input[type="checkbox"]{
+	position: absolute;
+	clip: rect(0,0,0,0);/*裁剪绝对定位的元素*/
+}
+div#css-skills-show-31-1 input[type="checkbox"]+label::before {
+	content: '\a0';
+	display: inline-block;
+	width: .8em;
+	height: .8em;
+	margin-right: .2em;
+	border-radius: .2em;
+	background: silver;
+	vertical-align: middle;
+	line-height: .6;
+}
+div#css-skills-show-31-1 input[type="checkbox"]:checked+label::before {
+	content: '\2713';
+	background: yellowgreen;
+}
+div#css-skills-show-31-2 input[type="checkbox"]+label{
+	background: #ccc;
+	background-image: linear-gradient(#ddd,#bbb);
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: .3em;
+	box-shadow: 0 1px white inset;
+	text-shadow: 0 1px 1px white;
+}
+div#css-skills-show-31-2 input[type="checkbox"]:checked+label{
+	box-shadow: .05em, .1em .2em rgba(0,0,0,.6) inset;
+	border-color: rgba(0,0,0,.3);
+	background:#bbb;
+}
+pre#css-skills-code-31-2{
+	padding: 3.2em 1em;
+}
+
+/*32 通过阴影来弱化背景*/
+section#css-skills-32{
+	overflow: visible;
+	/*由于chrome自身bug 有时设置hidden会隐藏fixed元素溢出部分 但设置overflow visible 不会产生BFC*/	
+}
+section#css-skills-32::after{/*通过伪元素清除浮动*/
+	display: block;
+	content: '';
+	clear: left;
+}
+section#css-skills-32 input[type="checkbox"]+label{
+	font: bold 200% sans-serif;
+	display: inline-block;
+	padding: .3em .5em;
+	cursor: pointer;
+	user-select: none;
+}
+section#css-skills-32  input[type="checkbox"]{
+	position: absolute;
+	clip: rect(0,0,0,0);
+}
+section#css-skills-32 input[type="checkbox"]+label{
+	background: #ccc;
+	background-image: linear-gradient(#ddd,#bbb);
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: .3em;
+	box-shadow: 0 1px white inset;
+	text-shadow: 0 1px 1px white;
+	position: relative;
+	z-index: 2;
+}
+section#css-skills-32 input[type="checkbox"]:checked+label{
+	box-shadow: .05em, .1em .2em rgba(0,0,0,.6) inset;
+	border-color: rgba(0,0,0,.3);
+	background:#bbb;
+}
+section#css-skills-32 input[type="checkbox"]:checked~.overlay{
+	position: fixed;
+	top: 0; right: 0; left: 0; bottom: 0;
+	background: rgba(0,0,0,.5);
+	z-index: 1;
+}
+div#css-skills-show-32-2 input#overlay-show-2:checked+label::before{
+	content: '';
+	position: fixed;/*伪元素fixed overflow hidden仍有效*/
+	top: 0; right: 0; left: 0; bottom: 0;
+	background: rgba(0,0,0,.5);
+	z-index: 1;/*关于层叠 无论fixed还是absolute 只在父层叠上下文的层叠顺序！ 而不是看相对元素*/
+}
+div#css-skills-show-32-3 input#overlay-show-3:checked+label{
+	box-shadow: 0 0 0 100vmax rgba(0,0,0,.5);
+}
+section#css-skills-32 dialog{ 
+	border: 1px solid #ccc;
+	border-radius: .5em;
+}
+div#css-skills-show-32-4 button{
+	cursor: pointer;
+	outline: none;
+	user-select: none;
+}
+div#css-skills-show-32-4>button{
+	font: bold 200% sans-serif;
+	display: inline-block;
+	padding: .3em .5em;
+	background: #ccc;
+	background-image: linear-gradient(#ddd,#bbb);
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: .3em;
+	box-shadow: 0 1px white inset;
+	text-shadow: 0 1px 1px white;
+}
+section#css-skills-32 dialog::backdrop{/*只有通过showModal()显示出来 才有backdrop*/
+	background: rgba(0,0,0,.5);
+}
+pre#css-skills-code-32-1{
+	padding: 2.1em 1em;
+}
+pre#css-skills-code-32-3{
+	padding: 4.5em 1em;
+}
+pre#css-skills-code-32-4{
+	padding: 3.4em 1em;
+}
+
+/*33 通过模糊来弱化背景*/
+div#css-skills-33-1{
+	position: relative;
+}
+div#css-skills-show-33-1{
+	width: 26em;
+	height:6em;
+	filter: blur(3px);
+	overflow: hidden;
+}
+div#css-skills-show-33-1-2{
+	position: absolute;
+	top: 6em;
+	left: 2.2em;
+	background: white;
+	box-shadow: 0 0 0 2.3em rgba(0,0,0,.5);
+}
+
+/*34 滚动提示*/
+div#css-skills-show-34-1>ul{
+	font-size: 1.5em;
+	width: 10em;
+	height: 8em;
+	overflow: auto;
+	border: 1px solid silver;
+	padding: .3em .5em;/*列表前的点只是装饰 不占位 当padding变小时 点会挤到外面去*/
+	background: linear-gradient(floralwhite 30%, rgba(255,255,255,0)),
+				radial-gradient(at top, rgba(0,0,0,.4), transparent 70%);
+	background-size:  100% 3em, 100% 1em;
+	background-repeat: no-repeat;
+	background-attachment: local, scroll;
+}
+
+/*35 交互式的图像对比控件*/
+div#css-skills-show-35-1{
+	position: relative;
+}
+div#css-skills-show-35-1>div{
+	position: absolute;
+	top: 0; right: 50%;bottom: 0; left: 0;
+	background: white;/*使图像不透明*/
+	/*
+		因为此前上层图像是半透明的 效果跟没叠加一样
+		还以为层叠出问题了 真是尴尬！！！！
+	*/
+	overflow: hidden;
+	resize: horizontal;
+	max-width: 100%;
+	/*
+		如果希望此属性生效，需要设置元素的 overflow 属性，
+		值可以是 auto、hidden 或 scroll。
+	*/
+}
+div#css-skills-show-35-1>div::before{
+	content: '';
+	position: absolute;
+	right: 0; bottom: 0;
+	width: 12px;
+	height: 12px;
+	background: linear-gradient(135deg, transparent 50%, white 0);
+	cursor: ew-resize;
+}
+
+/*36 自适应内部元素*/
+div#css-skills-show-36-1{
+	border-radius: 2em;
+	border: 1px solid silver;
+	padding: 1em;
+}
+/*figure标签默认有margin*/
+div#css-skills-show-36-1 figure{
+	max-width: min-content;
+	max-width: 350px;
+	margin: 1em auto;/*若只写auto 左右会计算 上下取默认值*/
+}
+
+/*37 精确控制表格列宽*/
+div#css-skills-show-37-1{
+	width: 30em;
+	background: #58a;
+	padding: .3em;
+}
+div#css-skills-show-37-1>table{
+	table-layout: fixed;
+	border-collapse: collapse;
+	border: white;
+	width: 100%;
+	white-space: nowrap
+}
+div#css-skills-show-37-1>table td,div#css-skills-show-37-1>table th{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	/*需配合overflow hidden使用 否则会和visible起冲突*/
+}
+
+/*38 根据兄弟元素的数量来设置样式*/
+section#css-skills-38 div.css-skills-show{
+	width: 30em;
+	height: 19em;
+	border: 1px solid silver;
+}
+section#css-skills-38 div.css-skills-show ul{
+	padding: 0;
+	padding-top: .2em;
+	height: 5em;
+	background: #58a;
+}
+section#css-skills-38 div.css-skills-show ul li{
+	display: inline-block;
+	font: bold 1.5em sans-serif; 
+	text-align: center;
+	line-height: 3;
+	border: 1px solid white;
+	border-radius: .3em;
+}
+div#css-skills-show-38-1 ul li:only-child{ 
+	width: calc(100% - 2px);
+}
+div#css-skills-show-38-1 ul li:first-child:nth-last-child(2),
+div#css-skills-show-38-1 ul li:first-child:nth-last-child(2)~li{
+	width: calc(50% - 6px);
+}
+div#css-skills-show-38-1 ul li:first-child:nth-last-child(3),/*li间的空隙是由空格产生的*/
+div#css-skills-show-38-1 ul li:first-child:nth-last-child(3)~li{
+	width: calc(33% - 6px);
+}
+section#css-skills-38 div#css-skills-show-38-2{
+	width: 35em;
+}
+div#css-skills-show-38-2 ul li:first-child:nth-last-child(-n+2),
+div#css-skills-show-38-2 ul li:first-child:nth-last-child(-n+2)~li{
+	width: 40%;
+}
+div#css-skills-show-38-2 ul li:first-child:nth-last-child(n+3):nth-last-child(-n+4),
+div#css-skills-show-38-2 ul li:first-child:nth-last-child(n+3):nth-last-child(-n+4)~li{
+	width: 20%;
+}
+pre#css-skills-code-38-2{
+	padding: 2.8em 1em;
+}
+
+/*39 满幅的背景 定宽的内容*/
+div#css-skills-39-1{
+	width: 100%;
+}
+div#css-skills-show-39-1{
+	font: bold 200% sans-serif;
+	color: white;
+	background: #58a;
+	height: 5em;
+	padding: 2em calc(50% - 10em);
+}
+div#css-skills-show-39-1 code{
+	display: block;
+	width: 17em;
+	margin: 1em auto;
+}
+
+/*40 垂直居中*/
+section#css-skills-40 .skills-parts{
+	width: 100%;
+}
+section#css-skills-40 pre{
+	font: bold 120% sans-serif;
+	color: #322;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+section#css-skills-40 .css-skills-show{
+	height: 20em;
+	background: #fb3;
+	position: relative;
+	border: 1px solid;
+}
+section#css-skills-40 .css-skills-show>div{
+	width: max-content;
+	height: 10em;
+	text-align: center;
+	background: #655;
+	padding: 1em;
+}
+section#css-skills-40 .css-skills-show h4{
+	font: bold 200% sans-serif;
+	color: white;
+}
+section#css-skills-40 .css-skills-show p{
+	font: bold 100% sans-serif;
+	color: white;
+}
+section#css-skills-40 div#css-skills-show-40-1>div{
+	position: absolute;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -50%);
+}
+section#css-skills-40 div#css-skills-show-40-2>div{
+	margin: 2em auto;
+}
+section#css-skills-40 div#css-skills-show-40-3{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/*41 紧贴底部的页脚*/
+section#css-skills-41 .css-skills-show{
+	border: 1px solid;
+	width: 20em;
+	height: 25em;
+	background: #58a;
+	color: white;
+	font: 200% bold sans-serif;
+}
+section#css-skills-41 .css-skills-show .user-bottom{/*margin 外泄对布局有影响*/
+	background: #655;
+	text-align: center;
+	padding: 1em;
+	line-height: 1;/*默认的行高加了2px*/ 
+}
+section#css-skills-41 div#css-skills-show-41-1 .user-top{
+	border: 1px solid;
+	min-height: calc(100% - 3em);
+}
+section#css-skills-41 div#css-skills-show-41-2{
+	display: flex;
+	flex-flow: column;
+}
+section#css-skills-41 div#css-skills-show-41-2 .user-top{
+	flex: 1;
+}
+
+/*42 缓动效果*/
+section#css-skills-42 .css-skills-show{
+	border: 1px solid;
+	width: 20em;
+	height: 15em;
+	background: #58a;
+	color: white;
+	font: 150% bold sans-serif;
+	position: relative;
+	padding: 1em;
+}
+@keyframes bounce{ 
+	60%, 80%, to{ 
+			transform: translateY(12em);
+			animation-timing-function: ease-out;
+		}
+	70% { transform: translateY(8em); }
+	90% { transform: translateY(10em); }
+}
+section#css-skills-42 div#css-skills-show-42-1 .user-ball{
+	position: absolute;
+	top: 1em; left: 1em;
+	height: 2em;
+	width: 2em;
+	border-radius: 50%;
+	background: radial-gradient(circle at 30% 30%, white, red);
+	animation: bounce 3s ease-in infinite;
+}
+section#css-skills-42 div#css-skills-show-42-1 code{
+	font-size: .6em;
+}
+section#css-skills-42 div#css-skills-show-42-1 pre{
+	margin: 0;
+}
+section#css-skills-42 div#css-skills-show-42-2 label{
+	position: relative;
+}
+section#css-skills-42 div#css-skills-show-42-2 span.user-callout{
+	font-size: .6em;
+	background: #655;
+	position: absolute;
+	top: 2.2em;
+	left: 13em;
+	text-align: center;
+}
+section#css-skills-42 div#css-skills-show-42-2 span.user-callout::before{
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: .6em solid transparent;
+	border-bottom:.6em solid #655;
+	top: -.9em;
+}
+section#css-skills-42 div#css-skills-show-42-2 input:not(:focus) + .user-callout{
+	transform: scale(0);
+	transition-timing-function: ease;
+}
+.user-callout{
+	transition: .5s transform cubic-bezier(.25,.1,.3,1.5);
+	transform-origin: 1.4em -.4em;
+}
+
+/*43 逐帧动画*/
+div#css-skills-show-43-1{
+	padding: 1em;
+	background: #58a;
+}
+@keyframes loader{
+	to{ background-position: -800px 0;}
+}
+div#css-skills-show-43-1 .user-loader{
+	width: 100px;
+	height: 100px;
+	background: url(./images/loader.png);
+	animation: loader 10s infinite steps(8);
+}
+
+/*44 闪烁效果*/
+section#css-skills-44 div.css-skills-show{
+	padding: 1em;
+	background: #58a;
+}
+section#css-skills-44 div.css-skills-show p{
+	font: 150% bold sans-serif;
+	color: white;
+}
+@keyframes blink-smooth{
+	to{ color:transparent;}
+}
+div#css-skills-show-44-1 p:hover{
+	animation: 1s blink-smooth 6 alternate; 
+}
+@keyframes blink{
+	50%{ color:transparent;}
+}
+div#css-skills-show-44-2 p:hover{
+	animation: 1s blink 3 steps(1); 
+}
+
+/*45 打字动画*/
+div#css-skills-show-45-1{
+	padding: 1em;
+	background: #58a;
+}
+div#css-skills-show-45-1 p{
+	width: 15ch;
+	font: 150% bold sans-serif;
+	color: white;
+	overflow: hidden;
+	white-space: nowrap;
+	border-right: .1em solid transparent;
+}
+@keyframes typing{
+	from{ width: 0;}
+}
+@keyframes caret{
+	50%{ border-color: currentColor;}
+}
+div#css-skills-show-45-1 p:hover{
+	border-right: .1em solid transparent;
+	animation: typing 15s steps(15),
+				caret 1s steps(1,start) infinite;
+}
+
+/*46 状态平滑的动画*/
+@keyframes boat{
+	to{ background-position: 100% 0;}
+}
+div#css-skills-show-46-1{
+	width: 24em;
+	height: 20em;
+	background: url(./images/boat.jpg) 0 0 / auto 100%;
+	animation: boat 10s linear infinite alternate;
+	animation-play-state: paused;
+}
+div#css-skills-show-46-1:hover{
+	animation-play-state: running;
+}
+
+/*47 沿环形路径平移的动画*/
+section#css-skills-47 .css-skills-show{
+	width: 30em;
+	height: 30em;
+	background: #fb3;
+	border-radius: 50%;
+	position: relative;
+}
+section#css-skills-47 .css-skills-show img{
+	border-radius: 50%;
+	position: absolute;
+	top: .5em;
+	left: calc(50% - 50px);
+}
+@keyframes spin{
+	to{ transform: rotate(1turn);}
+}
+section#css-skills-47 div#css-skills-show-47-1 {
+	animation: spin 6s linear infinite;
+}
+section#css-skills-47 div#css-skills-show-47-1 img{
+	animation: spin 6s linear infinite reverse;
+}
+section#css-skills-47 div#css-skills-show-47-2 div.user-wrap{
+	position: absolute;
+	top: .5em;
+	left: calc(50% - 50px);
+	width: 100px;
+	height: 100px;
+	animation: spin 6s linear infinite;
+	transform-origin: 50% 14.5em;
+}
+section#css-skills-47 div#css-skills-show-47-2 img{
+	position: static;
+	animation: spin 6s linear infinite reverse;
+}
+@keyframes spin22{/*from是none时to可以自动填补关键帧 不是none时 要根据from来对应填补*/
+	 from{
+		transform:  translateY( calc(14.5em - 50px))
+					rotate(0turn) 
+					translateY( calc(50px - 14.5em))
+					rotate(-0turn); 
+									
+	} 
+	to{ 
+		transform:  translateY( calc(14.5em - 50px))
+					rotate(1turn)
+					translateY( calc(50px - 14.5em))
+					rotate(-1turn);
+	}
+}
+section#css-skills-47 div#css-skills-show-47-3 img{
+	animation: spin22 6s linear infinite;
+}
+
+pre#css-skills-code-47-2{
+	padding: 7.3em 1em;
+}
+pre#css-skills-code-47-1{
+	padding: 6.7em 1em;
+}
+
+/*媒体查询*/
