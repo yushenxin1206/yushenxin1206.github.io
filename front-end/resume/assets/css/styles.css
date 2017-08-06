@@ -1,0 +1,210 @@
+/*   
+ * Template Name: Developer - Responsive Website Template for Developers
+ * Version: 1.5
+ * Author: Xiaoying Riley
+ 
+ * ReEdit by Zhou Tao 
+*/
+/* ======= Base ======= */
+ body {
+  font-family: SimSun, STSong, sans-serif;
+  /*color: #434343; */
+  background-color: #333; 
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/*h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  color: #778492;
+}  */
+a {
+  color: #3AAA64;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+}
+a:hover {
+  text-decoration: underline;
+  color: #2d844e;
+  cursor: pointer;
+}
+a:focus {
+  text-decoration: none;
+}
+
+/* ======= container======= */
+.container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/* ==== resume ==== */
+.resume.myhidden{
+	height: 0;
+	width: 0;
+	padding: 0;
+	overflow: hidden;
+}
+.resume{
+	background: #fff;
+	padding: 30px;
+	transition: all .6s; 
+}
+.resume.myhover{
+	transform: scale(.8) translate3d(-25%,-15%,0);
+	transform-style: preserve-3d;	
+	filter: blur(2px);
+}
+.resume hr.divider{
+	display: none;
+	color: #778492;
+}
+/* ==== basic-info ==== */
+
+.basic-info{
+	overflow: hidden;
+}
+/* ==== skills ==== */
+.skills{
+	overflow: hidden;
+}
+/* ==== typing ==== */
+.typing{
+	font-family: -apple-system,SF UI Display,Arial,PingFang SC,
+				 Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+	display: flex;
+	flex-direction: column;
+	color: white;
+	height: 30vh;
+	margin-top: 30vh;
+	font-size: 90%; 
+	background-color: #002b36;
+	background-clip: content-box;
+	padding-left: 30px;
+	transition: all .6s; 
+}
+
+.typing.myhover{
+	transform: scale(1.5) translate3d(-25%,0,0);
+	transform-style: preserve-3d;/*修复半个像素问题*/
+}
+.typing .typing-p{
+	flex: 3;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0 10px;
+	text-align: center;
+}
+.typing .typing-p p{
+	width: max-content;
+	/* border-right: .05em solid transparent; */
+	white-space: nowrap;
+	overflow: hidden;
+}
+.typing .typing-a{
+	flex: 1;
+	padding: 10px 20px;
+}
+.typing .typing-a a{
+	padding: .2em .4em;
+	text-decoration: none;
+	position: relative;
+	transition: all .5s;
+}
+.typing .typing-a a:hover{
+	padding: .2em .8em;
+}
+.typing .typing-a .next{
+	box-sizing: content-box;
+	width: 3em;
+	width: max-content;
+}
+.typing .typing-a a::before,.typing .typing-a a::after{
+	content: "";
+	position: absolute;
+	width: .6em;
+	height: .6em;
+	border: 1px solid #58a;
+	transition: all .5s;
+}
+.typing .typing-a a.yes::before,.typing .typing-a a.next::before{
+	left: 0; top: 0;
+	border-bottom: 0;
+	border-right: 0;
+}
+.typing .typing-a a.yes::after,.typing .typing-a a.next::after{
+	right: 0; bottom: 0;
+	border-left: 0;
+	border-top: 0;
+}
+.typing .typing-a a.no::before{
+	left: 0; bottom: 0;
+	border-right: 0;
+	border-top: 0;
+}
+.typing .typing-a a.no::after{
+	right: 0; top: 0;
+	border-left: 0;
+	border-bottom: 0;
+}
+.typing #typing-close{
+	font-size: 1.2em;
+	text-decoration: none;
+	position: absolute;
+	top: 5px;
+	right: 15px;
+	width: 20px;
+	height: 20px;
+}
+
+/*=== 优化待选类 ===*/
+
+/*基本信息列表*/
+li.divider-right{
+	box-sizing: content-box;
+	padding-right: calc(1em + 5px); 
+	margin-right: 1em;
+	border-right: 1px solid transparent;
+	border-image: 40% 100% 40% 0 linear-gradient(transparent 40%,#aaa 40%,#aaa 60%,transparent 60%);
+}
+/*更换字体*/
+.change-font{
+	font-family: -apple-system,SF UI Display,Arial,PingFang SC,
+				 Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+}
+/*其他技能*/
+.other-skills h3{
+	font-family: Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+	font-size: 18px;
+	font-weight: 500;
+	color: #778492;
+}
+.other-skills li{
+	margin: 20px 0;
+	font-size: 16px;
+}
+
+/* Extra small devices (phones, less than 768px) */
+@media (max-width: 767px) {
+	.avatar{
+		display: none;
+	}
+}
+/* Small devices (tablets, 768px and up) */
+/* Medium devices (desktops, 992px and up) */
+/* Large devices (large desktops, 1200px and up) */
+/* Ex-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1400px) {
+  .container {
+    width: 1360px;
+  }
+}

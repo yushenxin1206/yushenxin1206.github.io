@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="utf-8" />
+	<title>e招借-交互空间</title>
+	<link type="text/css" rel="stylesheet" href="style.css" />
+	<link rel="shortcut icon" href="./../../favicon.ico" />
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="../../pdfjs/pdfobject.min.js"></script>
+</head>
+
+<body>
+	<div id="main">
+		<h1><a href="../../index.html"><img src="../../images/main.png" alt="交互空间" /></a></h1>
+		<div id="content" class="pdfobject-container">
+		</div>
+		<a id="read" href="#" title="阅读模式"></a>
+		
+		<p class="attach attachF">
+			附件1:
+			<a href="./attachments/e招借Axure原型文件.rp">e招借Axure原型文件.rp</a>
+		</p>
+		<p class="attach">
+			附件2：
+			<a href="./attachments/中国人民大学信用管理研究中心 -《全国大学生信用认知调研报告》.pdf">中国人民大学信用管理研究中心 -《全国大学生信用认知调研报告》.pdf</a>
+		</p>
+		
+	</div>
+	
+	<script>
+		PDFObject.embed("./学生信贷产品设计-e招借.pdf", "#content");
+		
+		var read=0;
+		$("#read").click(function(){
+				if(read==0){
+					$("h1").hide();
+					$("#main").width("100%");
+					$(".pdfobject-container").css({"height":"100vh","margin-top":"0"});
+					$("body").css("overflow","hidden");
+					$("#read").css("background","url(../../images/out.png)");
+					$("#read").attr("title","退出阅读模式");
+					read=1;
+				}else{
+					$("h1").show();
+					$("#main").width("1300px");
+					$(".pdfobject-container").css({"height":"80vh","margin-top":"50px"});
+					$("body").css("overflow","auto");
+					$("#read").css("background","url(../../images/read.png)");
+					$("#read").attr("title","阅读模式");
+					read=0;
+				}	
+			}
+		);
+			
+	</script>
+</body>
+
+</html>
