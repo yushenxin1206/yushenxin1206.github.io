@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="utf-8" />
+	<title>咪咕爱看首页重设计-交互空间</title>
+	<link type="text/css" rel="stylesheet" href="style.css" />
+	<link rel="shortcut icon" href="./../../favicon.ico" />
+	<script type="text/javascript" src="../../libs/jquery.min.js"></script>  
+</head>
+
+<body>
+	<div id="main">
+		<h1><a href="../../index.html"><img src="../../images/main.png" alt="交互空间" /></a></h1>
+		<div id="content">
+			<img id="migu" src="migu.png" alt="咪咕"/>
+		</div>
+		<a id="Btop" href="#"></a>
+	</div>
+	
+	<script>
+		$(window).scroll(function(){
+		
+			if($(window).scrollTop()>400)
+				$("#Btop").show();
+			else $("#Btop").hide();
+			
+		});
+	</script>
+</body>
+
+</html>
