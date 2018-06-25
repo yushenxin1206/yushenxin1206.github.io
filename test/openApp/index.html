@@ -11,7 +11,8 @@ app = navigator.appVersion;
 //var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
  
 if(is_weixn_qq()){
-	alert("请点击右上角在浏览器打开"+is_weixn_qq());
+	//alert("请点击右上角在浏览器中打开");
+	document.getElementById("body").innerHtml="当前为微信/QQ环境，请点击右上角在浏览器中打开";
 }
 
 var ifr = document.createElement('iframe'); 
