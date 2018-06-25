@@ -8,19 +8,29 @@
 <script type="text/javascript">
 var u = navigator.userAgent,
 app = navigator.appVersion;
-var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+//var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+ 
+if(is_weixn_qq()){
+	alert("请点击右上角在浏览器打开");
+}
 
-if(isAndroid){
-	//alert("请点击右上角在浏览器打开");
-	//window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.edufound.mobile";
-	var ifr = document.createElement('iframe'); 
+var ifr = document.createElement('iframe'); 
 	ifr.src = 'alipayqr://platformapi/startapp'; 
 	ifr.style.display = 'none'; 
 	document.body.appendChild(ifr); 
 	window.setTimeout(function(){ 
 		document.body.removeChild(ifr); 
 	},3000);
-}
+
+function is_weixn_qq(){
+	var ua = navigator.userAgent.toLowerCase();
+	if(ua.match(/MicroMessenger/i)=="micromessenger") {
+		return true;
+	} else if (ua.match(/QQ/i) == "qq") {
+	return true;
+		}
+	return false;
+} 
 </script>
 </body>
 </html>
