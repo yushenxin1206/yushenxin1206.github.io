@@ -5,15 +5,15 @@
 <title></title>
 </head>
 <body id="body">
+<p>如未自动打开应用，请点击右上角在浏览器中打开</p>
 <script type="text/javascript">
 var u = navigator.userAgent,
 app = navigator.appVersion;
 //var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
 
-if(is_weixn_qq()){
-	alert("请点击右上角在浏览器中打开");
-	//window.location.href="alipayqr://platformapi/startapp";
-}window.location.href="alipayqr://platformapi/startapp";
+
+
+window.location.href="alipayqr://platformapi/startapp";
 
 /*var ifr = document.createElement('iframe'); 
 	ifr.src = 'alipayqr://platformapi/startapp'; 
@@ -23,15 +23,7 @@ if(is_weixn_qq()){
 		document.body.removeChild(ifr); 
 	},3000);*/
 
-function is_weixn_qq(){
-	var ua = navigator.userAgent.toLowerCase();
-	if(ua.match(/MicroMessenger/i)=="micromessenger") {
-		return true;
-	} else if (ua.match(/QQ/i) == "qq") {
-	return true;
-		}
-	return false;
-} 
+
 </script>
 </body>
 </html>
