@@ -41,11 +41,11 @@ if(isIOS){
 //安卓平台如已安装则打开 否则跳转到应用市场下载页面
 if(isAndroid){ 
 	
-	//判断是否为QQ或微信，是则提示在浏览器中打开
+	//判断是否为QQ或微信，不是则打开应用，否则默认提示在浏览器中打开
 	var ua = navigator.userAgent.toLowerCase();
 	var isQQWexin = ua.match(/MicroMessenger\/[0-9]/i) || ua.match(/QQ\/[0-9]/i);
 	
-	/*if(!isQQWexin){ 
+	if(!isQQWexin){ 
 	
 		//打开应用
 		window.location.href = appURL;
@@ -55,14 +55,7 @@ if(isAndroid){
 			window.location.href = downloadURL;
 		},500)
 		
-	}else{*/
-	
-		//为了兼容华为浏览器，
-		console.log(ua);
-		console.log(ua.match(/MicroMessenger\/[0-9]/i));
-		console.log(ua.match(/QQ\/[0-9]/i));
-		console.log(navigator);
-	//};
+	}
 }
 /*var ifr = document.createElement('iframe'); 
 	ifr.src = 'alipayqr://platformapi/startapp'; 
