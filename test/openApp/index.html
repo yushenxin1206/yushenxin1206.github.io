@@ -14,8 +14,7 @@
 </style>
 </head>
 <body id="body">
-<p>如未自动打开应用，请点击右上角在浏览器中打开</p>
-
+<p></p>
 <script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>
 <script type="text/javascript">
 
@@ -41,11 +40,13 @@ if(isIOS){
 //安卓平台如已安装则打开 否则跳转到应用市场下载页面
 if(isAndroid){ 
 	
-	//判断是否为QQ或微信，不是则打开应用，否则默认提示在浏览器中打开
+	//判断是否为QQ或微信，不是则打开应用，否则提示在浏览器中打开
 	var ua = navigator.userAgent.toLowerCase();
 	var isQQWexin = ua.match(/MicroMessenger\/[0-9]/i) || ua.match(/QQ\/[0-9]/i);
 	
 	if(isQQWexin === null){ 
+		
+		document.getElementsByTagName("p")[0].innerHTML="正在打开玩机技巧..."; 
 	
 		//打开应用
 		window.location.href = appURL;
@@ -53,7 +54,12 @@ if(isAndroid){
 		//超时500ms则进入下载页
 		setTimeout(function(){
 			window.location.href = downloadURL;
-		},500)
+		},500);
+		
+	}else{
+	
+		//在QQ微信中提示点击右上角在浏览器中打开
+		document.getElementsByTagName("p")[0].innerHTML="检测到当前非浏览器环境，请点击右上角在浏览器中打开"; 
 		
 	}
 }
