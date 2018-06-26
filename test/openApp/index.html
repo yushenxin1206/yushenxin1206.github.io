@@ -45,7 +45,7 @@ if(isAndroid){
 	var ua = navigator.userAgent.toLowerCase();
 	var isQQWexin = ua.match(/MicroMessenger\/[0-9]/i) || ua.match(/QQ\/[0-9]/i);
 	
-	if(!isQQWexin){ 
+	if(isQQWexin === null){ 
 	
 		//打开应用
 		window.location.href = appURL;
