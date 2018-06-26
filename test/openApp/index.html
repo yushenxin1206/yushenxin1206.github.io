@@ -15,6 +15,8 @@
 </head>
 <body id="body">
 <p>如未自动打开应用，请点击右上角在浏览器中打开</p>
+
+<script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>
 <script type="text/javascript">
 
 //deep links和应用市场地址
@@ -41,6 +43,7 @@ if(isAndroid){
 	var isQQWexin=ua.match(/MicroMessenger/i)=="micromessenger" || ua.match(/QQ/i) == "qq";
 	
 	if(!isQQWexin){ 
+	
 		//打开应用
 		window.location.href=appURL;
 		
@@ -48,7 +51,13 @@ if(isAndroid){
 		setTimeout(function(){
 			window.location.href=downloadURL;
 		},500)
-	}else alert("在QQ微信中");
+		
+	}else{
+	
+		//为了兼容华为浏览器，
+		console.log(ua);
+		
+	};
 }
 /*var ifr = document.createElement('iframe'); 
 	ifr.src = 'alipayqr://platformapi/startapp'; 
