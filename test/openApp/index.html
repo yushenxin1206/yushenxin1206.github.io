@@ -15,11 +15,11 @@
 </head>
 <body id="body">
 <p></p>
-<script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>
+<!--<script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>-->
 <script type="text/javascript">
 
 //初始化vConsole
-var vConsole = new VConsole(); 
+//var vConsole = new VConsole(); 
 
 //deep links和应用市场地址
 var appURL="alipayqr://platformapi/startapp";
@@ -46,7 +46,7 @@ if(isAndroid){
 	
 	if(isQQWexin === null){ 
 		
-		document.getElementsByTagName("p")[0].innerHTML="正在打开玩机技巧..."; 
+		document.getElementsByTagName("p")[0].innerHTML="正在打开支付宝..."; 
 	
 		//打开应用
 		window.location.href = appURL;
