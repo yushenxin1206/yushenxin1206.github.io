@@ -16,12 +16,34 @@
 <body id="body">
 <p>如未自动打开应用，请点击右上角在浏览器中打开</p>
 <script type="text/javascript">
-/*var u = navigator.userAgent,
+
+//deep links和应用市场地址
+var appURL="alipayqr://platformapi/startapp";
+var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";
+
+//判断设备属于哪类平台
+var u = navigator.userAgent,
 app = navigator.appVersion;
-var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器*/
+var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端  
 
-window.location.href="alipayqr://platformapi/startapp";
 
+//IOS提示不能使用玩机技巧
+if(isIOS){  
+	document.getElementsByTagName("p")[0].innerHtml="抱歉，IOS平台无法使用玩机技巧";   
+}
+
+//安卓平台如已安装则打开 否则跳转到应用市场下载页面
+if(isAndroid){ 
+	
+	//打开应用
+	window.location.href=appURL;
+	
+	//超时500ms则进入下载页
+	setTimeout(function(){
+		window.location.href=downloadURL;
+	},500)
+}
 /*var ifr = document.createElement('iframe'); 
 	ifr.src = 'alipayqr://platformapi/startapp'; 
 	ifr.style.display = 'none'; 
