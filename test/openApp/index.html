@@ -43,24 +43,25 @@ if(isAndroid){
 	
 	//判断是否为QQ或微信，是则提示在浏览器中打开
 	var ua = navigator.userAgent.toLowerCase();
-	var isQQWexin=ua.match(/MicroMessenger/i)=="micromessenger" || ua.match(/QQ/i) == "qq";
+	var isQQWexin = ua.match(/MicroMessenger/i)=="micromessenger" || ua.match(/QQ/i) == "qq";
 	
-	if(!isQQWexin){ 
+	/*if(!isQQWexin){ 
 	
 		//打开应用
-		window.location.href=appURL;
+		window.location.href = appURL;
 		
 		//超时500ms则进入下载页
 		setTimeout(function(){
-			window.location.href=downloadURL;
+			window.location.href = downloadURL;
 		},500)
 		
-	}else{
+	}else{*/
 	
 		//为了兼容华为浏览器，
 		console.log(ua);
-		
-	};
+		console.log(ua.match(/MicroMessenger/i));
+		console.log(ua.match(/QQ/i));
+	//};
 }
 /*var ifr = document.createElement('iframe'); 
 	ifr.src = 'alipayqr://platformapi/startapp'; 
