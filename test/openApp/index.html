@@ -25,7 +25,7 @@ var vConsole = new VConsole();
 //deep links和应用市场地址
 //var appURL="alipayqr://platformapi/startapp";
 var appURL="emuitips://www.huawei.com/hwemuimanual";
-var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C537";
+var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";
 
 //判断设备属于哪类平台
 var u = navigator.userAgent,
@@ -76,7 +76,7 @@ function getApp(){
 			if(response.status != 200){ 
 			
 				//提示输入玩机技巧进行搜索，并跳转到应用市场
-				console.log("链接失效");
+				document.getElementsByTagName("p")[0].innerHTML="请在应用市场内搜索“玩机技巧”下载应用"; 
 				
 			} 
 		} 
