@@ -15,15 +15,17 @@
 </head>
 <body id="body">
 <p></p>
-<!--<script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>-->
+<script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>
+<script src="./libs/jquery.min.js"></script>
 <script type="text/javascript">
 
 //初始化vConsole
-//var vConsole = new VConsole(); 
+var vConsole = new VConsole(); 
 
 //deep links和应用市场地址
-var appURL="alipayqr://platformapi/startapp";
-var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";
+//var appURL="alipayqr://platformapi/startapp";
+var appURL="emuitips://www.huawei.com/hwemuimanual";
+var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C537";
 
 //判断设备属于哪类平台
 var u = navigator.userAgent,
@@ -46,14 +48,14 @@ if(isAndroid){
 	
 	if(isQQWexin === null){ 
 		
-		document.getElementsByTagName("p")[0].innerHTML="正在打开支付宝..."; 
+		document.getElementsByTagName("p")[0].innerHTML="正在打开玩机技巧..."; 
 	
 		//打开应用
 		window.location.href = appURL;
 		
 		//超时500ms则进入下载页
 		setTimeout(function(){
-			window.location.href = downloadURL;
+			getApp();
 		},500);
 		
 	}else{
@@ -63,14 +65,23 @@ if(isAndroid){
 		
 	}
 }
-/*var ifr = document.createElement('iframe'); 
-	ifr.src = 'alipayqr://platformapi/startapp'; 
-	ifr.style.display = 'none'; 
-	document.body.appendChild(ifr); 
-	window.setTimeout(function(){ 
-		document.body.removeChild(ifr); 
-	},3000);*/
 
+//app下载
+function getApp(){
+	//通过ajax请求，若返回200则链接有效，否则无效
+	$.ajax({ 
+		url: downloadURL, 
+		type: 'GET', 
+		complete: function(response) { 
+			if(response.status != 200){ 
+			
+				//提示输入玩机技巧进行搜索，并跳转到应用市场
+				console.log("链接失效");
+				
+			} 
+		} 
+	}); 
+}
 
 </script>
 </body>
