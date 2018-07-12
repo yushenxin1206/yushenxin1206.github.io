@@ -1,4 +1,4 @@
-<!--扫描二维码唤起应用-->
+<!--点击网页唤起应用-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +11,16 @@
 		font-size: 16px;
 		color: rgba(0,0,0,.54);
 		text-align: center;
+		pointer-events: none;
+	}
+	.open-app{
+		color: rgba(0,0,0,.87);
+		pointer-events: auto;
 	}
 </style>
 </head>
 <body id="body">
-<p></p>
+<p class="open-app">点击打开玩机技巧</p>
 <script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>
 <script src="./libs/jquery.min.js"></script>
 <script type="text/javascript">
@@ -24,47 +29,46 @@
 var vConsole = new VConsole(); 
 
 //deep links和应用市场地址
-//var appURL="alipayqr://platformapi/startapp";
-var appURL="emuitips://www.huawei.com/hwemuimanual";
+var appURL="alipayqr://platformapi/startapp";
+//var appURL="emuitips://www.huawei.com/hwemuimanual";
 var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";
 
 //判断设备属于哪类平台
 var u = navigator.userAgent,
 app = navigator.appVersion;
 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
-var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端  
-
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 
 //IOS提示不能使用玩机技巧
 if(isIOS){  
-	document.getElementsByTagName("p")[0].innerHTML="抱歉，IOS平台无法使用玩机技巧";   
+	$("p").eq(0).html("抱歉，IOS平台无法使用玩机技巧"); 
+	$("p").eq(0).removeClass('open-app');	
 }
 
-//安卓平台如已安装则打开 否则跳转到应用市场下载页面
+//安卓平台
 if(isAndroid){ 
 	
-	//判断是否为QQ或微信，不是则打开应用，否则提示在浏览器中打开
-	var ua = navigator.userAgent.toLowerCase();
-	var isQQWexin = ua.match(/MicroMessenger\/[0-9]/i) || ua.match(/QQ\/[0-9]/i);
+	//为标签绑定事件
+	$("p").eq(0).click(openApp);
 	
-	if(isQQWexin === null){ 
-		
-		document.getElementsByTagName("p")[0].innerHTML="正在打开玩机技巧..."; 
+}
+
+
+
+//打开玩机技巧
+function openApp(){
+
+	document.getElementsByTagName("p")[0].innerHTML="正在打开玩机技巧..."; 
+	$("p").eq(0).removeClass('open-app');
 	
-		//打开应用
-		window.location.href = appURL;
-		
-		//超时500ms则进入下载页
-		setTimeout(function(){
-			window.location.href = downloadURL;
-		},500);
-		
-	}else{
+	//打开应用
+	window.location.href = appURL;
 	
-		//在QQ微信中提示点击右上角在浏览器中打开
-		document.getElementsByTagName("p")[0].innerHTML="检测到当前非浏览器环境，请点击右上角在浏览器中打开"; 
-		
-	}
+	//超时500ms则进入下载页
+	setTimeout(function(){
+		window.location.href = downloadURL;
+	},500);
+	
 }
 
 //app下载
@@ -77,7 +81,7 @@ function getApp(){
 			if(response.status != 200){ 
 			
 				//提示输入玩机技巧进行搜索，并跳转到应用市场
-				document.getElementsByTagName("p")[0].innerHTML="请在应用市场内搜索“玩机技巧”下载应用"; 
+				$("p").eq(0).html("请在应用市场内搜索“玩机技巧”下载应用"); 
 				
 			} 
 		} 
