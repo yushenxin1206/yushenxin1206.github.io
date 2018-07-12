@@ -26,11 +26,11 @@
 <script type="text/javascript">
 
 //初始化vConsole
-var vConsole = new VConsole(); 
+//var vConsole = new VConsole(); 
 
 //deep links和应用市场地址
-var appURL="alipayqr://platformapi/startapp";
-//var appURL="emuitips://www.huawei.com/hwemuimanual";
+//var appURL="alipayqr://platformapi/startapp";
+var appURL="emuitips://www.huawei.com/hwemuimanual";
 var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";
 
 //判断设备属于哪类平台
@@ -48,8 +48,22 @@ if(isIOS){
 //安卓平台
 if(isAndroid){ 
 	
-	//为标签绑定事件
-	$("p").eq(0).click(openApp);
+	//判断是否为QQ或微信，不是则打开应用，否则提示在浏览器中打开
+	var ua = navigator.userAgent.toLowerCase();
+	var isQQWexin = ua.match(/MicroMessenger\/[0-9]/i) || ua.match(/QQ\/[0-9]/i);
+	
+	if(isQQWexin === null){ 
+		
+		//为标签绑定事件
+		$("p").eq(0).click(openApp);
+		
+	}else{
+	
+		//在QQ微信中提示点击右上角在浏览器中打开
+		document.getElementsByTagName("p")[0].innerHTML="检测到当前非浏览器环境，请点击右上角在浏览器中打开"; 
+		$("p").eq(0).removeClass('open-app');
+		
+	}
 	
 }
 
