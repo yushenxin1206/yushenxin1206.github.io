@@ -60,7 +60,7 @@ if(isAndroid){
 	}else{
 	
 		//在QQ微信中提示点击右上角在浏览器中打开
-		document.getElementsByTagName("p")[0].innerHTML="检测到当前非浏览器环境，请点击右上角在浏览器中打开"; 
+		$("p").eq(0).html("检测到当前非浏览器环境，请点击右上角在浏览器中打开"); 
 		$("p").eq(0).removeClass('open-app');
 		
 	}
@@ -72,34 +72,19 @@ if(isAndroid){
 //打开玩机技巧
 function openApp(){
 
-	document.getElementsByTagName("p")[0].innerHTML="正在打开玩机技巧..."; 
+	$("p").eq(0).html("正在打开玩机技巧..."); 
 	$("p").eq(0).removeClass('open-app');
 	
 	//打开应用
 	window.location.href = appURL;
 	
-	//超时500ms则进入下载页
+	//超时1000ms则进入下载页
 	setTimeout(function(){
-		window.location.href = downloadURL;
-	},500);
 	
-}
-
-//app下载
-function getApp(){
-	//通过ajax请求，若返回200则链接有效，否则无效
-	$.ajax({ 
-		url: downloadURL, 
-		type: 'GET', 
-		complete: function(response) { 
-			if(response.status != 200){ 
-			
-				//提示输入玩机技巧进行搜索，并跳转到应用市场
-				$("p").eq(0).html("请在应用市场内搜索“玩机技巧”下载应用"); 
-				
-			} 
-		} 
-	}); 
+		window.location.href = downloadURL;
+		
+	},1000);
+	
 }
 
 </script>

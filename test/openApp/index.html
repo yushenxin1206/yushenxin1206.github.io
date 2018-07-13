@@ -28,11 +28,6 @@ var appURL="alipayqr://platformapi/startapp";
 //var appURL="emuitips://www.huawei.com/hwemuimanual";
 var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";
 
-var state = window.open("alipayqr://platformapi/startapp", '_blank');
-console.log(state);
-var state = window.open("emuitips://www.huawei.com/hwemuimanual", '_blank');
-console.log(state);
-
 //判断设备属于哪类平台
 var u = navigator.userAgent,
 app = navigator.appVersion;
@@ -54,18 +49,12 @@ if(isAndroid){
 	
 	if(isQQWexin === null){ 
 		
-		document.getElementsByTagName("p")[0].innerHTML="正在打开玩机技巧..."; 
+		document.getElementsByTagName("p")[0].innerHTML="正在打开玩机技巧...";
 		
-		//记录当前时间
-		var  start = new Date().getTime();
-		
-		//若未安装应用则setTimeout不会被阻塞，now-start接近1000
+		//延时进入下载页
 		setTimeout(function(){
 			
-			var now = new Date().getTime();
-			
-			if(now-start < 1100)
-				window.location.href = downloadURL;
+			window.location.href = downloadURL;
 			
 		},1000);
 		
@@ -78,24 +67,6 @@ if(isAndroid){
 		document.getElementsByTagName("p")[0].innerHTML="检测到当前非浏览器环境，请点击右上角在浏览器中打开"; 
 		
 	}
-}
-
-//app下载
-function getApp(){
-	//通过ajax请求，若返回200则链接有效，否则无效
-	$.ajax({ 
-		url: downloadURL, 
-		type: 'GET', 
-		complete: function(response) {
-			console.log(response.status);
-			if(response.status != 200){ 
-			
-				//提示输入玩机技巧进行搜索，并跳转到应用市场
-				document.getElementsByTagName("p")[0].innerHTML="请在应用市场内搜索“玩机技巧”下载应用"; 
-				
-			} 
-		} 
-	}); 
 }
 
 </script>
