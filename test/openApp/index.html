@@ -50,14 +50,22 @@ if(isAndroid){
 	if(isQQWexin === null){ 
 		
 		document.getElementsByTagName("p")[0].innerHTML="正在打开玩机技巧..."; 
-	
+		
+		//记录当前时间
+		var  start = new Date().getTime();
+		
+		//若未安装应用则setTimeout不会被阻塞，now-start接近1000
+		setTimeout(function(){
+			
+			var now = new Date().getTime();
+			
+			if(now-start < 1100)
+				window.location.href = downloadURL;
+			
+		},1000);
+		
 		//打开应用
 		window.location.href = appURL;
-		
-		//超时500ms则进入下载页
-		setTimeout(function(){
-			window.location.href = downloadURL;
-		},500);
 		
 	}else{
 	
