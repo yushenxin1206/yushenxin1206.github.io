@@ -22,12 +22,16 @@
 
 //初始化vConsole
 var vConsole = new VConsole(); 
-console.log(window.JSBridge);
 
 //deep links和应用市场地址
 var appURL="alipayqr://platformapi/startapp";
 //var appURL="emuitips://www.huawei.com/hwemuimanual";
 var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";
+
+var state = window.open("alipayqr://platformapi/startapp", '_blank');
+console.log(state);
+var state = window.open("emuitips://www.huawei.com/hwemuimanual", '_blank');
+console.log(state);
 
 //判断设备属于哪类平台
 var u = navigator.userAgent,
