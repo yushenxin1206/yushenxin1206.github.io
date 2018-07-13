@@ -52,14 +52,16 @@ if(isAndroid){
 		document.getElementsByTagName("p")[0].innerHTML="正在打开玩机技巧...";
 		
 		//延时进入下载页
-		setTimeout(function(){
+		/*setTimeout(function(){
 			
 			window.location.href = downloadURL;
 			
-		},1000);
+		},1000);*/
 		
 		//打开应用
+		console.log(new Date().getTime);
 		window.location.href = appURL;
+		console.log(new Date().getTime);
 		
 	}else{
 	
