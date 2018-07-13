@@ -21,7 +21,8 @@
 <script type="text/javascript">
 
 //初始化vConsole
-//var vConsole = new VConsole(); 
+var vConsole = new VConsole(); 
+console.log(window.JSBridge);
 
 //deep links和应用市场地址
 var appURL="alipayqr://platformapi/startapp";
@@ -81,7 +82,8 @@ function getApp(){
 	$.ajax({ 
 		url: downloadURL, 
 		type: 'GET', 
-		complete: function(response) { 
+		complete: function(response) {
+			console.log(response.status);
 			if(response.status != 200){ 
 			
 				//提示输入玩机技巧进行搜索，并跳转到应用市场
