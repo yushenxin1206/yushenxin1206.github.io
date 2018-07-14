@@ -28,8 +28,7 @@ var appURL="alipayqr://platformapi/startapp";
 var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";
 
 //判断设备属于哪类平台
-var u = navigator.userAgent,
-app = navigator.appVersion;
+var u = navigator.userAgent;
 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端  
 
@@ -60,7 +59,8 @@ if(isAndroid){
 		//打开应用
 		var t1=new Date().getTime();
 		document.write(t1);
-		window.location = appURL;//window.location.href=appurl有无应用都不会阻塞，相当于只是一个赋值语句而已
+		window.location.href = appURL;//window.location.href(window.location)=appurl有无应用都不会阻塞，相当于只是一个赋值语句而已
+		console.log(window.location);
 		var t2=new Date().getTime();
 		document.write(t2);
 		
