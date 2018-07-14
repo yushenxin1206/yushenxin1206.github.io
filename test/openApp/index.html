@@ -58,9 +58,12 @@ if(isAndroid){
 		},1000);*/
 		
 		//打开应用
-		document.write(new Date().getTime());
+		var t1=new Date().getTime();
+		console.log(t1);
 		window.location.href = appURL;
-		document.write(new Date().getTime());
+		var t2=new Date().getTime();
+		console.log(t2);
+		//document.write(new Date().getTime());
 		
 	}else{
 	
