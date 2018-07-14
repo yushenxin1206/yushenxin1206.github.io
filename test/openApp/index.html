@@ -20,7 +20,7 @@
 <script type="text/javascript">
 
 //初始化vConsole
-var vConsole = new VConsole(); //window.location的变化会导致其失效
+var vConsole = new VConsole(); //有时会有bug 不必深究
 
 //deep links和应用市场地址
 var appURL="alipayqr://platformapi/startapp";
@@ -59,12 +59,10 @@ if(isAndroid){
 		
 		//打开应用
 		var t1=new Date().getTime();
-		console.log(t1);
-		//document.write(t1);
+		document.write(t1);
 		window.location.href = appURL;
 		var t2=new Date().getTime();
-		console.log(t2);
-		//document.write(t2);
+		document.write(t2);
 		
 	}else{
 	
