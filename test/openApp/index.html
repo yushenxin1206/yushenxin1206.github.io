@@ -23,8 +23,8 @@
 var vConsole = new VConsole(); //window.location的变化会导致其失效
 
 //deep links和应用市场地址
-//var appURL="alipayqr://platformapi/startapp";
-var appURL="emuitips://www.huawei.com/hwemuimanual";
+var appURL="alipayqr://platformapi/startapp";
+//var appURL="emuitips://www.huawei.com/hwemuimanual";
 var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";
 
 //判断设备属于哪类平台
@@ -58,9 +58,9 @@ if(isAndroid){
 		},1000);*/
 		
 		//打开应用
-		document.write(new Date().getTime());
+		console.log(new Date().getTime());
 		window.location.href = appURL;
-		document.write(new Date().getTime());
+		console.log(new Date().getTime());
 		
 	}else{
 	
