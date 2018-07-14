@@ -20,7 +20,7 @@
 <script type="text/javascript">
 
 //初始化vConsole
-var vConsole = new VConsole(); //有时会有bug 不必深究
+var vConsole = new VConsole(); //有奇怪的bug 不必深究
 
 //deep links和应用市场地址
 //var appURL="alipayqr://platformapi/startapp";
@@ -60,7 +60,7 @@ if(isAndroid){
 		//打开应用
 		var t1=new Date().getTime();
 		document.write(t1);
-		window.location.href = appURL;
+		window.location = appURL;//window.location.href=appurl有无应用都不会阻塞，相当于只是一个赋值语句而已
 		var t2=new Date().getTime();
 		document.write(t2);
 		
