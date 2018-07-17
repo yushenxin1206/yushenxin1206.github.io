@@ -31,10 +31,11 @@
 //deep links和应用市场地址
 //var appURL="alipayqr://platformapi/startapp";
 var appURL="emuitips://www.huawei.com/hwemuimanual";
+//var appURL="emuitips://www.huawei.com/hwemuimanual";
 var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";
 
 //判断设备属于哪类平台
-var u = navigator.userAgent,
+var u = navigator.userAgent,//UserAgent字段之所以那么混乱，是因为其认为自己可以很好的渲染专门为其他浏览器编写的网页代码，因此主动添加其它浏览器的标识名称，使其能在自己的平台上运行
 app = navigator.appVersion;
 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
