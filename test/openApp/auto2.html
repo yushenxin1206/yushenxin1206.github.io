@@ -1,0 +1,121 @@
+<!--扫描二维码唤起应用-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
+<title></title>
+<style type="text/css">
+	p{
+		margin: 50px;
+		font-size: 16px;
+		color: rgba(0,0,0,.54);
+		text-align: center;
+	}
+</style>
+</head>
+<body id="body">
+<p></p>
+<!--<script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>-->
+<script type="text/javascript">
+
+//初始化vConsole
+//var vConsole = new VConsole(); //有奇怪的bug 不必深究(加个document.write就好了？)
+
+/*
+*	获取url带的参数 //注意：原url最后的path名不要与param的path名一致，否则可能出现异常
+*	url示例： https://www.emuitips.com/auto?cate=card&id=xxx
+*/
+var url = window.location.href;
+var param = "";
+//得到页面类别
+var cate = getQueryString("cate");
+
+//根据类别做相应处理
+switch(cate){
+
+	case null:
+	case "index":
+	break;
+	
+	case "banner":
+		var name = getQueryString("name");
+		param = "/banner?name="+name;
+	break;
+	
+	case "category":
+		var id = getQueryString("id");
+		param = "/category?id="+id;
+	break;
+	
+	case "card":
+		var id = getQueryString("id");
+		param = "/card?id="+id;
+	break;
+	
+	case "search":
+		var keywords = getQueryString("keywords");
+		if(!keywords) keywords = "";
+		param = "/search?keywords="+keywords;
+	break;
+	
+	default: break;
+	
+}
+
+//deep links和应用市场地址
+var appURL="emuitips://dl"+param;//将获取到的参数拼接到appUrl后传给安卓
+var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";//是不是需要从服务器获取
+
+//判断设备属于哪类平台
+var u = navigator.userAgent;
+var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端  
+
+
+//IOS提示不能使用玩机技巧
+if(isIOS){  
+	document.getElementsByTagName("p")[0].innerHTML="抱歉，IOS平台无法使用玩机技巧";   
+}
+
+//安卓平台如已安装则打开 否则跳转到应用市场下载页面
+if(isAndroid){ 
+	
+	//判断是否为QQ或微信，不是则打开应用，否则提示在浏览器中打开
+	var ua = navigator.userAgent.toLowerCase();
+	var isQQWexin = ua.match(/MicroMessenger\/[0-9]/i) || ua.match(/QQ\/[0-9]/i);
+	
+	if(isQQWexin === null){ 
+		
+		document.getElementsByTagName("p")[0].innerHTML="正在打开玩机技巧...";
+		
+		//延时进入下载页
+		setTimeout(function(){
+			
+			window.location.href = downloadURL;
+			
+		},1000);
+		
+		
+		//打开应用(只是尝试打开app，并不能返回app是否打开成功的结果，即app是否安装)
+		window.location.href = appURL;//window.location.href(window.location)=appurl有无应用都不会阻塞，并且不会改变该页面的window.location的值
+
+		
+	}else{
+	
+		//在QQ微信中提示点击右上角在浏览器中打开
+		document.getElementsByTagName("p")[0].innerHTML="检测到当前非浏览器环境，请点击右上角在浏览器中打开"; 
+		
+	}
+}
+
+//解析url
+function getQueryString(name) { 
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+	var r = window.location.search.substr(1).match(reg); 
+	if (r != null) return unescape(r[2]); 
+	return null; 
+} 
+</script>
+</body>
+</html>
