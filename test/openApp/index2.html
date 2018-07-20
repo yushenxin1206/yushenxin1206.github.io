@@ -26,7 +26,7 @@
 <script type="text/javascript">
 
 //初始化vConsole
-//var vConsole = new VConsole(); 
+var vConsole = new VConsole(); 
 
 //deep links和应用市场地址
 var appURL="alipayqr://platformapi/startapp";
@@ -88,6 +88,7 @@ function openApp(){
 		ifr.onerror = function(){ 
 				alert("error"); 
 			}; 
+		console.log(ifr);
 		
 		document.body.appendChild(ifr);
 		
