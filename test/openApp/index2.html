@@ -79,19 +79,20 @@ function openApp(){
 	//通过iframe打开app
 	var ifr = document.createElement('iframe');
         ifr.src = appURL;//打开app的协议，有app同事提供
-        ifr.style.display = 'none';         
-		document.body.appendChild(ifr);
-		
-		//判断状态
-		if (iframe.attachEvent){ 
-			iframe.attachEvent("onload", function(){ 
+        ifr.style.display = 'none';
+
+		//绑定onload
+		if (ifr.attachEvent){ 
+			ifr.attachEvent("onload", function(){ 
 				alert("加载完毕"); 
 			}); 
 		} else { 
-			iframe.onload = function(){ 
+			ifr.onload = function(){ 
 				alert("加载完毕."); 
 			}; 
 		} 
+		
+		document.body.appendChild(ifr);
 		
 	/*window.setTimeout(function(){
 	   document.body.removeChild(ifr);
