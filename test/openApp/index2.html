@@ -81,16 +81,13 @@ function openApp(){
         ifr.src = appURL;//打开app的协议，有app同事提供
         ifr.style.display = 'none';
 
-		//绑定onload
-		if (ifr.attachEvent){ 
-			ifr.attachEvent("onload", function(){ 
-				alert("加载完毕"); 
-			}); 
-		} else { 
-			ifr.onload = function(){ 
-				alert("加载完毕."); 
+		//绑定onload和onerror
+		ifr.onload = function(){ 
+				alert("load"); 
 			}; 
-		} 
+		ifr.onerror = function(){ 
+				alert("error"); 
+			}; 
 		
 		document.body.appendChild(ifr);
 		
