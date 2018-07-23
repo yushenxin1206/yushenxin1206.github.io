@@ -42,7 +42,7 @@ switch(dst){
 	case "banner":
 		var bannerName = getQueryString("bannerName");
 		var bannerUrl = getQueryString("bannerUrl");
-		param = "/banner?bannerName="+bannerName+'&bannerUrl='+bannerUrl;
+		param = "/banner?bannerName="+bannerName+'&bannerUrl='+UrlEncode(bannerUrl);
 	break;
 	
 	case "category":
@@ -56,9 +56,7 @@ switch(dst){
 	break;
 	
 	case "search":
-		var searchText = getQueryString("searchText");
-		if(!searchText) searchText = "";
-		param = "/search?searchText="+UrlEncode(searchText);
+		param = "/search";
 		//console.log(keywords);
 	break;
 	
