@@ -24,40 +24,41 @@
 
 /*
 *	获取url带的参数 //注意：原url最后的path名不要与param的path名一致，否则可能出现异常
-*	url示例： https://www.emuitips.com/auto?cate=card&id=xxx
+*	url示例： https://www.emuitips.com/auto?dst=card&featureId=xxx
 *	扫码后浏览器会自动对url中的中文编码，并且默认采用UTF-8格式，但直接点击的如a标签则不会
 */
 var url = window.location.href;
 var param = "";
 //得到页面类别
-var cate = getQueryString("cate");
+var dst = getQueryString("dst");
 
 //根据类别做相应处理
-switch(cate){
+switch(dst){
 
 	case null:
 	case "index":
 	break;
 	
 	case "banner":
-		var name = getQueryString("name");
-		param = "/banner?name="+name;
+		var bannerName = getQueryString("bannerName");
+		var bannerUrl = getQueryString("bannerUrl");
+		param = "/banner?bannerName="+bannerName+'&bannerUrl='+bannerUrl;
 	break;
 	
 	case "category":
-		var id = getQueryString("id");
-		param = "/category?id="+id;
+		var groupId = getQueryString("groupId");
+		param = "/card?featureId="+groupId;
 	break;
 	
 	case "card":
-		var id = getQueryString("id");
-		param = "/card?id="+id;
+		var funnum = getQueryString("funnum");
+		param = "/card?categoryId="+funnum;
 	break;
 	
 	case "search":
-		var keywords = getQueryString("keywords");
-		if(!keywords) keywords = "";
-		param = "/search?keywords="+UrlEncode(keywords);
+		var searchText = getQueryString("searchText");
+		if(!searchText) searchText = "";
+		param = "/search?searchText="+UrlEncode(searchText);
 		//console.log(keywords);
 	break;
 	
