@@ -42,17 +42,17 @@ switch(dst){
 	case "banner":
 		var bannerName = getQueryString("bannerName");
 		var bannerUrl = getQueryString("bannerUrl");
-		param = "/banner?bannerName="+bannerName+'&bannerUrl='+UrlEncode(bannerUrl);
+		param = "/banner?bannerName="+bannerName+'&bannerUrl='+bannerUrl;
 	break;
 	
 	case "category":
 		var groupId = getQueryString("groupId");
-		param = "/card?featureId="+groupId;
+		param = "/card?categoryId="+groupId;
 	break;
 	
 	case "card":
 		var funnum = getQueryString("funnum");
-		param = "/card?categoryId="+funnum;
+		param = "/card?featureId="+funnum;
 	break;
 	
 	case "search":
