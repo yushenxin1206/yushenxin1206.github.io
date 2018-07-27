@@ -169,14 +169,16 @@ function getletter(num) {
 }
 
 //检查链接是否有效
-var iframe = document.createElement('iframe');
-        iframe.src="http://app.hicloud.com/app/C10652857wqwe";
-		iframe.style.display = "none";
-    $("body").append(iframe);
-    iframe.onload= function(){
-        console.log("onload");
-		console.log(iframe.contentWindow);//根据页面内容判断是否失效。。。获取title
-    }
+/*
+* jsonp返回需要是json格式 get请求无法跨域 iframe无法跨域获取文档内容
+* 通常做法是后台检查链接是否有效 返回给前台
+*/
+/*var iframe = document.createElement('iframe');
+	iframe.src="http://app.hicloud.com/app/C10652857wqwe";
+	iframe.style.display = "none";
+    $("body").append(iframe);*/
+
+
 </script>
 </body>
 </html>
