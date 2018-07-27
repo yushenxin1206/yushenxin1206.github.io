@@ -17,8 +17,8 @@
 <body id="body">
 <p></p>
 <!--<script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>-->
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
-
 //初始化vConsole
 //var vConsole = new VConsole(); //有奇怪的bug 不必深究(加个document.write就好了？)
 
@@ -167,6 +167,16 @@ function getletter(num) {
 		if (num == 15) { return "F" } 
 	} 
 }
+
+//检查链接是否有效
+var iframe = document.createElement('iframe');
+        iframe.src="http://app.hicloud.com/app/C10652857wqwe";
+		iframe.style.display = "none";
+    $("body").append(iframe);
+    iframe.onload= function(){
+        console.log("onload");
+		console.log(iframe.contentWindow);//根据页面内容判断是否失效。。。获取title
+    }
 </script>
 </body>
 </html>

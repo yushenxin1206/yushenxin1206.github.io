@@ -25,7 +25,7 @@
 //deep links和应用市场地址
 //var appURL="alipayqr://platformapi/startapp";
 var appURL="emuitips://dl/card?id=SF-10044716_f002";
-var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";
+var downloadURL="http://app.hicloud.com";
 
 //判断设备属于哪类平台
 var u = navigator.userAgent;
@@ -54,7 +54,7 @@ if(isAndroid){
 			
 			window.location.href = downloadURL;
 			
-		},1000);
+		},3000);
 		
 		
 		//打开应用(只是尝试打开app，并不能返回app是否打开成功的结果，即app是否安装)
