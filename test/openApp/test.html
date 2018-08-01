@@ -33,6 +33,8 @@ var u = navigator.userAgent;
 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端  
 
+ var lang = (navigator.browserLanguage || navigator.language).toLowerCase();
+ alert(lang);
 
 //IOS提示不能使用玩机技巧
 if(isIOS){  
