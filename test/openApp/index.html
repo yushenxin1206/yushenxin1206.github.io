@@ -25,7 +25,7 @@
 //不同语言数据
 var langData = {
 
-	"zh-cn":{
+	"zh":{
 		notSp:"抱歉，该平台无法使用玩机技巧",
 		openApp:"正在打开玩机技巧...",
 		openInBrowser:"检测到当前非浏览器环境，请点击右上角在浏览器中打开"
@@ -93,8 +93,12 @@ if(isAndroid){
 //判断平台语言 更新文本内容
 function updateTxt(){
 	var lang = (navigator.browserLanguage || navigator.language).toLowerCase();
+	
+	if(lang.indexOf('zh') > -1){
+		lang = "zh";
+	}
 	if(!langData.hasOwnProperty(lang)){
-		lang = 'zh-cn';//需要查询其中是否有对应的lang 没有则显示中文 防止发生错误
+		lang = 'en';//需要查询其中是否有对应的lang 没有则显示英文 防止发生错误
 	}
 	txtData = langData[lang];
 }
