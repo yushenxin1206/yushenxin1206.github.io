@@ -59,11 +59,11 @@ var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android�
 //安卓平台如已安装则打开 否则跳转到应用市场下载页面
 if(isAndroid){ 
 	
-	//判断是否为QQ或微信，不是则打开应用，否则提示在浏览器中打开
+	//判断是否为QQ或微信支付宝，不是则打开应用，否则提示在浏览器中打开
 	var ua = navigator.userAgent.toLowerCase();
-	var isQQWexin = ua.match(/MicroMessenger\/[0-9]/i) || ua.match(/QQ\/[0-9]/i);
+	var isQQWxAli = ua.match(/MicroMessenger\/[0-9]/i) || ua.match(/QQ\/[0-9]/i) || || ua.match(/Alipay/i);
 	
-	if(isQQWexin === null){ 
+	if(isQQWxAli === null){ 
 		
 		document.getElementsByTagName("p")[0].innerHTML = txtData.openApp;
 				
@@ -79,7 +79,7 @@ if(isAndroid){
 		
 	}else{
 	
-		//在QQ微信中提示点击右上角在浏览器中打开
+		//在QQ微信支付宝中提示点击右上角在浏览器中打开
 		document.getElementsByTagName("p")[0].innerHTML = txtData.openInBrowser;
 		
 	}
