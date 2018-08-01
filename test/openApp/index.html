@@ -94,7 +94,7 @@ if(isAndroid){
 function updateTxt(){
 	var lang = (navigator.browserLanguage || navigator.language).toLowerCase();
 	if(!langData.hasOwnProperty(lang)){
-		lang = 'en'//需要查询其中是否有对应的lang 没有则显示英文 防止发生错误
+		lang = 'zh-cn';//需要查询其中是否有对应的lang 没有则显示中文 防止发生错误
 	}
 	txtData = langData[lang];
 }
