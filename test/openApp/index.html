@@ -61,7 +61,7 @@ if(isAndroid){
 	
 	//判断是否为QQ或微信支付宝，不是则打开应用，否则提示在浏览器中打开
 	var ua = navigator.userAgent.toLowerCase();
-	var isQQWxAli = ua.match(/MicroMessenger\/[0-9]/i) || ua.match(/QQ\/[0-9]/i) || || ua.match(/Alipay/i);
+	var isQQWxAli = ua.match(/MicroMessenger\/[0-9]/i) || ua.match(/QQ\/[0-9]/i) || ua.match(/Alipay/i);
 	
 	if(isQQWxAli === null){ 
 		
