@@ -6,16 +6,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
 <title></title>
 <style type="text/css">
-	p{
-		margin: 50px;
-		font-size: 16px;
-		color: rgba(0,0,0,.54);
+	*{padding0;margin:0;}
+	.loading-wrap{
+		display: none;
+		margin-top: calc(50vh - 43px);
+	}
+	.loading-icon{
+		display: block;
+		margin: 0 auto;
+		width: 72px;
+		height: 72px;
+	}
+	.loading-text{
+		font-size: 13px;
+		color: rgba(25,25,25,.5);
 		text-align: center;
+	}
+	.warning-wrap{
+		display: none;
+		padding: 8px 16px;
+		background: #f2f2f2;
+		align-items: center;
+	}
+	.warning-icon{
+		width: 24px;
+		height: 24px;
+	}
+	.warning-text{
+		display: inline-block;
+		font-size: 15px;
+		line-height: 23px;
+		padding-left: 16px;
+		color: #191919;
 	}
 </style>
 </head>
 <body>
-<p></p>
+<div class="warning-wrap">
+	<img class="warning-icon" src="./images/warning.png" />
+	<p class="warning-text"></p>
+</div>
+<div class="loading-wrap">
+	<img class="loading-icon" src="./images/loading.png"/>
+	<p class="loading-text"></p>
+</div>
 <script type="text/javascript">
 
 //不同语言数据
@@ -76,7 +110,8 @@ if(isAndroid){
 	
 	if(isQQWxAli === null){ 
 		
-		document.getElementsByTagName("p")[0].innerHTML = txtData.openApp;
+		document.getElementsByClassName("loading-text")[0].innerHTML = txtData.openApp;
+		document.getElementsByClassName("loading-wrap")[0].style.display = 'block';
 				
 		//打开应用(只是尝试打开app，并不能返回app是否打开成功的结果，即app是否安装)
 		window.location.href = appURL;//window.location.href(window.location)=appurl有无应用都不会阻塞，并且不会改变该页面的window.location的值
@@ -91,13 +126,15 @@ if(isAndroid){
 	}else{
 	
 		//在QQ微信支付宝中提示点击右上角在浏览器中打开
-		document.getElementsByTagName("p")[0].innerHTML = txtData.openInBrowser;
+		document.getElementsByClassName("warning-text")[0].innerHTML = txtData.openInBrowser;
+		document.getElementsByClassName("warning-wrap")[0].style.display = 'flex';
 		
 	}
 	
 }else{
 
-	document.getElementsByTagName("p")[0].innerHTML = txtData.notSp;
+	document.getElementsByClassName("warning-text")[0].innerHTML = txtData.notSp;
+	document.getElementsByClassName("warning-wrap")[0].style.display = 'flex';
 	
 }
 
