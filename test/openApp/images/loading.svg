@@ -1,1 +1,25 @@
-<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1533280755991" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2976" xmlns:xlink="http://www.w3.org/1999/xlink" width="72" height="72"><defs><style type="text/css"></style></defs><path d="M144.205 202.496a136.678 136.678 0 1 0 273.357 0 136.678 136.678 0 1 0-273.357 0zM41.728 492.902a119.578 119.578 0 1 0 239.155 0 119.578 119.578 0 1 0-239.155 0zM144.23 749.158a102.502 102.502 0 1 0 205.005 0 102.502 102.502 0 1 0-205.005 0zM435.2 861.926a89.6 89.6 0 1 0 179.2 0 89.6 89.6 0 1 0-179.2 0zM725.043 766.26a85.427 85.427 0 1 0 170.855 0 85.427 85.427 0 1 0-170.855 0zM861.747 475.827a68.326 68.326 0 1 0 136.653 0 68.326 68.326 0 1 0-136.653 0zM759.22 219.571a51.251 51.251 0 1 0 102.502 0 51.251 51.251 0 1 0-102.503 0zM512 85.376a34.176 34.176 0 1 0 68.352 0 34.176 34.176 0 1 0-68.352 0z" p-id="2977" fill="#666666"></path></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="288px" height="288px" viewBox="0 0 288 288" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>icon copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="phone" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic/72x72/Light/Empty/loading">
+            <g id="Group" transform="translate(16.000000, 17.000000)">
+                <circle id="Oval" fill="#D0D0D0" cx="131.121951" cy="9.9902439" r="9.9902439"></circle>
+                <circle id="Oval-Copy" fill="#D0D0D0" cx="188.565854" cy="24.9756098" r="9.9902439"></circle>
+                <circle id="Oval-Copy-2" fill="#D0D0D0" cx="231.02439" cy="66.1853659" r="9.9902439"></circle>
+                <circle id="Oval-Copy-3" fill="#D0D0D0" cx="246.009756" cy="123.629268" r="9.9902439"></circle>
+                <circle id="Oval-Copy-4" fill="#D0D0D0" cx="229.77561" cy="179.82439" r="9.9902439"></circle>
+                <circle id="Oval-Copy-10" fill="#C7C7C7" cx="31.2195122" cy="64.9365854" r="11.2390244"></circle>
+                <circle id="Oval-Copy-11" fill="#C7C7C7" cx="74.9268293" cy="24.9756098" r="9.9902439"></circle>
+                <circle id="Oval-Copy-5" fill="#999999" cx="188.565854" cy="222.282927" r="12.4878049"></circle>
+                <circle id="Oval-Copy-6" fill="#8C8C8C" cx="131.746341" cy="237.892683" r="15.6097561"></circle>
+                <circle id="Oval-Copy-7" fill="#808080" cx="74.9268293" cy="222.282927" r="18.7317073"></circle>
+                <circle id="Oval-Copy-9" fill="#A0A0A0" cx="17.4829268" cy="123.629268" r="17.4829268"></circle>
+                <circle id="Oval-Copy-8" fill="#666666" cx="33.7170732" cy="179.82439" r="21.2292683"></circle>
+            </g>
+        </g>
+    </g>
+</svg>
