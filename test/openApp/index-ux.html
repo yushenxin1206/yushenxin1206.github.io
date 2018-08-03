@@ -11,15 +11,40 @@
 		background: #fff;
 	}
 	.loading-wrap{
-		display: none;
+		/*display: none;*/
 		margin-top: calc(50vh - 43px);
 	}
 	.loading-icon{
 		display: block;
 		margin: 0 auto;
-		width: 72px;
-		height: 72px;
+		-webkit-animation: spin 2s linear infinite;
+		animation: spin 1.5s linear infinite;
 	}
+	/*图标动画*/
+	@-webkit-keyframes spin {
+        0%   {
+            -webkit-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+	@keyframes spin {
+		0% {
+			-webkit-transform: rotate(0deg);
+			-ms-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+		100% {
+			-webkit-transform: rotate(360deg);
+			-ms-transform: rotate(360deg);
+			transform: rotate(360deg);
+		}
+    }
 	.loading-text{
 		font-size: 13px;
 		color: rgba(25,25,25,.5);
@@ -30,10 +55,6 @@
 		padding: 8px 16px;
 		background: #f2f2f2;
 		align-items: center;
-	}
-	.warning-icon{
-		width: 24px;
-		height: 24px;
 	}
 	.warning-text{
 		display: inline-block;
@@ -46,11 +67,11 @@
 </head>
 <body>
 <div class="warning-wrap">
-	<img class="warning-icon" src="./images/warning.png" />
+	<img width="24" height="24" class="warning-icon" src="./images/warning.svg"/>
 	<p class="warning-text"></p>
 </div>
 <div class="loading-wrap">
-	<img class="loading-icon" src="./images/loading.png"/>
+	<img width="72" height="72" class="loading-icon" src="./images/loading.svg"/>
 	<p class="loading-text"></p>
 </div>
 <script type="text/javascript">
@@ -118,9 +139,9 @@ var langData = {
 		openInBrowser:"（德语）当前非浏览器环境，请点击右上角在浏览器中打开"
 	},
 	"en":{//美式英语 默认语言
-		notSp:"（美式英语）抱歉，该平台无法使用玩机技巧",
-		openApp:"（美式英语）正在打开玩机技巧...",
-		openInBrowser:"（美式英语）当前非浏览器环境，请点击右上角在浏览器中打开"
+		notSp:"Sorry, the platform cannot use the Tips.",
+		openApp:"Opening the Tips ...",
+		openInBrowser:"You are not using a browser. Please click in the upper right corner to open the browser."
 	},
 	"en-rgb":{//英式英语 
 		notSp:"（英式英语）抱歉，该平台无法使用玩机技巧",
