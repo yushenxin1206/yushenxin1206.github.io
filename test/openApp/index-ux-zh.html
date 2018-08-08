@@ -89,7 +89,7 @@ var downloadURL="http://appstore.huawei.com";
 //语言数据
 var langData = {
 	"zh":{//中文
-		notSp:"抱歉，该平台无法使用玩机技巧抱歉抱歉，该平台无法使用玩机技巧抱歉抱歉，该平台无法使用玩机技巧抱歉",
+		notSp:"抱歉，该平台无法使用玩机技巧",
 		openApp:"正在打开玩机技巧...",
 		openInBrowser:"当前非浏览器环境，请点击右上角在浏览器中打开"
 	}
@@ -106,6 +106,18 @@ var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1; //android�
 
 window.onload = function(){
 
+	var warningText = document.getElementsByClassName("warning-text")[0];
+	var warningWrap = document.getElementsByClassName("warning-wrap")[0];
+	
+	//padding自适应
+	window.onresize = function(){
+	
+		if(warningText.offsetHeight<35){
+			warningWrap.style.padding = '16px';
+		}else{
+			warningWrap.style.padding = '8px 16px';
+		}
+	}
 	//安卓平台如已安装则打开 否则跳转到应用市场下载页面
 	if(isAndroid){ 
 		
@@ -131,29 +143,25 @@ window.onload = function(){
 		}else{
 		
 			//在QQ微信支付宝中提示点击右上角在浏览器中打开
-			var warningText =document.getElementsByClassName("warning-text")[0];
+			warningText.innerHTML = txtData.openInBrowser;
 			
-				warningText.innerHTML = txtData.openInBrowser;
+			warningWrap.style.display = 'flex';
+			if(warningText.offsetHeight<35){
+				warningWrap.style.padding = '16px';
+			}
 				
-				document.getElementsByClassName("warning-wrap")[0].style.display = 'flex';
-				if(warningText.offsetHeight<35){
-					document.getElementsByClassName("warning-wrap")[0].style.padding = '16px';
-				}
-			
-			
 		}
 		
 	}else{
-		
-		var warningText =document.getElementsByClassName("warning-text")[0];
 			
 			warningText.innerHTML = txtData.notSp;
 			
-			document.getElementsByClassName("warning-wrap")[0].style.display = 'flex';
+			warningWrap.style.display = 'flex';
 			if(warningText.offsetHeight<35){
-				document.getElementsByClassName("warning-wrap")[0].style.padding = '16px';
+				warningWrap.style.padding = '16px';
 			}
 	}
+	
 	
 }
 
