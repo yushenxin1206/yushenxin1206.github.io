@@ -94,8 +94,8 @@ var txtData = {};
 updateTxt();
 
 //判断设备属于哪类平台
-var u = navigator.userAgent;
-var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+var u = navigator.userAgent.toLowerCase();
+var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1; //android终端或者uc浏览器
 
 window.onload = function(){
 
@@ -103,8 +103,7 @@ window.onload = function(){
 	if(isAndroid){ 
 		
 		//判断是否为QQ或微信支付宝，不是则打开应用，否则提示在浏览器中打开
-		var ua = navigator.userAgent.toLowerCase();
-		var isQQWxAli = ua.match(/MicroMessenger\/[0-9]/i) || ua.match(/QQ\/[0-9]/i) || ua.match(/Alipay/i);
+		var isQQWxAli = u.match(/MicroMessenger\/[0-9]/i) || u.match(/QQ\/[0-9]/i) || u.match(/Alipay/i);
 		
 		if(isQQWxAli === null){ 
 			

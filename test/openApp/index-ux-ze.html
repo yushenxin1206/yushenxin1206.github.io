@@ -107,8 +107,8 @@ var txtData = {};
 updateTxt();
 
 //判断设备属于哪类平台
-var u = navigator.userAgent;
-var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+var u = navigator.userAgent.toLowerCase();
+var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1; //android终端或者uc浏览器
 
 window.onload = function(){
 
