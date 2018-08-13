@@ -74,7 +74,7 @@
 	<img width="72" height="72" class="loading-icon" src="./images/loading.svg"/>
 	<p class="loading-text"></p>
 </div>
-
+<a class="jump-links"></a>
 <script type="text/javascript">
 
 //deep links和应用市场地址  
@@ -98,6 +98,11 @@ var u = navigator.userAgent.toLowerCase();
 var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1; //android终端或者uc浏览器
 
 window.onload = function(){
+
+	//显示跳转地址
+	var jumpLinks = document.getElementsByClassName("jump-links")[0];
+	jumpLinks.innerHTML = window.location.href;
+	jumpLinks.href = window.location.href;
 
 	var warningText = document.getElementsByClassName("warning-text")[0];
 	var warningWrap = document.getElementsByClassName("warning-wrap")[0];
