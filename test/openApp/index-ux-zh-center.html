@@ -59,7 +59,7 @@
 	}
 	/*提示信息*/
 	.warning-wrap{
-		display: block;
+		display: none;
 	}
 	.warning-icon{
 		display: block;
@@ -134,13 +134,14 @@ window.onload = function(){
 		
 			//在QQ微信支付宝中提示点击右上角在浏览器中打开
 			warningText.innerHTML = txtData.openInBrowser;
+			warningWrap.style.display = 'block';
 			
 		}
 		
 	}else{
 			//非安卓平台提示无法使用
 			warningText.innerHTML = txtData.notSp;
-		
+			warningWrap.style.display = 'block';
 	}
 }
 
