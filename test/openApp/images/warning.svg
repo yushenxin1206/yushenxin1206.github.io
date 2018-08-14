@@ -5,7 +5,7 @@
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Dialog/Light/BG_item_title_with-icon" transform="translate(-1000.000000, -72.000000)" fill="#000000">
+        <g id="Dialog/Light/BG_item_title_with-icon" transform="translate(-1000.000000, -72.000000)" fill="#000000" fill-opacity="0.3">
             <g id="ic/24x24/Light/Public_info" transform="translate(1040.000000, 112.000000) scale(1, -1) translate(-1040.000000, -112.000000) translate(992.000000, 64.000000)">
                 <path d="M48,8 C70.092,8 88,25.908 88,48 C88,70.092 70.092,88 48,88 C25.908,88 8,70.092 8,48 C8,25.908 25.908,8 48,8 Z M48,14 C29.252,14 14,29.252 14,48 C14,66.748 29.252,82 48,82 C66.748,82 82,66.748 82,48 C82,29.252 66.748,14 48,14 Z M53,29.958 C53,32.719 50.762,34.958 48,34.958 C45.236,34.958 43,32.719 43,29.958 C43,27.194 45.236,24.958 48,24.958 C50.762,24.958 53,27.194 53,29.958 Z M52,65 C52,67.209 50.209,69 48,69 C45.791,69 44,67.209 44,65 L44,45 C44,42.791 45.791,41 48,41 C50.209,41 52,42.791 52,45 L52,65 Z" id="Combined-Shape"></path>
             </g>

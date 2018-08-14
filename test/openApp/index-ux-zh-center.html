@@ -8,11 +8,18 @@
 <style type="text/css">
 	*{padding0;margin:0;}
 	body{
+		box-sizing: border-box;
+		height: 100vh;
+		width: 100vw;
+		padding: 0 16px;
 		background: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
+	/*正在打开*/
 	.loading-wrap{
 		display: none;
-		margin-top: calc(50vh - 43px);
 	}
 	.loading-icon{
 		display: block;
@@ -50,31 +57,30 @@
 		color: rgba(25,25,25,.5);
 		text-align: center;
 	}
+	/*提示信息*/
 	.warning-wrap{
-		display: none;
-		padding: 8px 16px;
-		background: #f2f2f2;
-		align-items: center;
+		display: block;
+	}
+	.warning-icon{
+		display: block;
+		margin: 0 auto;
 	}
 	.warning-text{
-		display: inline-block;
-		font-size: 15px;
-		line-height: 23px;
-		padding-left: 16px;
-		color: #191919;
+		font-size: 13px;
+		color: #808080;
+		text-align: left;
 	}
 </style>
 </head>
 <body>
 <div class="warning-wrap">
-	<img width="24" height="24" class="warning-icon" src="./images/warning.svg"/>
+	<img width="72" height="72" class="warning-icon" src="./images/warning.svg"/>
 	<p class="warning-text"></p>
 </div>
 <div class="loading-wrap">
 	<img width="72" height="72" class="loading-icon" src="./images/loading.svg"/>
 	<p class="loading-text"></p>
 </div>
-<a class="jump-links"></a>
 <script type="text/javascript">
 
 //deep links和应用市场地址  
@@ -99,23 +105,8 @@ var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1; //android�
 
 window.onload = function(){
 
-	//显示跳转地址
-	var jumpLinks = document.getElementsByClassName("jump-links")[0];
-	jumpLinks.innerHTML = window.location.href;
-	jumpLinks.href = window.location.href;
-
 	var warningText = document.getElementsByClassName("warning-text")[0];
 	var warningWrap = document.getElementsByClassName("warning-wrap")[0];
-	
-	//浏览中切换横竖屏padding自适应
-	window.onresize = function(){
-	
-		if(warningText.offsetHeight<35){
-			warningWrap.style.padding = '16px';
-		}else{
-			warningWrap.style.padding = '8px 16px';
-		}
-	}
 	
 	//安卓平台如已安装则打开 否则跳转到应用市场下载页面
 	if(isAndroid){ 
@@ -144,23 +135,13 @@ window.onload = function(){
 			//在QQ微信支付宝中提示点击右上角在浏览器中打开
 			warningText.innerHTML = txtData.openInBrowser;
 			
-			warningWrap.style.display = 'flex';
-			if(warningText.offsetHeight<35){
-				warningWrap.style.padding = '16px';
-			}
-				
 		}
 		
 	}else{
 			//非安卓平台提示无法使用
 			warningText.innerHTML = txtData.notSp;
-			
-			warningWrap.style.display = 'flex';
-			if(warningText.offsetHeight<35){
-				warningWrap.style.padding = '16px';
-			}
+		
 	}
-	
 }
 
 </script>
