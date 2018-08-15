@@ -110,7 +110,7 @@ window.onload = function(){
 	var warningWrap = document.getElementsByClassName("warning-wrap")[0];
 	
 	//安卓平台如已安装则打开 否则跳转到应用市场下载页面
-	if(isAndroid){ 
+	if(!isAndroid){ 
 		
 		//判断是否为QQ或微信支付宝，不是则打开应用，否则提示在浏览器中打开
 		var ua = navigator.userAgent.toLowerCase();
