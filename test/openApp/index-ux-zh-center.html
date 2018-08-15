@@ -64,6 +64,7 @@
 	.warning-icon{
 		display: block;
 		margin: 0 auto;
+		padding: 11px;
 	}
 	.warning-text{
 		font-size: 13px;
@@ -74,7 +75,7 @@
 </head>
 <body>
 <div class="warning-wrap">
-	<img width="72" height="72" class="warning-icon" src="./images/warning.svg"/>
+	<img width="50" height="50" class="warning-icon" src="./images/warning.svg"/>
 	<p class="warning-text"></p>
 </div>
 <div class="loading-wrap">
@@ -91,7 +92,7 @@ var downloadURL="http://appstore.huawei.com";
 var langData = {
 	"zh":{//中文
 		notSp:"抱歉，该平台无法使用玩机技巧",
-		openApp:"正在打开玩机技巧...",
+		openApp:"正在尝试打开玩机技巧...",
 		openInBrowser:"当前非浏览器环境，请点击右上角在浏览器中打开"
 	}
 };
@@ -126,7 +127,7 @@ window.onload = function(){
 			//延时进入下载页
 			setTimeout(function(){
 				
-				window.location.href = downloadURL;
+				window.location.replace(downloadURL);
 				
 			},2000);
 			
