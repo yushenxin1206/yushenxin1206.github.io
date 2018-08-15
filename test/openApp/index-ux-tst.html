@@ -86,7 +86,8 @@
 * 移动端最终都会跳转到a.vmall.com 但appstore更正规且规则更清晰
 * 且不同域名下的相同应用都具有相同的ID 如抖音的C10652857
 */
-var appURL="emuitips://dl";
+//var appURL="emuitips://dl";
+var appURL="weixin://dl";
 var downloadURL="http://appstore.huawei.com";
 
 //获取用户首选语言 更新文本内容
@@ -97,7 +98,7 @@ updateTxt();
 var u = navigator.userAgent.toLowerCase();
 var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1; //android终端或者uc浏览器
 document.write(navigator.userAgent.toLowerCase());
-/*window.onload = function(){
+window.onload = function(){
 
 	//安卓平台如已安装则打开 否则跳转到应用市场下载页面
 	if(isAndroid){ 
@@ -137,7 +138,7 @@ document.write(navigator.userAgent.toLowerCase());
 		
 	}
 	
-}*/
+}
 
 //判断平台语言 更新文本内容
 function updateTxt(){
