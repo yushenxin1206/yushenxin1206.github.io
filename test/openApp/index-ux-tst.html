@@ -115,7 +115,7 @@ window.onload = function(){
 			document.getElementsByClassName("loading-text")[0].innerHTML = txtData.openApp;
 			document.getElementsByClassName("loading-wrap")[0].style.display = 'block';
 				
-			var d1 = new Date()；
+			var d1 = new Date();
 			var time1 = d1.getTime();
 			//打开应用(只是尝试打开app，并不能返回app是否打开成功的结果，即app是否安装)
 			window.location.href = appURL;//window.location.href(window.location)=appurl有无应用都不会阻塞，并且不会改变该页面的window.location的值
@@ -123,7 +123,7 @@ window.onload = function(){
 			//document.write(window.location.href);
 			//延时进入下载页
 			setTimeout(function(){
-				var d2 = new Date()；
+				var d2 = new Date();
 				var time2 = d2.getTime();
 				
 				//window.location.replace(downloadURL);
