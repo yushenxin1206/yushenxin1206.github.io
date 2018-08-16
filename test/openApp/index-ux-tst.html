@@ -79,27 +79,21 @@
 
 <script type="text/javascript">
 
-//deep links和应用市场地址  
-/*
-* 同地区downloadURL是否是一致呢？ 
-* 应用市场的地址有好几个 appstore.huawei.com app.hicloud.com a.vmall.com
-* 移动端最终都会跳转到a.vmall.com 但appstore更正规且规则更清晰
-* 且不同域名下的相同应用都具有相同的ID 如抖音的C10652857
-*/
-var appURL="emuitips://dl";
-//var appURL="alipayqr://platformapi/startapp";
-var downloadURL="http://appstore.huawei.com";
-
-//获取用户首选语言 更新文本内容
-var txtData = {};
-updateTxt();
-
-//判断设备属于哪类平台
-var u = navigator.userAgent.toLowerCase();
-var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1; //android终端或者uc浏览器
-document.write(navigator.userAgent.toLowerCase());
 window.onpageshow = function(){
 
+	var appURL="emuitips://dl";
+	//var appURL="alipayqr://platformapi/startapp";
+	var downloadURL="http://appstore.huawei.com";
+
+	//获取用户首选语言 更新文本内容
+	var txtData = {};
+	updateTxt();
+
+	//判断设备属于哪类平台
+	var u = navigator.userAgent.toLowerCase();
+	var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1; //android终端或者uc浏览器
+	document.write(navigator.userAgent.toLowerCase());
+		
 	//安卓平台如已安装则打开 否则跳转到应用市场下载页面
 	if(isAndroid){ 
 		
@@ -139,10 +133,8 @@ window.onpageshow = function(){
 		
 	}
 	
-}
-
-//判断平台语言 更新文本内容
-function updateTxt(){
+	//判断平台语言 更新文本内容
+	function updateTxt(){
 	var lang = (navigator.browserLanguage || navigator.language).toLowerCase();
 	lang = "en";
 	if(!langData.hasOwnProperty(lang)){
@@ -161,6 +153,8 @@ function updateTxt(){
 		lang = 'en';//需要查询其中是否有对应的lang 没有则显示英文 防止发生错误
 	}
 	txtData = langData[lang];
+}
+	
 }
 
 </script>
