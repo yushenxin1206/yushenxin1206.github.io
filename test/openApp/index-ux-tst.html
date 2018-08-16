@@ -105,7 +105,11 @@ var u = navigator.userAgent.toLowerCase();
 var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1; //android终端或者uc浏览器
 
 window.onpageshow = function(event){
-	alert(event.persisted);
+	
+	//从缓存中读取 则不刷新js
+	if(event.persisted){
+		return false;
+	}
 	var warningText = document.getElementsByClassName("warning-text")[0];
 	var warningWrap = document.getElementsByClassName("warning-wrap")[0];
 	
@@ -123,7 +127,7 @@ window.onpageshow = function(event){
 					
 			//打开应用(只是尝试打开app，并不能返回app是否打开成功的结果，即app是否安装)
 			window.location.href = appURL;//window.location.href(window.location)=appurl有无应用都不会阻塞，并且不会改变该页面的window.location的值
-			alert("已尝试调起玩机技巧"+appURL);
+			//alert("已尝试调起玩机技巧"+appURL);
 			//延时进入下载页
 			setTimeout(function(){
 				
