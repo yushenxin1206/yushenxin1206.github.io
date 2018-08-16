@@ -104,8 +104,8 @@ var txtData = langData['zh'];
 var u = navigator.userAgent.toLowerCase();
 var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1; //android终端或者uc浏览器
 
-window.onload = function(){
-
+window.onpageshow = function(event){
+	alert(event.persisted);
 	var warningText = document.getElementsByClassName("warning-text")[0];
 	var warningWrap = document.getElementsByClassName("warning-wrap")[0];
 	
@@ -127,7 +127,7 @@ window.onload = function(){
 			//延时进入下载页
 			setTimeout(function(){
 				
-				window.location.replace(downloadURL);
+				window.location.href = downloadURL;
 				
 			},2000);
 			
