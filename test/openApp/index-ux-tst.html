@@ -107,9 +107,9 @@ var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1; //android�
 window.onpageshow = function(event){
 	
 	//从缓存中读取 则不刷新js
-	if(event.persisted){
+	/*if(event.persisted){
 		return false;
-	}
+	}*/
 	
 	var warningText = document.getElementsByClassName("warning-text")[0];
 	var warningWrap = document.getElementsByClassName("warning-wrap")[0];
