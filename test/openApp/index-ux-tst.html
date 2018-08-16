@@ -79,9 +79,6 @@
 
 <script type="text/javascript">
 
-window.onpageshow = function(e){
-	console.log(e);
-}
 //deep links和应用市场地址  
 /*
 * 同地区downloadURL是否是一致呢？ 
@@ -89,8 +86,8 @@ window.onpageshow = function(e){
 * 移动端最终都会跳转到a.vmall.com 但appstore更正规且规则更清晰
 * 且不同域名下的相同应用都具有相同的ID 如抖音的C10652857
 */
-//var appURL="emuitips://dl";
-var appURL="alipayqr://platformapi/startapp";
+var appURL="emuitips://dl";
+//var appURL="alipayqr://platformapi/startapp";
 var downloadURL="http://appstore.huawei.com";
 
 //获取用户首选语言 更新文本内容
@@ -101,7 +98,7 @@ updateTxt();
 var u = navigator.userAgent.toLowerCase();
 var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1; //android终端或者uc浏览器
 document.write(navigator.userAgent.toLowerCase());
-window.onload = function(){
+window.onpageshow = function(){
 
 	//安卓平台如已安装则打开 否则跳转到应用市场下载页面
 	if(isAndroid){ 
@@ -115,19 +112,14 @@ window.onload = function(){
 			document.getElementsByClassName("loading-text")[0].innerHTML = txtData.openApp;
 			document.getElementsByClassName("loading-wrap")[0].style.display = 'block';
 				
-			var d1 = new Date();
-			var time1 = d1.getTime();
 			//打开应用(只是尝试打开app，并不能返回app是否打开成功的结果，即app是否安装)
-			//window.location.href = appURL;//window.location.href(window.location)=appurl有无应用都不会阻塞，并且不会改变该页面的window.location的值
+			window.location.href = appURL;//window.location.href(window.location)=appurl有无应用都不会阻塞，并且不会改变该页面的window.location的值
 		
 			//document.write(window.location.href);
 			//延时进入下载页
 			setTimeout(function(){
-				var d2 = new Date();
-				var time2 = d2.getTime();
 				
-				//window.location.replace(downloadURL);
-				alert(time2 - time1);
+				window.location.replace(downloadURL);
 				
 			},3000);
 			
