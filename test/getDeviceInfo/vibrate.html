@@ -3,7 +3,20 @@
 <head>
 <meta charset="utf-8">
 <title>Device Example</title>
+<script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>
 <script type="text/javascript">
+window.vConsole = new window.VConsole({
+  defaultPlugins: ['system', 'network', 'element', 'storage'], // 可以在此设定要默认加载的面板
+  maxLogNumber: 1000,
+  // disableLogScrolling: true,
+  onReady: function() {
+    console.log('vConsole is ready.');
+  },
+  onClearLog: function() {
+    console.log('on clearLog');
+  }
+});
+
 function plusReady(){
 	plus.device.vibrate(2000);
 }
@@ -13,7 +26,7 @@ if(window.plus){
 	document.addEventListener("plusReady",plusReady,false);
 }
 
-document.write(navigator);
+console.log(navigator);
 </script>
 </head>
 </html>
