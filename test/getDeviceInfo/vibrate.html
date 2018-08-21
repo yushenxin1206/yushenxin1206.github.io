@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Device Example</title>
-<script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>
+<script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>   
 <script type="text/javascript">
 window.vConsole = new window.VConsole({
   defaultPlugins: ['system', 'network', 'element', 'storage'], // 可以在此设定要默认加载的面板
@@ -17,7 +17,18 @@ window.vConsole = new window.VConsole({
   }
 });
 
-navigator.vibrate(300000);
+if(window.plus){
+	console.log(plus);
+}else{
+	document.addEventListener("plusready",function(){
+		console.log(plus);
+	},flase);
+}
+
+/*setInterval(function(){
+	navigator.vibrate(2000);
+},2000);*/
+
 
 console.log(navigator);
 console.log(window.plus);
