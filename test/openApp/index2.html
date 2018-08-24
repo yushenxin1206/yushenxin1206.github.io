@@ -79,6 +79,7 @@ if(isAndroid){
 	
 }
 
+openApp();
 
 
 //打开玩机技巧
@@ -91,12 +92,12 @@ function openApp(){
 	//打开应用
 	window.location.href = appURL;
 	
-	//延时1000ms则进入下载页
+	//延时2000ms则进入下载页
 	setTimeout(function(){
 	
 		window.location.href = downloadURL;
 		
-	},1000);
+	},2000);
 	
 }
 
