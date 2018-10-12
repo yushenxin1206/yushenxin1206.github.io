@@ -127,14 +127,19 @@ window.onpageshow = function(event){
 			document.getElementsByClassName("loading-wrap")[0].style.display = 'block';
 					
 			//打开应用(只是尝试打开app，并不能返回app是否打开成功的结果，即app是否安装)
-			window.location.href = appURL;//window.location.href(window.location)=appurl有无应用都不会阻塞，并且不会改变该页面的window.location的值
+			setTimeout(function(){
+				
+				window.location.href = appURL;
+				
+			},5000);
+			//window.location.href = appURL;//window.location.href(window.location)=appurl有无应用都不会阻塞，并且不会改变该页面的window.location的值
 			//alert("已尝试调起玩机技巧"+appURL);
 			//延时进入下载页
 			setTimeout(function(){
 				
 				window.location.href = downloadURL;
 				
-			},2000);
+			},10000);
 			
 		}else{
 		
