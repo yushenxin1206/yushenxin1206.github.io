@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
+
 <title></title>
 <style type="text/css">
 	p{
@@ -24,6 +25,12 @@
 <p></p>
 <script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>
 <script type="text/javascript">
+if(document.documentElement.requestFullScreen()){
+	document.documentElement.requestFullScreen();
+}else{
+	document.documentElement.webkitRequestFullScreen();
+}	
+
 
 //初始化vConsole
 //var vConsole = new VConsole(); //有奇怪的bug 不必深究(加个document.write就好了？)
