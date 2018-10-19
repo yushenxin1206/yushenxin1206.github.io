@@ -25,78 +25,16 @@
 <p></p>
 <script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>
 <script type="text/javascript">
-
-	document.documentElement.webkitRequestFullScreen();
 	
-
-
 //初始化vConsole
-//var vConsole = new VConsole(); //有奇怪的bug 不必深究(加个document.write就好了？)
+var vConsole = new VConsole(); //有奇怪的bug 不必深究(加个document.write就好了？)
 
-//deep links和应用市场地址
-//var appURL="alipayqr://platformapi/startapp";
-var appURL="weixin://dl"
-//var appURL="emuitips://dl/card?id=SF-10044716_f001";
-var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";
 
 //判断设备属于哪类平台
-var u = navigator.userAgent;
-var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
-var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端  
-
- var lang = (navigator.browserLanguage || navigator.language).toLowerCase();
- alert(lang);
-
-//IOS提示不能使用玩机技巧
-if(isIOS){  
-	document.getElementsByTagName("p")[0].innerHTML="抱歉，该平台无法使用玩机技巧";   
-}
-
-//安卓平台如已安装则打开 否则跳转到应用市场下载页面
-if(isAndroid){ 
-	
-	//判断是否为QQ或微信，不是则打开应用，否则提示在浏览器中打开
-	var ua = navigator.userAgent.toLowerCase();
-	var isQQWexin = ua.match(/MicroMessenger\/[0-9]/i) || ua.match(/QQ\/[0-9]/i) || ua.match(/Alipay/i); 
-	
-	if(isQQWexin === null){ 
-		
-		document.getElementsByTagName("p")[0].innerHTML="正在打开玩机技巧...";
-		
-		//延时进入下载页
-		/*setTimeout(function(){
-			
-			window.location.href = downloadURL;
-			
-		},1000); */
-		
-		//通过iframe的方式打开APP
-		var ifr = document.createElement('iframe');//通过iframe的方式试图打开APP，并不会阻止js其他行为
-			ifr.src = appURL;         
-			ifr.style.display = 'none';
-			var t1 = Date.now(); 
-			document.write(t1);
-			document.body.appendChild(ifr);
-			var t2 = Date.now(); 
-			document.write(t2);
-			window.setTimeout(function(){
-            document.body.removeChild(ifr);
-　　　　　　　//window.location.href = downloadURL;//打开app下载地址，有app同事提供
-         },2000)
-		
-		//打开应用(只是尝试打开app，并不能返回app是否打开成功的结果，即app是否安装)
-		window.location.href = appURL;//window.location.href(window.location)=appurl有无应用都不会阻塞，并且不会改变该页面的window.location的值
-
-		
-	}else{
-	
-		//在QQ微信中提示点击右上角在浏览器中打开
-		
-		document.getElementsByTagName("p")[0].innerHTML="抱歉，该平台无法使用玩机技巧"; 
-		document.getElementsByTagName("img")[0].style.display = "block";
-	}
-}
-
+var ua = navigator.userAgent;
+var an = navigator.appVersion;
+console.log(ua);
+console.log(an);	
 </script>
 </body>
 </html>
