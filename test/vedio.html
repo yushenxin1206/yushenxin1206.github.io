@@ -64,18 +64,30 @@ h2,p{text-align: center; margin: 20px 0;}
 
 <h2 class="">视频2</h2>
 <p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
-<video src="http://ohjdda8lm.bkt.clouddn.com/course/sample1.mp4" controls="controls" webkit-playsinline="true" preload="preload">您的浏览器不支持 video 标签</video>
+<video x-webkit-airplay="true" playsinline="true" x5-playsinline="true" webkit-playsinline="true" src="http://ohjdda8lm.bkt.clouddn.com/course/sample1.mp4" controls="controls" >您的浏览器不支持 video 标签</video>
 
 <script>
 	
 	$(function(){
 		
 		var pVideo;
-	
+		var $video = $("video");
+		
+		/*
+		* 视频初始化
+		*/
+		for(var i=0;i<$video.length;i++){
+			$video[i].play();
+		}
+		setTimeout(function(){
+			for(var i=0;i<$video.length;i++){
+				$video[i].pause();
+			}
+		},50);
+		
 		/*
 		* 设置同时只有一个视频处于播放状态
 		*/
-		var $video = $("video");
 		$video.on('play',function(){
 			pVideo = this;
 			for(var i=0;i<$video.length;i++){
@@ -84,6 +96,7 @@ h2,p{text-align: center; margin: 20px 0;}
 				}
 			}
 		});
+		
 		
 		/*不在屏幕范围内的视频停止播放*/
 		window.addEventListener('scroll', function () {
