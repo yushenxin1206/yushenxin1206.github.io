@@ -73,17 +73,6 @@ h2,p{text-align: center; margin: 20px 0;}
 		var pVideo;
 		var $video = $("video");
 		
-		/*
-		* 视频初始化
-		*/
-		for(var i=0;i<$video.length;i++){
-			$video[i].play();
-		}
-		setTimeout(function(){
-			for(var i=0;i<$video.length;i++){
-				$video[i].pause();
-			}
-		},50);
 		
 		/*
 		* 设置同时只有一个视频处于播放状态
