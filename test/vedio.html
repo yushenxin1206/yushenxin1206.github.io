@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>normal template</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+<style type="text/css">
+*{margin:0;padding:0;}
+body{
+	padding: 0 16px;
+}
+@font-face{
+    font-family: '';
+    src : url('../fonts/yaheiconsolashybrid.ttf');
+}
+.s1{
+	font-family: Arail; /* 字体 */
+	font-size:; 14px/* 文字大小 */
+	color: #ccc;/*文字颜色*/
+	text-align: center; /*文字对齐样式 居中：center 左对齐：left 右对齐：right*/
+	line-height: 1;/*行间距*/
+}
+
+/*设置图片模块*/
+.img-md{
+	max-width: 100%;
+	white-space: nowrap;
+	overflow-x: scroll;
+}
+.img-md div{
+	display: inline-block;
+	max-width: 100%;
+	text-align: center;
+}
+.img-md img{
+	max-width: 100%;
+	margin: 0 auto;
+}
+.more-img{
+	color: #999;
+	font-size: 12px;
+	text-align: center;
+	margin-bottom: 40px;
+}
+/*视频模块*/
+video{
+	display: block;
+	max-width: 100%;
+	margin: 20px auto;
+}
+
+h2,p{text-align: center; margin: 20px 0;}
+
+</style>
+<script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+
+<h2 class="">视频1</h2>
+<p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
+<video src="http://vjs.zencdn.net/v/oceans.mp4" controls="controls">您的浏览器不支持 video 标签</video>
+
+
+
+<h2 class="">视频2</h2>
+<p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
+<video src="http://ohjdda8lm.bkt.clouddn.com/course/sample1.mp4" controls="controls" webkit-playsinline="true">您的浏览器不支持 video 标签</video>
+
+<script>
+	
+	$(function(){
+		
+		var pVideo;
+	
+		/*
+		* 设置同时只有一个视频处于播放状态
+		*/
+		var $video = $("video");
+		$video.on('play',function(){
+			pVideo = this;
+			for(var i=0;i<$video.length;i++){
+				if(this != $video[i]){
+					$video[i].pause();
+				}
+			}
+		});
+		
+		/*不在屏幕范围内的视频停止播放*/
+		window.addEventListener('scroll', function () {
+			if(pVideo){
+
+				if($(pVideo).offset()["top"]<$(window).scrollTop()-$(pVideo).height()){
+					pVideo.pause();
+				}
+				
+				if($(pVideo).offset()["top"] - $(window).scrollTop()- window.innerHeight >0){
+					pVideo.pause();
+				}
+				
+			}
+		});
+		
+		
+	});
+	
+</script>
+</body>
+
+</html>
