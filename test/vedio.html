@@ -117,7 +117,7 @@ h2,p{text-align: center; margin: 20px 0;}
 <script>
 	
 	$(function(){
-		alert("7");
+		alert("8");
 		var pVideo;
 		var mOrientation;
 		var $video = $("video");
@@ -163,6 +163,7 @@ h2,p{text-align: center; margin: 20px 0;}
 			alert($fsVideo);
 			//alert(window.orientation);
 			$video.parent().addClass("fs");
+			$fsVideo.width("100vw");
 			
 		});
 								 
@@ -181,9 +182,11 @@ h2,p{text-align: center; margin: 20px 0;}
 			alert(mOrientation);
 			if(!$fsVideo){return false;}
 			if(mOrientation){
-				$fsVideo.height("100vh");
+				//$fsVideo.height("100vh");
+						       $fsVideo.width("100vw");
 			}else{
-				$fsVideo.width("100vw");
+				//$fsVideo.width("100vw");
+						      $fsVideo.height("100vh");
 			}
 		}
 		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", setVideoOrientation, false);
