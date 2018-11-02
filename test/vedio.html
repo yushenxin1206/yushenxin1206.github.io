@@ -227,6 +227,7 @@ h2,p{text-align: center; margin: 20px 0;}
 		$(".pause").click(function(){
 			$(this).parent().find("video")[0].pause();
 			$(this).parent().find(".play").show();
+			$(this).hide();
 			event.stopPropagation();
 		});
 		
