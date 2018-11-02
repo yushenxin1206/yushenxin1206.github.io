@@ -240,7 +240,9 @@ h2,p{text-align: center; margin: 20px 0;}
 			$(this).fadeOut();
 		});
 		$(".video-session").click(function(){
-			pCtrlShow($(this).find("video")[0]);
+			var v = $(this).find("video")[0];
+			if(v.paused){ return false;}
+			pCtrlShow(v);
 		});
 		
 		/*不在屏幕范围内的视频停止播放*/
