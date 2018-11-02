@@ -16,7 +16,6 @@ video::-webkit-media-controls-panel{ width: calc(100% + 32px);}
 	/*竖屏*/
 }
 @media screen and (orientation : landscape){
-
 }
 	
 body{
@@ -33,7 +32,6 @@ body{
 	text-align: center; /*文字对齐样式 居中：center 左对齐：left 右对齐：right*/
 	line-height: 1;/*行间距*/
 }
-
 /*设置图片模块*/
 .img-md{
 	max-width: 100%;
@@ -70,7 +68,6 @@ video{
 	margin: 0 auto;
 	transition: all 1s;
 }
-
 .fs{
 	position: fixed;
 	top: 0;left: 0;right: 0;bottom: 0;
@@ -132,7 +129,6 @@ video{
 	background: url("./pl.svg") 0 0 / 100% 100% no-repeat;
 }
 h2,p{text-align: center; margin: 20px 0;}
-
 </style>
 <script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
 </head>
@@ -182,7 +178,6 @@ h2,p{text-align: center; margin: 20px 0;}
 		for(var i=0;i<$video.length;i++){
 			
 			$video[i].oncanplaythrough = function(){
-
 				var $ttime = $(this).parent().find(".control .ttime").eq(0);
 				var ttime = this.duration;
 				$ttime.html(sec2min(ttime));
@@ -239,6 +234,7 @@ h2,p{text-align: center; margin: 20px 0;}
 			$(this).parent().find("video")[0].play();
 			$(this).fadeOut();
 		});
+		
 		$(".video-session").click(function(){
 			var v = $(this).find("video")[0];
 			if(v.paused){ return false;}
@@ -248,7 +244,6 @@ h2,p{text-align: center; margin: 20px 0;}
 		/*不在屏幕范围内的视频停止播放*/
 		window.addEventListener('scroll', function () {
 			if(pVideo){
-
 				if($(pVideo).offset()["top"]<$(window).scrollTop()-$(pVideo).height()){
 					pVideo.pause();
 				}
@@ -322,11 +317,16 @@ h2,p{text-align: center; margin: 20px 0;}
 		
 		/*播放时控件条的显示与隐藏*/
 		function pCtrlShow(v){
+			
 			//避免重复触发
-			if(v.dataset.cs){
-			 	return false;	
+			console.log(v.dataset.cs);
+			
+			if(v.dataset.cs === "1"){
+				return false;
+			}else{
+				v.dataset.cs = "1";
 			}
-			v.dataset.cs = 1;
+			
 			$(v).parent().find(".control").slideDown();
 			$(v).parent().find(".pause").fadeIn();
 			setTimeout(function(v){
@@ -335,7 +335,7 @@ h2,p{text-align: center; margin: 20px 0;}
 				}
 				$(v).parent().find(".control").slideUp();
 				$(v).parent().find(".pause").hide();
-				v.dataset.cs = 0;
+				v.dataset.cs = "0";
 			},3000,v);
 		}
 		
