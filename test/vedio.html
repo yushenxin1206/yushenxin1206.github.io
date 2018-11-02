@@ -116,7 +116,7 @@ h2,p{text-align: center; margin: 20px 0;}
 <script>
 	
 	$(function(){
-		alert("5");
+		alert("6");
 		var pVideo;
 		var mOrientation;
 		var $video = $("video");
@@ -180,11 +180,11 @@ h2,p{text-align: center; margin: 20px 0;}
 			alert(mOrientation);
 			if(!$fsVideo){return false;}
 			if(mOrientation){
-				$fsVideo.width("100vw");
-				alert("竖屏");
-			}else{
 				$fsVideo.height("100vh");
 				alert("横屏");
+			}else{
+				$fsVideo.width("100vw");
+				alert("竖屏");
 			}
 		}
 		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", setVideoOrientation, false);
