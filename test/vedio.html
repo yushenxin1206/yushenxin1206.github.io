@@ -11,6 +11,14 @@ video::-internal-media-controls-download-button { display:none;}
 video::-webkit-media-controls-enclosure{ overflow: hidden; }
 video::-webkit-media-controls-panel{ width: calc(100% + 32px);}
 	
+/*横竖屏*/
+@media screen and (orientation : portrait){
+	/*竖屏*/
+}
+@media screen and (orientation : landscape){
+
+}
+	
 body{
 	padding: 0 16px;
 }
@@ -60,6 +68,7 @@ video{
 	border-bottom: 0;
 	border-image-slice: 1;
 	box-sizing: content-box;
+	transition: all 1s;
 }
 .full-screen{
 	position: absolute;
@@ -134,10 +143,10 @@ h2,p{text-align: center; margin: 20px 0;}
 		});
 							  
 		$(".full-screen").click(function(){
-			$(this).parent().find("video")[0].webkitRequestFullScreen();
-			//element.webkitRequestFullScreen();//进入全屏
-			//document.webkitCancelFullScreen();//退出全屏
-
+			
+			var video = $(this).parent().find("video")[0];
+			alert(video);
+			alert(window.orientation);
 		});
 		
 	});
