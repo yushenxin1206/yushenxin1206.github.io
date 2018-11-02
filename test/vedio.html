@@ -132,7 +132,13 @@ h2,p{text-align: center; margin: 20px 0;}
 				
 			}
 		});
-		
+							  
+		$(".full-screen").click(function(){
+			$(this).parent().find("video")[0].webkitRequestFullScreen();
+			//element.webkitRequestFullScreen();//进入全屏
+			//document.webkitCancelFullScreen();//退出全屏
+
+		});
 		
 	});
 	
