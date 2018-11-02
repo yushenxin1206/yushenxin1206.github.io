@@ -322,6 +322,7 @@ h2,p{text-align: center; margin: 20px 0;}
 		
 		/*播放时控件条的显示与隐藏*/
 		function pCtrlShow(v){
+			//避免重复触发
 			if(v.dataset.cs){
 			 	return false;	
 			}
