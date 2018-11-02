@@ -6,11 +6,10 @@
 <style type="text/css">
 *{margin:0;padding:0;}
 	
-/*隐藏控件*/
-video::-internal-media-controls-download-button {
-    display:none;
-}
-
+/*隐藏下载控件*/
+video::-internal-media-controls-download-button { display:none;}
+video::-webkit-media-controls-enclosure{ overflow: hidden; }
+video::-webkit-media-controls-panel{ width: calc(100% + 40px);}
 	
 body{
 	padding: 0 16px;
@@ -48,11 +47,24 @@ body{
 	text-align: center;
 	margin-bottom: 40px;
 }
+	
 /*视频模块*/
+.video-session{
+	max-width: 100%;
+	margin: 20px auto;
+	position: relative;
+}
 video{
 	display: block;
 	max-width: 100%;
-	margin: 20px auto;
+	border-bottom: 0;
+	border-image-slice: 1;
+	box-sizing: content-box;
+}
+.full-screen{
+	position: absolute;
+	bottom: 40px;
+	right: 20px;
 }
 
 h2,p{text-align: center; margin: 20px 0;}
@@ -65,7 +77,10 @@ h2,p{text-align: center; margin: 20px 0;}
 
 <h2 class="">视频1</h2>
 <p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
-<video src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10045865_f002_Slipt%20Screen.mp4">您的浏览器不支持 video 标签</video>
+<div class="video-session">
+	<video src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10044802_f003_Gesture%20Navigation.mp4" controls="controls"">您的浏览器不支持 video 标签</video>
+	<button class="full-screen">全屏</button>
+</div>
 	
 
 <h2 class="">视频2</h2>
