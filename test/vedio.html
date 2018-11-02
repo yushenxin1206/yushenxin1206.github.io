@@ -225,16 +225,20 @@ h2,p{text-align: center; margin: 20px 0;}
 		});
 		
 		$(".pause").click(function(){
-			$(this).parent().find("video")[0].pause();
+			var $v = $(this).parent().find("video")[0];
+			$v.pause();
 			$(this).parent().find(".play").show();
 			$(this).hide();
+			$v.dataset.cs = "1";
 			event.stopPropagation();
 		});
 		
 		$(".play").click(function(){
-		
-			$(this).parent().find("video")[0].play();
+			var $v = $(this).parent().find("video")[0];
+			$v.play();
 			$(this).fadeOut();
+			$(this).parent().find(".control").slideUp();
+			$v.dataset.cs = "0";
 			event.stopPropagation();
 		});
 		
