@@ -77,17 +77,62 @@ video{
 	background: #000;
 	z-index: 9999;
 }
-
-
-.full-screen{
-	position: absolute;
-	bottom: 10px;
-	right: 22px;
-	width: 32px;
+/*底部控件*/
+.control{
 	height: 32px;
-	background: #FAFAFA url(./fullScreen.svg) 0 0 / 100% 100% no-reapert;
+	background: rgba(0,0,0,.54);
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 }
-
+.ctime{
+	float: left;
+	height: 32px;
+	line-height: 32px;
+	margin: 0 16px;
+	font-size: 13px;
+	font-weight: lighter;
+	color: #fff;
+}
+.process{
+	height: 4px;
+	background: rgba(255,255,255,.6);
+	position: absolute;
+	left: 64px;
+	right: 112px;
+	top: 14px;
+	border-radius: 2px;
+}
+.ttime{
+	float: right;
+	height: 32px;
+	line-height: 32px;
+	margin-left: 16px;
+	font-size: 13px;
+	font-weight: lighter;
+	color: #fff;
+}
+.full-screen{
+	height: 32px;
+	width: 32px;
+	line-height: 32px;
+	float: right;
+	margin: 0 16px;
+	background: url("./fs.svg") 6px 6px / 20px 20px no-repeat;
+}
+.pause,.play{
+	display: none;
+	height: 48px;
+	width: 48px;
+	background: url("./ps.svg") 0 0 / 100% 100% no-repeat;
+	position: absolute;
+	top: calc(50% - 24px);
+	left: calc(50% - 24px);
+}
+.play{
+	display: block;
+	background: url("./pl.svg") 0 0 / 100% 100% no-repeat;
+}
 h2,p{text-align: center; margin: 20px 0;}
 
 </style>
@@ -100,7 +145,14 @@ h2,p{text-align: center; margin: 20px 0;}
 <p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
 <div class="video-session">
 	<video src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10044802_f003_Gesture%20Navigation.mp4">您的浏览器不支持 video 标签</video>
-	<a class="full-screen">全屏</a>
+	<div class="control">
+		<div class="ctime">0:00</div>
+		<div class="process"></div>
+		<div class="full-screen"></div>
+		<div class="ttime">0:00</div>
+	</div>
+	<div class="pause"></div>
+	<div class="play"></div>
 </div>
 	
 
@@ -112,32 +164,87 @@ h2,p{text-align: center; margin: 20px 0;}
 
 <h2 class="">视频3</h2>
 <p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
-<video x-webkit-airplay="true" playsinline="true" x5-playsinline="true" webkit-playsinline="true" src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10045865_f002_Slipt%20Screen.mp4">您的浏览器不支持 video 标签</video>
+<video x-webkit-airplay="true" playsinline="true" x5-playsinline="true" webkit-playsinline="true" src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10045865_f002_Slipt%20Screen.mp4" controls>您的浏览器不支持 video 标签</video>
 
 <script>
 	
 	$(function(){
-		alert("9");
 		var pVideo;
 		var mOrientation;
+		var process;
+		var $fsVideo;
+		
 		var $video = $("video");
+		console.log($video);
+		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", setVideoOrientation, false);
 		
 		/*初始化横竖屏值*/
 		getOrientation();
-				      
+		
+		/*初始化视频时间*/
+		for(var i=0;i<$video.length;i++){
+			
+			$video[i].oncanplaythrough = function(){
+
+				var $ttime = $(this).parent().find(".control .ttime").eq(0);
+				var ttime = this.duration;
+				$ttime.html(sec2min(ttime));
+				
+			}
+			
+		}
+		
 		/*
 		* 设置同时只有一个视频处于播放状态
 		*/
 		$video.on('play',function(){
 			pVideo = this;
+			
+			$(this).parent().find(".control").slideUp();
+			$(this).parent().find(".pause").hide();
+			
+			if(process){
+				clearInterval(process);
+			}
+			upDataProcess();
+			
 			for(var i=0;i<$video.length;i++){
 				if(this != $video[i]){
 					$video[i].pause();
 				}
 			}
 		});
+		/*视频暂停 停止*/
+		$video.on('pause',function(){
+			
+			$(this).parent().find(".control").slideDown();
+			$(this).parent().find(".pause").hide();
+			$(this).parent().find(".play").show();
+			
+			//停止
+			if(this.currentTime == this.duration){
+				
+			}
+			//暂停
+			if(this.currentTime < this.duration){
+				
+			}
+	
+		});
 		
-		$video.click(function(){this.play()});
+		$(".pause").click(function(){
+			$(this).parent().find("video")[0].pause();
+			$(this).parent().find(".play").show();
+		});
+		
+		$(".play").click(function(){
+		
+			$(this).parent().find("video")[0].play();
+			$(this).fadeOut();
+		});
+		$video.click(function(){
+			pCtrlShow(this);
+		});
 		
 		/*不在屏幕范围内的视频停止播放*/
 		window.addEventListener('scroll', function () {
@@ -155,7 +262,6 @@ h2,p{text-align: center; margin: 20px 0;}
 		});
 		
 		/*竖屏状态旋转90度 横屏状态不旋转*/
-		var $fsVideo;
 		$(".full-screen").click(function(){
 			
 			var $video = $(this).parent().find("video").eq(0);
@@ -183,7 +289,52 @@ h2,p{text-align: center; margin: 20px 0;}
 				$fsVideo.width("100vw");
 			}
 		}
-		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", setVideoOrientation, false);
+		
+		/*更新控件条*/
+		function upDataProcess(){
+			var $process = $(pVideo).parent().find(".control .process").eq(0);
+			var $ctime = $(pVideo).parent().find(".control .ctime").eq(0);
+			var $ttime = $(pVideo).parent().find(".control .ttime").eq(0);
+			var ttime = pVideo.duration;
+			
+			$ttime.html(sec2min(ttime));
+			
+			process = setInterval(function(){
+				var ctime = pVideo.currentTime;
+				var percent = ctime*100/ttime+"%";
+				$process.css("background","linear-gradient(to right, #FFFFFF "+percent+" , rgba(255,255,255,.6) "+percent+")");
+				$ctime.html(sec2min(ctime));
+			},100);
+	
+		}
+		
+		/*秒转分秒*/
+		function sec2min(t){
+			
+			t = Math.round(t);
+			var m = Math.floor(t/60);
+			var s = t%60;
+			if(s<10){
+				s = "0"+s;
+			} 
+			return m+":"+s;
+		}
+		
+		/*播放时控件条的显示与隐藏*/
+		function pCtrlShow(v){
+		
+			$(v).parent().find(".control").slideDown();
+			$(v).parent().find(".pause").fadeIn();
+			setTimeout(function(v){
+				if(v.paused){
+					return false;
+				}
+				$(v).parent().find(".control").slideUp();
+				$(v).parent().find(".pause").hide();
+				
+			},3000,v);
+		}
+		
 	});
 	
 </script>
