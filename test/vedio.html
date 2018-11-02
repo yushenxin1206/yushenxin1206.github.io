@@ -59,24 +59,23 @@ body{
 /*视频模块*/
 .video-session{
 	position: relative;
+	display: flex;
 	max-width: 100%;
-	margin: 20px auto;
+	align-content: center;
+	align-items: center;
 }
 video{
+	width: 200px;
+	height: 200px;
 	display: block;
 	max-width: 100%;
-	border-bottom: 0;
-	border-image-slice: 1;
-	box-sizing: content-box;
 	transition: all 1s;
 }
 
 .fs{
 	position: fixed;
-	height: 100%;
-	margin: 0;
-	top: 50vh;
-	transform: translateY(-50%);
+	top: 0;left: 0;right: 0;bottom: 0;
+	background: #000;
 }
 
 
