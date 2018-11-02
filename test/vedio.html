@@ -65,8 +65,6 @@ body{
 	align-items: center;
 }
 video{
-	width: 200px;
-	height: 200px;
 	display: block;
 	max-width: 100%;
 	transition: all 1s;
@@ -175,7 +173,17 @@ h2,p{text-align: center; margin: 20px 0;}
 				mOrientation = 1;
 			}
 		}
-		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", getOrientation, false);
+		/*设置video状态*/
+		function setVideoOrientation(){
+			getOrientation();
+			if(!$fsVideo){return false;}
+			if(mOrientation){
+				$fsVideo.width("100vw");		     
+			}else{
+				$fsVideo.width("100vh");		     
+			}
+		}
+		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", setVideoOrientation, false);
 	});
 	
 </script>
