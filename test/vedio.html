@@ -60,16 +60,24 @@ body{
 .video-session{
 	max-width: 100%;
 	margin: 20px auto;
-	position: relative;
 }
 video{
 	display: block;
+	position: relative;
 	max-width: 100%;
 	border-bottom: 0;
 	border-image-slice: 1;
 	box-sizing: content-box;
 	transition: all 1s;
-	transform: rotate(90deg);
+}
+.video-fs-r{
+	width: 100vh;
+	position: fixed;
+	top: 50vh;
+	transform: translateY(-50%) rotate(90deg);
+}
+.video-fs-c{
+	width: 100vw;
 }
 .full-screen{
 	position: absolute;
@@ -149,10 +157,11 @@ h2,p{text-align: center; margin: 20px 0;}
 		/*竖屏状态旋转90度 横屏状态不旋转*/
 		$(".full-screen").click(function(){
 			
-			var video = $(this).parent().find("video")[0];
+			var $video = $(this).parent().find("video").eq(0);
 			//alert(video);
 			//alert(window.orientation);
-			
+			$video.addClass("video-fs-r");
+		
 		});
 								 
 		/*判断横竖屏状态*/
