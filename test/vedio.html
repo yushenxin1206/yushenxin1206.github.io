@@ -69,6 +69,7 @@ video{
 	border-image-slice: 1;
 	box-sizing: content-box;
 	transition: all 1s;
+	transform: rotate(90deg);
 }
 .full-screen{
 	position: absolute;
@@ -110,9 +111,12 @@ h2,p{text-align: center; margin: 20px 0;}
 	$(function(){
 		
 		var pVideo;
+		var mOrientation;
 		var $video = $("video");
 		
-		
+		/*初始化横竖屏值*/
+		getOrientation();
+				      
 		/*
 		* 设置同时只有一个视频处于播放状态
 		*/
@@ -141,24 +145,26 @@ h2,p{text-align: center; margin: 20px 0;}
 				
 			}
 		});
-							  
+		
+		/*竖屏状态旋转90度 横屏状态不旋转*/
 		$(".full-screen").click(function(){
 			
 			var video = $(this).parent().find("video")[0];
-			alert(video);
-			alert(window.orientation);
+			//alert(video);
+			//alert(window.orientation);
+			
 		});
 								 
 		/*判断横竖屏状态*/
-		function hengshuping(){
+		function getOrientation(){
 			if(window.orientation==180||window.orientation==0){
-				alert("竖屏状态！")
+				mOrientation = 0;
 			}
 			if(window.orientation==90||window.orientation==-90){
-				alert("横屏状态！")
+				mOrientation = 1;
 			}
 		}
-		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", hengshuping, false);
+		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", getOrientation, false);
 	});
 	
 </script>
