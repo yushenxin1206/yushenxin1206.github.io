@@ -241,8 +241,8 @@ h2,p{text-align: center; margin: 20px 0;}
 			$(this).parent().find("video")[0].play();
 			$(this).fadeOut();
 		});
-		$video.click(function(){
-			pCtrlShow(this);
+		$(".video-session").click(function(){
+			pCtrlShow($(this).find("video")[0]);
 		});
 		
 		/*不在屏幕范围内的视频停止播放*/
