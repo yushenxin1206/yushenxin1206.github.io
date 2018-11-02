@@ -322,7 +322,10 @@ h2,p{text-align: center; margin: 20px 0;}
 		
 		/*播放时控件条的显示与隐藏*/
 		function pCtrlShow(v){
-		
+			if(v.dataset.cs){
+			 	return false;	
+			}
+			v.dataset.cs = 1;
 			$(v).parent().find(".control").slideDown();
 			$(v).parent().find(".pause").fadeIn();
 			setTimeout(function(v){
@@ -331,7 +334,7 @@ h2,p{text-align: center; margin: 20px 0;}
 				}
 				$(v).parent().find(".control").slideUp();
 				$(v).parent().find(".pause").hide();
-				
+				v.dataset.cs = 0;
 			},3000,v);
 		}
 		
