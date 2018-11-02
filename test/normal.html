@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--
+	1. 文字模块：
+	（1）字体样式（大小、颜色、字体等），文本框、行间距、文字对齐样式可调整。
+	（2）同一个模板中，可支持多个文字样式。
+	2. 配图模块：
+	（1）多图左右滑动查看。
+	（2）支持配图格式jpg/png/gif
+	（3）配图支持超链接
+	（4）图片大小需要制定制作规格
+	3. 视频模块：
+	（1）点击播放，支持暂停、进度条、全屏、横屏播放。
+	（2）1个H5支持多个视频模块。
+	（3）每次限定一个视频播放。
+	4. 支持各模块混排。不限定各模块（文字、图片、视频等）的排版方式。
+	5. 按钮：
+	主要使用场景为超链接跳转。
+-->
+<title>normal template</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+<style type="text/css">
+*{margin:0;padding:0;}
+body{
+	padding: 0 16px;
+}
+@font-face{
+    font-family: '';
+    src : url('../fonts/yaheiconsolashybrid.ttf');
+}
+.s1{
+	font-family: Arail; /* 字体 */
+	font-size:; 14px/* 文字大小 */
+	color: #ccc;/*文字颜色*/
+	text-align: center; /*文字对齐样式 居中：center 左对齐：left 右对齐：right*/
+	line-height: 1;/*行间距*/
+}
+
+h2,p{text-align: center;}
+
+/*设置图片模块*/
+.img-md{
+	max-width: 100%;
+	white-space: nowrap;
+	overflow-x: scroll;
+	margin: 20px auto;
+}
+.img-md div{
+	display: inline-block;
+	max-width: 100%;
+	text-align: center;
+}
+.img-md img{
+	max-width: 100%;
+	margin: 0 auto;
+}
+.more-img{
+	color: #999;
+	font-size: 12px;
+	text-align: center;
+}
+/*视频模块*/
+video{
+	display: block;
+	margin: 20px auto;
+	max-width: 100%;
+}
+</style>
+<script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+<h2 class="">标题</h2>
+<p class="">正文</p>
+
+<div class="img-md">
+	<div><img src="0.webp" /></div>
+	<div><img src="1.webp" /></div>
+	<div><img src="2.webp" /></div>
+	<div><img src="3.gif" /></div>
+</div>
+
+<p class="more-img">向左滑动查看更多</p>
+
+<h2 class="">视频1</h2>
+<video src="test.mp4" controls="controls">您的浏览器不支持 video 标签</video>
+<h2 class="">视频2</h2>
+<video src="test.mp4" controls="controls">您的浏览器不支持 video 标签</video>
+<h2 class="">视频3</h2>
+<video src="test.mp4" controls="controls">您的浏览器不支持 video 标签</video>
+<h2 class="">视频4</h2>
+<video src="test.mp4" controls="controls">您的浏览器不支持 video 标签</video>
+
+<script>
+	
+	$(function(){
+	
+		/*
+		* 设置同时只有一个视频处于播放状态
+		*/
+		var $video = $("video");
+		$video.on('play',function(){
+			for(var i=0;i<$video.length;i++){
+				if(this != $video[i]){
+					$video[i].pause();
+				}
+			}
+		});
+		
+
+		/*
+		* 设置gif在显示1s后才播放
+		*/
+		if ('getContext' in document.createElement('canvas')) {
+			HTMLImageElement.prototype.play = function() {
+				if (this.storeCanvas) {
+					// 移除存储的canvas
+					this.storeCanvas.parentElement.removeChild(this.storeCanvas);
+					this.storeCanvas = null;
+					// 透明度还原
+					image.style.opacity = '';
+				}
+				if (this.storeUrl) {
+					this.src = this.storeUrl;    
+				}
+			};
+			HTMLImageElement.prototype.stop = function() {
+				var canvas = document.createElement('canvas');
+				// 尺寸
+				var width = this.width, height = this.height;
+				if (width && height) {
+					// 存储之前的地址
+					if (!this.storeUrl) {
+						this.storeUrl = this.src;
+					}
+					// canvas大小
+					canvas.width = width;
+					canvas.height = height;
+					// 绘制图片帧（第一帧）
+					canvas.getContext('2d').drawImage(this, 0, 0, width, height);
+					// 重置当前图片
+					try {
+						this.src = canvas.toDataURL("image/gif");
+					} catch(e) {
+						// 跨域
+						this.removeAttribute('src');
+						// 载入canvas元素
+						canvas.style.position = 'absolute';
+						// 前面插入图片
+						this.parentElement.insertBefore(canvas, this);
+						// 隐藏原图
+						this.style.opacity = '0';
+						// 存储canvas
+						this.storeCanvas = canvas;
+					}
+				}
+			};
+		}
+		var image = document.getElementsByTagName("img")[3];
+		// 停止gif图片
+		image.stop();
+		image.onclick = function(){
+			// 播放gif图片
+			image.play();
+		}
+	});
+	
+</script>
+</body>
+
+</html>
