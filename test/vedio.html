@@ -64,7 +64,6 @@ body{
 }
 video{
 	display: block;
-	max-width: 100%;
 	border-bottom: 0;
 	border-image-slice: 1;
 	box-sizing: content-box;
@@ -161,7 +160,7 @@ h2,p{text-align: center; margin: 20px 0;}
 			var $video = $(this).parent().find("video").eq(0);
 			//alert(video);
 			//alert(window.orientation);
-			$video.addClass("fs");
+			$video.parent().addClass("fs");
 			
 		
 		});
