@@ -74,6 +74,7 @@ video{
 	position: fixed;
 	top: 0;left: 0;right: 0;bottom: 0;
 	background: #000;
+	z-index: 9999;
 }
 
 
@@ -158,7 +159,7 @@ h2,p{text-align: center; margin: 20px 0;}
 			
 			var $video = $(this).parent().find("video").eq(0);
 			$fsVideo = $video;
-			//alert(video);
+			alert($fsVide);
 			//alert(window.orientation);
 			$video.parent().addClass("fs");
 			
@@ -176,13 +177,12 @@ h2,p{text-align: center; margin: 20px 0;}
 		/*设置video状态*/
 		function setVideoOrientation(){
 			getOrientation();
+			alert(mOrientation);
 			if(!$fsVideo){return false;}
 			if(mOrientation){
 				$fsVideo.width("100vw");		     
 			}else{
 				$fsVideo.height("100vh");
-				alert($fsVideo.height());
-				alert($fsVideo.width());
 			}
 		}
 		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", setVideoOrientation, false);
