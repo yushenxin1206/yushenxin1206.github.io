@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>长视频播放</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0">
+</head>
+<style>
+    *{margin: 0;padding: 0;}
+    html, body{width: 100%;height: 100%;overflow: hidden;}
+    body{position: relative;}
+    /*隐藏播放器自带的下载、全屏按钮*/
+    video::-internal-media-controls-download-button{display: none;}
+    video::-webkit-media-controls-enclosure{overflow: hidden;}
+    video::-webkit-media-controls-panel{width: calc(100% + 35px);}
+    @media all and (orientation : portrait){
+        header{height: 13.3vw;line-height: 13.3vw;width: 100%;overflow: hidden;position: absolute;top: 0;left: 0;background: white;z-index: 999;}
+        header .clickBack{display: inline-block;height: auto;width: 6.6vw;vertical-align: middle;margin: 0 4.4vw;}
+        header .title{display: inline-block;height: 13.3vw;line-height: 13.3vw;vertical-align: middle;}
+        .videoFrame{background: black;width: 100%;height: 100%;}
+        .videoFrame video{width: 100%;height: auto;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;}
+        .videoFrame .zantingImg{width: 0;height: auto;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;opacity: 0.5;filter: Alpha(Opacity=50);}
+    }
+    @media all and (orientation : landscape){
+        header{height: 13.3vh;line-height: 13.3vh;width: 100%;overflow: hidden;position: absolute;top: 0;left: 0;background: white;z-index: 999;}
+        header .clickBack{display: inline-block;height: auto;width: 6.6vh;vertical-align: middle;margin: 0 4.4vh;}
+        header .title{display: inline-block;height: 13.3vh;line-height: 13.3vh;vertical-align: middle;}
+        .videoFrame{background: black;width: 100%;position: absolute;top: 13.3vh;bottom: 0;}
+        .videoFrame video{width: 100%;height: 100%;}
+        .videoFrame .zantingImg{width: 0;height: auto;position: absolute;margin: auto;top: -12%;bottom: 0;left: 0;right: 0;opacity: 0.5;filter: Alpha(Opacity=50);}
+    }
+    .hide{display: none !important;}
+    /*反序语种引用此类*/
+    .doc_Rtl{direction: rtl !important;unicode-bidi: bidi-override !important;}
+</style>
+<body>
+    <!-- <header>
+        <div onclick="click_back()">
+            <img id="clickBack" class="clickBack" src="return_icon.png"/>
+            <a id="title" class="title">返回</a>
+        </div>
+    </header> -->
+    <div id="videoFrame" class="videoFrame" onclick="restart()">
+        <video autoplay poster="" src="" controls></video>
+        <img src="Snap5.png" id="zantingImg" class="zantingImg"/>
+        <div id="output"></div>
+    </div>
+</body>
+<script type="text/javascript">
+    var videoFrame = document.getElementById("videoFrame");
+    var body = videoFrame.parentNode;
+    var head = document.createElement("header");
+    head.innerHTML = '<div onclick="click_back()"><img id="clickBack" class="clickBack" src="return_icon.png"/><a id="title" class="title">返回</a></div>';
+    body.insertBefore(head, videoFrame);
+    var header = document.getElementsByTagName("header")[0];
+    var clickBack = document.getElementById("clickBack");
+    var video = document.getElementsByTagName("video")[0];
+    var headerHeight0 = Math.ceil(header.offsetHeight);
+    var zantingImg = document.getElementById("zantingImg");
+    var setInter, setInter2, setInter3, setTime;
+    //获取url上的参数集
+    var parameValue = appType_tool(location.href);
+    var appType = parameValue["appType"] ? parameValue["appType"].toUpperCase() : null;//判断是否在玩机技巧里面打开
+    //获取卡片URL上参数的方法
+    function appType_tool(url){
+        var parame = {};
+        var Url = (url).split("?");
+        if(Url[1]){
+            Url = (Url[1]).split("&");
+            for(var i=0; i<Url.length; i++){
+                var proper = (Url[i].split("="))[0];
+                var value = (Url[i].split("="))[1];
+                parame[proper] = value;
+            }
+        }
+        return parame;
+    }
+    //卡片不在玩机技巧内打开时
+    if(appType != "TIPS"){
+        var webLongVideo_url = longVideo_url(location.href);
+        console.log(webLongVideo_url)
+        video.setAttribute("src", webLongVideo_url.LongVideo_Reurl);
+        video.setAttribute("poster", webLongVideo_url.LongVideo_poster_Reurl);
+        function longVideo_url(url){
+            var Url = (url).split("?");
+            var longVideoUrl = ((Url[1]).split("&"))[0];
+            longVideoUrl = (decodeURIComponent(longVideoUrl)).split("?");
+            var videoUrl = longVideoUrl[0];
+            var posterUrl = longVideoUrl[1];
+            return {
+                "LongVideo_Reurl": videoUrl,
+                "LongVideo_poster_Reurl": posterUrl
+            };
+        }
+    }else{
+        video.removeAttribute("autoplay");
+    }
+    //卡片在玩机技巧里面打开时，供native调用，回传播放地址
+    function setVideoSrc(data){
+        var data1 = JSON.parse(data);
+        video.setAttribute("src", data1.LongVideo_Reurl);
+        video.setAttribute("poster", data1.LongVideo_poster_Reurl);
+    }
+    //判断横竖屏
+    window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function(){
+        headerShow();
+        if(!video.paused){
+            headerHide();
+        }
+    })
+    //返回上级页面
+    function click_back(){
+        if(appType != "TIPS"){
+            history.back();
+        }else{
+            location.href = "closePage:";
+        }
+    }
+    //重播方法
+    function restart(){
+        if(zantingImg.className.indexOf("hide") == -1){
+            nativePlay();
+        }else if(zantingImg.className.indexOf("hide") != -1){
+            video.pause();
+            zantingImg.className = (zantingImg.className).replace(" hide","");
+            headerShow();
+        }
+    }
+
+    //横屏时，顶部header消失的方法
+    function headerHide(){
+        setTime = setTimeout(function(){
+            setInter2 = setInterval(function(){
+                var headerHeight = parseInt(header.offsetHeight);
+                var videoFrameTop = parseInt(videoFrame.offsetTop);
+                header.style.height = (headerHeight-2) + "px";
+                videoFrame.style.top = (videoFrameTop-2) + "px";
+                if(headerHeight <= 1){
+                    header.style.height = "0px";
+                    videoFrame.style.top = "0px";
+                    clearInterval(setInter2);
+                }
+            },20)
+        }, 2000)
+    }
+    //横屏时，顶部header出现的方法
+    function headerShow(){
+        clearTimeout(setTime);
+        clearInterval(setInter2);
+        if(window.screen.height >= window.screen.width){
+            header.style.height = "13.3vw";
+            videoFrame.style.top = "13.3vw";
+        }else{
+            header.style.height = "13.3vh";
+            videoFrame.style.top = "13.3vh";
+        }
+    }
+    //横屏时屏幕被触碰则出现header
+    // function touch_headerShow(){
+    //     clearTimeout(setTime);
+    //     clearInterval(setInter2);
+    //     header.style.height = headerHeight0 + "px";
+    //     if(header.className.indexOf("headerOpacity") == -1){
+    //         header.className += "headerOpacity";
+    //     }
+    // }
+    //用户触摸屏幕时显示header
+    // video.addEventListener("touchstart",function(){
+    //     touch_headerShow();
+    // })
+    
+    //用于监听点击播放器暂停按钮，视频为播放是就隐藏title
+    video.addEventListener("play", function(e){
+        zantingImg.className += " hide";
+        clearTimeout(setTime);
+        clearInterval(setInter2);
+        headerHide();
+    })
+
+    video.addEventListener("pause", function(){
+        zantingImg.className = (zantingImg.className).replace(" hide","");
+        headerShow();
+    })
+
+    //供玩机技巧Android调用，切换到该页面时再播放视频
+    function nativePlay(){
+        zantingImg.className += " hide";
+        video.play();
+        //横屏时header在视频播放后需隐藏
+        headerHide();
+        //视频播放完毕时显示暂停按钮
+        setInter = setInterval(function(){
+            if(video.ended){
+                video.currentTime = 0;
+                video.pause();
+                clearInterval(setInter);
+                if(zantingImg.className.indexOf("hide") != -1){
+                    headerShow();
+                    zantingImg.className = (zantingImg.className).replace(" hide","");
+                }
+            }
+        },10)
+    }
+    //视频加载完成后，native调用JS的nativePlay方法实现自动播放
+    if(appType == "TIPS"){
+        if(video){
+            setInter3 = setInterval(function(){
+                if(video.readyState == 4){
+                    clearInterval(setInter3);
+                    location.href = "JSloadFinish:";
+                }
+            }, 10)
+        }
+    }
+
+</script>
+</html>
