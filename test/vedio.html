@@ -176,7 +176,6 @@ h2,p{text-align: center; margin: 20px 0;}
 		
 		var $video = $("video");
 		console.log($video);
-		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", setVideoOrientation, false);
 		
 		/*初始化横竖屏值*/
 		getOrientation();
@@ -263,10 +262,10 @@ h2,p{text-align: center; margin: 20px 0;}
 		
 		/*竖屏状态旋转90度 横屏状态不旋转*/
 		$(".full-screen").click(function(){
-			
-			var $video = $(this).parent().find("video").eq(0);
-			$fsVideo = $video;
-			$video.parent().addClass("fs");
+		
+			var $v = $(this).parent().parent().find("video").eq(0);
+			$fsVideo = $v;
+			$v.parent().addClass("fs");
 			
 		});
 								 
@@ -289,6 +288,7 @@ h2,p{text-align: center; margin: 20px 0;}
 				$fsVideo.width("100vw");
 			}
 		}
+		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", setVideoOrientation, false);
 		
 		/*更新控件条*/
 		function upDataProcess(){
