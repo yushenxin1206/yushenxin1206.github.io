@@ -156,9 +156,11 @@ h2,p{text-align: center; margin: 20px 0;}
 		});
 		
 		/*竖屏状态旋转90度 横屏状态不旋转*/
+		var $fsVideo;
 		$(".full-screen").click(function(){
 			
 			var $video = $(this).parent().find("video").eq(0);
+			$fsVideo = $video;
 			//alert(video);
 			//alert(window.orientation);
 			$video.parent().addClass("fs");
@@ -170,9 +172,11 @@ h2,p{text-align: center; margin: 20px 0;}
 		function getOrientation(){
 			if(window.orientation==180||window.orientation==0){
 				mOrientation = 0;
+				$fsVideo.height("100vh");
 			}
 			if(window.orientation==90||window.orientation==-90){
 				mOrientation = 1;
+				$fsVideo.width("100vw");		       	
 			}
 		}
 		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", getOrientation, false);
