@@ -165,18 +165,18 @@ h2,p{text-align: center; margin: 20px 0;}
 			//alert(window.orientation);
 			$video.parent().addClass("fs");
 			
-		
 		});
 								 
 		/*判断横竖屏状态*/
 		function getOrientation(){
 			if(window.orientation==180||window.orientation==0){
 				mOrientation = 0;
+				alert($fsVideo);
 				$fsVideo.height("100vh");
 			}
 			if(window.orientation==90||window.orientation==-90){
 				mOrientation = 1;
-				$fsVideo.width("100vw");		       	
+				alert($fsVideo);
 			}
 		}
 		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", getOrientation, false);
