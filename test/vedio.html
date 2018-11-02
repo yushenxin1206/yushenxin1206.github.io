@@ -73,7 +73,7 @@ video{
 
 .fs{
 	position: fixed;
-	width: 100%;
+	height: 100%;
 	margin: 0;
 	top: 50vh;
 	transform: translateY(-50%);
@@ -118,7 +118,7 @@ h2,p{text-align: center; margin: 20px 0;}
 <script>
 	
 	$(function(){
-		
+		alert("1");
 		var pVideo;
 		var mOrientation;
 		var $video = $("video");
@@ -171,12 +171,9 @@ h2,p{text-align: center; margin: 20px 0;}
 		function getOrientation(){
 			if(window.orientation==180||window.orientation==0){
 				mOrientation = 0;
-				alert($fsVideo);
-				$fsVideo.height("100vh");
 			}
 			if(window.orientation==90||window.orientation==-90){
 				mOrientation = 1;
-				alert($fsVideo);
 			}
 		}
 		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", getOrientation, false);
