@@ -58,27 +58,28 @@ body{
 	
 /*视频模块*/
 .video-session{
+	position: relative;
 	max-width: 100%;
 	margin: 20px auto;
 }
 video{
 	display: block;
-	position: relative;
 	max-width: 100%;
 	border-bottom: 0;
 	border-image-slice: 1;
 	box-sizing: content-box;
 	transition: all 1s;
 }
-.video-fs-r{
-	width: 100vh;
+
+.fs{
 	position: fixed;
-	top: 50vh;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	transform: translateY(-50%) rotate(90deg);
 }
-.video-fs-c{
-	width: 100vw;
-}
+
 .full-screen{
 	position: absolute;
 	bottom: 10px;
@@ -160,7 +161,8 @@ h2,p{text-align: center; margin: 20px 0;}
 			var $video = $(this).parent().find("video").eq(0);
 			//alert(video);
 			//alert(window.orientation);
-			$video.addClass("video-fs-r");
+			$video.addClass(".fs");
+			
 		
 		});
 								 
