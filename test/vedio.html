@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<!--
+	1、安卓native交互
+	2、动效设计
+	3、判断有无网络  
+	4、视频poster是否支持 不支持则需自己写
+-->
 <html>
 <head>
 <title>normal template</title>
@@ -6,14 +12,10 @@
 <style type="text/css">
 *{margin:0;padding:0;}
 	
-/*隐藏下载控件*/
-video::-internal-media-controls-download-button { display:none;}
-video::-webkit-media-controls-enclosure{ overflow: hidden; }
-video::-webkit-media-controls-panel{ width: calc(100% + 32px);}
 	
 /*横竖屏*/
 @media screen and (orientation : portrait){
-	/*竖屏*/
+	
 }
 @media screen and (orientation : landscape){
 }
@@ -32,11 +34,15 @@ body{
 	text-align: center; /*文字对齐样式 居中：center 左对齐：left 右对齐：right*/
 	line-height: 1;/*行间距*/
 }
+
+
 /*设置图片模块*/
 .img-md{
 	max-width: 100%;
 	white-space: nowrap;
 	overflow-x: scroll;
+	margin: 20px 0;
+	position: relative;
 }
 .img-md div{
 	display: inline-block;
@@ -52,6 +58,14 @@ body{
 	font-size: 12px;
 	text-align: center;
 	margin-bottom: 40px;
+}
+.gif,.gif-poster{
+	display: block;
+	max-width: 100%;
+	margin: 0 auto;
+}
+.gif{
+	display: none;
 }
 	
 /*视频模块*/
@@ -138,7 +152,7 @@ h2,p{text-align: center; margin: 20px 0;}
 <h2 class="">视频1</h2>
 <p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
 <div class="video-session">
-	<video data-cs="0" src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10044802_f003_Gesture%20Navigation.mp4">您的浏览器不支持 video 标签</video>
+	<video poster="http://pic29.nipic.com/20130511/9252150_174018365301_2.jpg"  src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10044802_f003_Gesture%20Navigation.mp4">您的浏览器不支持 video 标签</video>
 	<div class="control">
 		<div class="ctime">0:00</div>
 		<div class="process"></div>
@@ -148,17 +162,63 @@ h2,p{text-align: center; margin: 20px 0;}
 	<div class="pause"></div>
 	<div class="play"></div>
 </div>
-	
 
 <h2 class="">视频2</h2>
 <p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
-<video src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10045865_f002_Slipt%20Screen.mp4">您的浏览器不支持 video 标签</video>
-
-
+<div class="video-session">
+	<video src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10045865_f002_Slipt%20Screen.mp4">您的浏览器不支持 video 标签</video>
+	<div class="control">
+		<div class="ctime">0:00</div>
+		<div class="process"></div>
+		<div class="full-screen"></div>
+		<div class="ttime">0:00</div>
+	</div>
+	<div class="pause"></div>
+	<div class="play"></div>
+</div>
 
 <h2 class="">视频3</h2>
 <p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
-<video x-webkit-airplay="true" playsinline="true" x5-playsinline="true" webkit-playsinline="true" src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10045865_f002_Slipt%20Screen.mp4" controls>您的浏览器不支持 video 标签</video>
+<div class="video-session">
+	<video src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10045865_f002_Slipt%20Screen.mp4">您的浏览器不支持 video 标签</video>
+	<div class="control">
+		<div class="ctime">0:00</div>
+		<div class="process"></div>
+		<div class="full-screen"></div>
+		<div class="ttime">0:00</div>
+	</div>
+	<div class="pause"></div>
+	<div class="play"></div>
+</div>
+
+<!-- 多静态图片 -->
+<h2 class="">图片1</h2>
+<p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
+<div class="img-md">
+	<div><img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/img/phone.png"/></div>
+	<div><img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/img/phone.png"/></div>
+	<div><img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/img/phone.png"/></div>
+</div>
+<p class="more-img">向左滑动查看更多</p>
+
+<!-- 单静态图片 -->
+<h2 class="">图片2</h2>
+<p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
+<div class="img-md">
+	<div>
+		<img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/img/phone.png" />
+	</div>
+</div>
+
+
+<!-- GIF图片 -->
+<h2 class="">GIF</h2>
+<p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
+<div class="img-md">
+	<img class="gif" src="https://n.sinaimg.cn/tech/transform/478/w241h237/20181103/A-iG-hnknmqw2062092.gif" />
+	<img class="gif-poster" src="http://pic29.nipic.com/20130511/9252150_174018365301_2.jpg" />
+</div>
+	
 
 <script>
 	
@@ -167,8 +227,11 @@ h2,p{text-align: center; margin: 20px 0;}
 		var mOrientation;
 		var process;
 		var $fsVideo;
+		var vItvlList = [];
+		var $gifList;
 		
 		var $video = $("video");
+		var $gifList = $(".gif");
 		console.log($video);
 		
 		/*初始化横竖屏值*/
@@ -180,8 +243,8 @@ h2,p{text-align: center; margin: 20px 0;}
 			$video[i].oncanplaythrough = function(){
 				var $ttime = $(this).parent().find(".control .ttime").eq(0);
 				var ttime = this.duration;
+				console.log(ttime);
 				$ttime.html(sec2min(ttime));
-				
 			}
 			
 		}
@@ -191,9 +254,8 @@ h2,p{text-align: center; margin: 20px 0;}
 		*/
 		$video.on('play',function(){
 			pVideo = this;
-			
+			$(this).parent().find(".play").hide();
 			$(this).parent().find(".control").slideUp();
-			$(this).parent().find(".pause").hide();
 			
 			if(process){
 				clearInterval(process);
@@ -206,43 +268,36 @@ h2,p{text-align: center; margin: 20px 0;}
 				}
 			}
 		});
-		/*视频暂停 停止*/
+		
+		/*视频停止、暂停*/
 		$video.on('pause',function(){
 			
 			$(this).parent().find(".control").slideDown();
 			$(this).parent().find(".pause").hide();
 			$(this).parent().find(".play").show();
-			
-			//停止
-			if(this.currentTime == this.duration){
-				
-			}
-			//暂停
-			if(this.currentTime < this.duration){
-				
-			}
-	
+
 		});
 		
-		$(".pause").click(function(){
+		$(".pause").click(function(e){
 			var $v = $(this).parent().find("video")[0];
 			$v.pause();
-			$(this).parent().find(".play").show();
+			e.stopPropagation();
 		});
 		
-		$(".play").click(function(){
+		$(".play").click(function(e){
 			var $v = $(this).parent().find("video")[0];
 			$v.play();
-			$(this).fadeOut();
+			e.stopPropagation();
 		});
 		
 		$(".video-session").click(function(){
 			var v = $(this).find("video")[0];
-			if(v.paused){ return false;}
+			//已显示时不触发
+			if($(this).find(".control")[0].style.display != "none"){ return false;}
 			pCtrlShow(v);
 		});
 		
-		/*不在屏幕范围内的视频停止播放*/
+		/*不在屏幕范围内的视频停止播放 、GIF不显示*/
 		window.addEventListener('scroll', function () {
 			if(pVideo){
 				if($(pVideo).offset()["top"]<$(window).scrollTop()-$(pVideo).height()){
@@ -254,14 +309,41 @@ h2,p{text-align: center; margin: 20px 0;}
 				}
 				
 			}
+			
+			var $gifContainer;
+			for(var i=0;i<$gifList.length;i++){
+				$gifContainer = $gifList.eq(i).parent();
+				if($gifContainer.offset()["top"]<$(window).scrollTop()-$gifContainer.height()){
+					$gifContainer.find(".gif").css("display","none");
+				}else if($gifContainer.offset()["top"] - $(window).scrollTop()- window.innerHeight >0){
+					$gifContainer.find(".gif").css("display","none");
+				}else{
+					$gifContainer.find(".gif").css("display","block");
+				}
+				
+			}
+			
+			
 		});
 		
-		/*竖屏状态旋转90度 横屏状态不旋转*/
+		/*全屏按钮*/
 		$(".full-screen").click(function(){
-		
+			
 			var $v = $(this).parent().parent().find("video").eq(0);
-			$fsVideo = $v;
-			$v.parent().addClass("fs");
+			if($fsVideo){
+				$fsVideo = null;
+				$v.height("auto");
+				$v.width("auto");
+				$v.parent().removeClass("fs");
+			}else{
+				$fsVideo = $v;
+				$v.parent().addClass("fs");
+				if(mOrientation){
+					$fsVideo.height("100vh");
+				}else{
+					$fsVideo.width("100vw");
+				}
+			}
 			
 		});
 								 
@@ -316,29 +398,102 @@ h2,p{text-align: center; margin: 20px 0;}
 			return m+":"+s;
 		}
 		
-		/*播放时控件条的显示与隐藏*/
+		/*播放时点击屏幕 控件条的显示与隐藏*/
 		function pCtrlShow(v){
-			
-			//避免重复触发
-			console.log(v.dataset.cs);
-			
-			if(v.dataset.cs === "1"){
-				return false;
-			}else{
-				v.dataset.cs = "1";
-			}
-			
+
 			$(v).parent().find(".control").slideDown();
-			$(v).parent().find(".pause").fadeIn();
-			setTimeout(function(v){
+			$(v).parent().find(".pause").show();
+			
+			var mIvl = setTimeout(function(v){
+				
 				if(v.paused){
+					$(v).parent().find(".pause").hide();
 					return false;
 				}
-				$(v).parent().find(".control").slideUp();
 				$(v).parent().find(".pause").hide();
-				v.dataset.cs = "0";
-			},3000,v);
+				$(v).parent().find(".control").slideUp();
+				
+			},2000,v);
+			
+			/*已存在定时器则更新，否则添加*/
+			var iv = vExist(v);
+			
+			if(iv === false){
+				vItvlList.push({v:v,ivl:mIvl});
+			}else{
+				clearInterval(vItvlList[iv].ivl);
+				vItvlList[iv].ivl = mIvl;
+			}
+			
+			function vExist(v){
+			
+				for(var i=0;i<vItvlList.length;i++){
+					if(vItvlList[i].v == v){
+						return i;
+					}
+				}
+				return false;	
+			}
+			
+			
 		}
+		
+		/*点击进度条调整视频时间*/
+		$(".process").click(function(e){
+			//获取点击处时间
+			var position = getXAndY(e,this);
+			console.log(position.x);
+			//更新视频播放时间
+			var length = $(this).width();
+			var v = $(this).parent().parent().find("video")[0];
+			v.currentTime = v.duration*position.x/length;
+			v.play();
+			pCtrlShow(v);
+			e.stopPropagation();
+		});
+		
+		
+		//获取鼠标点击区域中的相对位置坐标
+		function getXAndY(event,prcs){
+			//鼠标点击的绝对位置
+			Ev= event || window.event;
+			var mousePos = mouseCoords(event);
+			var x = mousePos.x;
+			var y = mousePos.y;
+			//alert("鼠标点击的绝对位置坐标："+x+","+y);
+
+			//获取div在body中的绝对位置
+			var x1 = $(prcs).offset().left;
+			var y1 = $(prcs).offset().top;
+			//alert("div在body中的绝对位置坐标："+x1+","+y1);
+
+			//鼠标点击位置相对于div的坐标
+			var x2 = x - x1;
+			var y2 = y - y1;
+			return {x:x2,y:y2};
+		}
+
+		//获取点击区域在Html绝对位置坐标
+		function mouseCoords(event){
+			if(event.pageX || event.pageY){
+				return {x:event.pageX, y:event.pageY};
+			}
+			return{
+				x:event.clientX + document.body.scrollLeft - document.body.clientLeft,
+				y:event.clientY + document.body.scrollTop - document.body.clientTop
+			};
+		}
+		
+		/*
+		*	设置GIF 视频资源默认显示占位图
+		*/
+		
+		/*GIF加载完成显示GIF*/
+		$('.gif').on("load",function(){
+			$(this).css("display","block");
+			$(this).parent().find(".gif-poster").css("display","none");
+		}); 
+		
 		
 	});
 	
