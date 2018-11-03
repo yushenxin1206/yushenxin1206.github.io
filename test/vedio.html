@@ -2,8 +2,7 @@
 <!--
 	1、安卓native交互
 	2、动效设计
-	3、判断有无网络
-	4、GIF如何提示网络未连接
+	3、GIF如何提示网络未连接
 -->
 <html>
 <head>
@@ -86,7 +85,7 @@ video{
 	position: fixed;
 	top: 0;left: 0;right: 0;bottom: 0;
 	background: #000;
-	z-index: 9999;
+	z-index: 999;
 }
 /*底部控件*/
 .control{
@@ -131,12 +130,12 @@ video{
 }
 .pause,.play{
 	display: none;
-	height: 48px;
-	width: 48px;
+	height: 32px;
+	width: 32px;
 	background: url("./ps.svg") 0 0 / 100% 100% no-repeat;
 	position: absolute;
-	top: calc(50% - 24px);
-	left: calc(50% - 24px);
+	top: calc(50% - 16px);
+	left: calc(50% - 16px);
 }
 .play{
 	display: block;
@@ -155,6 +154,7 @@ video{
 	position: fixed;
 	bottom: 40px;
 	left: calc(50vw - 75px);
+	z-index: 9999;
 }
 h2,p{text-align: center; margin: 20px 0;}
 </style>
@@ -263,7 +263,7 @@ h2,p{text-align: center; margin: 20px 0;}
 			}
 			
 		}
-		
+		setToast("网络未连接",3000);
 		/*
 		* 设置同时只有一个视频处于播放状态
 		*/
@@ -511,6 +511,12 @@ h2,p{text-align: center; margin: 20px 0;}
 			$(this).css("display","block");
 			$(this).parent().find(".gif-poster").css("display","none");
 		}); 
+		/*点击GIF Poster 时提示网络状态*/
+		$('.gif-poster').on("click",function(){
+			if(!navigator.onLine){
+				setToast("网络未连接",3000);
+			}
+		});
 		
 		/*toast*/
 		function setToast(msg,t){
