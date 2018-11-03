@@ -2,8 +2,8 @@
 <!--
 	1、安卓native交互
 	2、动效设计
-	3、判断有无网络  
-	4、视频poster是否支持 不支持则需自己写
+	3、判断有无网络
+	4、GIF如何提示网络未连接
 -->
 <html>
 <head>
@@ -142,12 +142,26 @@ video{
 	display: block;
 	background: url("./pl.svg") 0 0 / 100% 100% no-repeat;
 }
+.toast{
+	width: 150px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 15px;
+	background: rgba(0,0,0,.42);
+	font-size: 13px;
+	color: #FFF;
+	position: fixed;
+	bottom: 40px;
+	left: calc(50vw - 60px);
+}
 h2,p{text-align: center; margin: 20px 0;}
 </style>
 <script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
+<div class="toast"></div>
 
 <h2 class="">视频1</h2>
 <p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
@@ -253,6 +267,9 @@ h2,p{text-align: center; margin: 20px 0;}
 		* 设置同时只有一个视频处于播放状态
 		*/
 		$video.on('play',function(){
+			if(!navigator.onLine){
+				setToast("网络未连接",3000);
+			}
 			pVideo = this;
 			$(this).parent().find(".play").hide();
 			$(this).parent().find(".control").slideUp();
@@ -285,7 +302,6 @@ h2,p{text-align: center; margin: 20px 0;}
 		});
 		
 		$(".play").click(function(e){
-			alert(navigator.onLine);
 			var $v = $(this).parent().find("video")[0];
 			$v.play();
 			e.stopPropagation();
@@ -494,6 +510,16 @@ h2,p{text-align: center; margin: 20px 0;}
 			$(this).css("display","block");
 			$(this).parent().find(".gif-poster").css("display","none");
 		}); 
+		
+		/*toast*/
+		function setToast(msg,t){
+			$(".toast").html(msg);
+			$(".toast").show();
+			setTimeout(function(){
+				$(".toast").fadeOut();
+			},t);
+		}
+		
 		
 		
 	});
