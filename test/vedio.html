@@ -285,6 +285,7 @@ h2,p{text-align: center; margin: 20px 0;}
 		});
 		
 		$(".play").click(function(e){
+			alert(navigator.onLine);
 			var $v = $(this).parent().find("video")[0];
 			$v.play();
 			e.stopPropagation();
