@@ -2,14 +2,15 @@
 <!--
 	1、安卓native交互
 	2、动效设计
-	3、GIF如何提示网络未连接
+	3、GIF如何提示网络未连接（目前点击提示）
+	4、给poster a标签加入href可否调本地播放器？
 -->
 <html>
 <head>
 <title>normal template</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
 <style type="text/css">
-*{margin:0;padding:0;}
+*{margin:0;padding:0; font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
 	
 	
 /*横竖屏*/
@@ -18,10 +19,7 @@
 }
 @media screen and (orientation : landscape){
 }
-	
-body{
-	padding: 0 16px;
-}
+
 @font-face{
     font-family: '';
     src : url('../fonts/yaheiconsolashybrid.ttf');
@@ -40,7 +38,6 @@ body{
 	max-width: 100%;
 	white-space: nowrap;
 	overflow-x: scroll;
-	margin: 20px 0;
 	position: relative;
 }
 .img-md div{
@@ -56,9 +53,9 @@ body{
 	color: #999;
 	font-size: 12px;
 	text-align: center;
-	margin-bottom: 40px;
+	margin:20px 0 40px;
 }
-.gif,.gif-poster{
+.gif-poster{
 	display: block;
 	max-width: 100%;
 	margin: 0 auto;
@@ -156,7 +153,10 @@ video{
 	left: calc(50vw - 75px);
 	z-index: 9999;
 }
-h2,p{text-align: center; margin: 20px 0;}
+h2,p{text-align: center; margin: 20px 0;padding: 0 32px;}
+h2{color: #000;font-size: 20px;margin-top: 40px;letter-spacing: 2px;}
+p{color: #666;font-size: 13px;line-height: 20px;}
+section{padding:1px 0;}
 </style>
 <script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
 </head>
@@ -164,36 +164,52 @@ h2,p{text-align: center; margin: 20px 0;}
 <body>
 <div class="toast"></div>
 
-<h2 class="">视频1</h2>
-<p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
-<div class="video-session">
-	<video poster="http://pic29.nipic.com/20130511/9252150_174018365301_2.jpg"  src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10044802_f003_Gesture%20Navigation.mp4">您的浏览器不支持 video 标签</video>
-	<div class="control">
-		<div class="ctime">0:00</div>
-		<div class="process"></div>
-		<div class="full-screen"></div>
-		<div class="ttime">0:00</div>
+<div class="img-md">
+	<div>
+		<img src="https://img14.360buyimg.com/imgzone/jfs/t24919/276/2266247788/527363/3730485c/5bc7fd8fNa18cc65b.jpg" alt="MATE20 PRO" />
 	</div>
-	<div class="pause"></div>
-	<div class="play"></div>
 </div>
-
-<h2 class="">视频2</h2>
-<p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
-<div class="video-session">
-	<video src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10045865_f002_Slipt%20Screen.mp4">您的浏览器不支持 video 标签</video>
-	<div class="control">
-		<div class="ctime">0:00</div>
-		<div class="process"></div>
-		<div class="full-screen"></div>
-		<div class="ttime">0:00</div>
+<div class="img-md">
+	<div>
+		<img src="https://img11.360buyimg.com/imgzone/jfs/t27127/255/1380097627/231362/9aa2e715/5bc7fd8fNb9c357b2.jpg" alt="MATE20 PRO" />
 	</div>
-	<div class="pause"></div>
-	<div class="play"></div>
 </div>
+<section style="">
+	<h2>视频1</h2>
+	<p>正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
+	<div class="video-session">
+		
+		<video poster="http://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/img/section2-video.jpg"  src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/video/EMUI_9.0_%E8%A7%86%E9%A2%91_%E4%B8%AD%E6%96%87.mp4">您的浏览器不支持 video 标签</video>
+		<div class="control">
+			<div class="ctime">0:00</div>
+			<div class="process"></div>
+			<div class="full-screen"></div>
+			<div class="ttime">0:00</div>
+		</div>
+		<div class="pause"></div>
+		<div class="play"></div>
+	</div>
+	<a href="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/video/EMUI_9.0_%E8%A7%86%E9%A2%91_%E4%B8%AD%E6%96%87.mp4">视频链接</a>
+</section>
 
-<h2 class="">视频3</h2>
-<p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
+<section style="">
+	<h2>视频2</h2>
+	<p>正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
+	<div class="video-session">
+		<video src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10045865_f002_Slipt%20Screen.mp4">您的浏览器不支持 video 标签</video>
+		<div class="control">
+			<div class="ctime">0:00</div>
+			<div class="process"></div>
+			<div class="full-screen"></div>
+			<div class="ttime">0:00</div>
+		</div>
+		<div class="pause"></div>
+		<div class="play"></div>
+	</div>
+</section>
+
+<h2>视频3</h2>
+<p>正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
 <div class="video-session">
 	<video src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10045865_f002_Slipt%20Screen.mp4">您的浏览器不支持 video 标签</video>
 	<div class="control">
@@ -207,8 +223,8 @@ h2,p{text-align: center; margin: 20px 0;}
 </div>
 
 <!-- 多静态图片 -->
-<h2 class="">图片1</h2>
-<p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
+<h2>图片1</h2>
+<p>正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
 <div class="img-md">
 	<div><img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/img/phone.png"/></div>
 	<div><img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/img/phone.png"/></div>
@@ -217,8 +233,8 @@ h2,p{text-align: center; margin: 20px 0;}
 <p class="more-img">向左滑动查看更多</p>
 
 <!-- 单静态图片 -->
-<h2 class="">图片2</h2>
-<p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
+<h2>图片2</h2>
+<p>正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
 <div class="img-md">
 	<div>
 		<img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/img/phone.png" />
@@ -227,17 +243,18 @@ h2,p{text-align: center; margin: 20px 0;}
 
 
 <!-- GIF图片 -->
-<h2 class="">GIF</h2>
-<p class="">正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
+<h2>GIF</h2>
+<p>正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
 <div class="img-md">
 	<img class="gif" src="https://n.sinaimg.cn/tech/transform/478/w241h237/20181103/A-iG-hnknmqw2062092.gif" />
 	<img class="gif-poster" src="http://pic29.nipic.com/20130511/9252150_174018365301_2.jpg" />
 </div>
-	
+	  
 
 <script>
 	
 	$(function(){
+	
 		var pVideo;
 		var mOrientation;
 		var process;
@@ -254,11 +271,10 @@ h2,p{text-align: center; margin: 20px 0;}
 		
 		/*初始化视频时间*/
 		for(var i=0;i<$video.length;i++){
-			
+			$video.eq(i).parent().find(".control").hide();
 			$video[i].oncanplaythrough = function(){
 				var $ttime = $(this).parent().find(".control .ttime").eq(0);
 				var ttime = this.duration;
-				console.log(ttime);
 				$ttime.html(sec2min(ttime));
 			}
 			
@@ -290,7 +306,8 @@ h2,p{text-align: center; margin: 20px 0;}
 		/*视频停止、暂停*/
 		$video.on('pause',function(){
 			
-			$(this).parent().find(".control").slideDown();
+			//$(this).parent().find(".control").slideDown();
+			$(this).parent().find(".control").slideUp();
 			$(this).parent().find(".pause").hide();
 			$(this).parent().find(".play").show();
 
@@ -310,7 +327,8 @@ h2,p{text-align: center; margin: 20px 0;}
 		
 		$(".video-session").click(function(){
 			var v = $(this).find("video")[0];
-			//已显示时不触发
+			//已显示时和暂停不触发
+			if(v.paused){return false;}
 			if($(this).find(".control")[0].style.display != "none"){ return false;}
 			pCtrlShow(v);
 		});
@@ -332,11 +350,11 @@ h2,p{text-align: center; margin: 20px 0;}
 			for(var i=0;i<$gifList.length;i++){
 				$gifContainer = $gifList.eq(i).parent();
 				if($gifContainer.offset()["top"]<$(window).scrollTop()-$gifContainer.height()){
-					$gifContainer.find(".gif").css("display","none");
+					$gifContainer.find(".gif-poster").css("display","none");
 				}else if($gifContainer.offset()["top"] - $(window).scrollTop()- window.innerHeight >0){
-					$gifContainer.find(".gif").css("display","none");
+					$gifContainer.find(".gif-poster").css("display","none");
 				}else{
-					$gifContainer.find(".gif").css("display","block");
+					$gifContainer.find(".gif-poster").css("display","block");
 				}
 				
 			}
@@ -353,6 +371,7 @@ h2,p{text-align: center; margin: 20px 0;}
 				$v.height("auto");
 				$v.width("auto");
 				$v.parent().removeClass("fs");
+				$v.parent().find(".control .full-screen").css("background-image","url(./fs.svg)");
 			}else{
 				$fsVideo = $v;
 				$v.parent().addClass("fs");
@@ -361,6 +380,7 @@ h2,p{text-align: center; margin: 20px 0;}
 				}else{
 					$fsVideo.width("100vw");
 				}
+				$v.parent().find(".control .full-screen").css("background-image","url(./efs.svg)");
 			}
 			
 		});
@@ -374,6 +394,7 @@ h2,p{text-align: center; margin: 20px 0;}
 				mOrientation = 1;
 			}
 		}
+		
 		/*设置video状态*/
 		function setVideoOrientation(){
 			getOrientation();
@@ -508,9 +529,9 @@ h2,p{text-align: center; margin: 20px 0;}
 		
 		/*GIF加载完成显示GIF*/
 		$('.gif').on("load",function(){
-			$(this).css("display","block");
-			$(this).parent().find(".gif-poster").css("display","none");
+			$(this).parent().find(".gif-poster")[0].src = this.src;
 		}); 
+		
 		/*点击GIF Poster 时提示网络状态*/
 		$('.gif-poster').on("click",function(){
 			if(!navigator.onLine){
@@ -526,8 +547,6 @@ h2,p{text-align: center; margin: 20px 0;}
 				$(".toast").fadeOut();
 			},t);
 		}
-		
-		
 		
 	});
 	
