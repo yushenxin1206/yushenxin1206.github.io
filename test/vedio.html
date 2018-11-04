@@ -392,6 +392,7 @@ section{padding:1px 0;}
 				$v.width("auto");
 				$v.parent().removeClass("fs");
 				$v.parent().find(".control .full-screen").css("background-image","url(./fs.svg)");
+				$('body').css('overflow','auto');
 			}else{
 				$fsVideo = $v;
 				$v.parent().addClass("fs");
@@ -401,6 +402,7 @@ section{padding:1px 0;}
 					$fsVideo.width("100vw");
 				}
 				$v.parent().find(".control .full-screen").css("background-image","url(./efs.svg)");
+				$('body').css('overflow','hidden');
 			}
 			
 		});
@@ -545,6 +547,7 @@ section{padding:1px 0;}
 				y:event.clientY + document.body.scrollTop - document.body.clientTop
 			};
 		}
+		
 		
 		/*
 		*	设置GIF 视频资源默认显示占位图
