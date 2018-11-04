@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
 	1、安卓native交互
-	2、动效设计
+	2、动效设计 以section为单位、块层叠交替，上滑叠起来、下滑展开、顶部滑动期间有阴影处理 
 	3、GIF如何提示网络未连接（目前点击提示）
 	4、横屏全屏退出时网页自动向上滑动
 -->
@@ -180,10 +180,10 @@ section{padding:1px 0;}
 		
 		<video poster="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/intro-video.jpg"  src="https://consumer.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/homepage/hlep_teaser/43s_TVC.mp4">您的浏览器不支持 video 标签</video>
 		<div class="control">
-			<div class="ctime">0:00</div>
+			<div class="ctime">000:00</div>
 			<div class="process"></div>
 			<div class="full-screen"></div>
-			<div class="ttime">0:00</div>
+			<div class="ttime">000:00</div>
 		</div>
 		<div class="pause"></div>
 		<div class="play"></div>
@@ -218,10 +218,10 @@ section{padding:1px 0;}
 	<div class="video-section">
 		<video poster="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-Global.jpg" src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-China.mp4">您的浏览器不支持 video 标签</video>
 		<div class="control">
-			<div class="ctime">0:00</div>
+			<div class="ctime">00:00</div>
 			<div class="process"></div>
 			<div class="full-screen"></div>
-			<div class="ttime">0:00</div>
+			<div class="ttime">00:00</div>
 		</div>
 		<div class="pause"></div>
 		<div class="play"></div>
@@ -255,10 +255,10 @@ section{padding:1px 0;}
 	<div class="video-section">
 		<video poster="pic3.png" src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/video/section8-video.mp4">您的浏览器不支持 video 标签</video>
 		<div class="control">
-			<div class="ctime">0:00</div>
+			<div class="ctime">00:00</div>
 			<div class="process"></div>
 			<div class="full-screen"></div>
-			<div class="ttime">0:00</div>
+			<div class="ttime">00:00</div>
 		</div>
 		<div class="pause"></div>
 		<div class="play"></div>
@@ -447,13 +447,16 @@ section{padding:1px 0;}
 		
 		/*秒转分秒*/
 		function sec2min(t){
-			if(isNaN(t)){return "0:00";}
+			if(isNaN(t)){return "00:00";}
 			t = Math.round(t);
 			var m = Math.floor(t/60);
 			var s = t%60;
+			if(m<10){
+				m = "0"+m;
+			} 
 			if(s<10){
 				s = "0"+s;
-			} 
+			}
 			return m+":"+s;
 		}
 		
