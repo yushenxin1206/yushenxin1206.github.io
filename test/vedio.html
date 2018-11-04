@@ -392,7 +392,7 @@ section{padding:1px 0;}
 				$v.width("auto");
 				$v.parent().removeClass("fs");
 				$v.parent().find(".control .full-screen").css("background-image","url(./fs.svg)");
-				$('body').css('overflow','auto');
+				document.removeEventListener('touchmove', function(e){e.preventDefault();},false);
 			}else{
 				$fsVideo = $v;
 				$v.parent().addClass("fs");
@@ -403,6 +403,7 @@ section{padding:1px 0;}
 				}
 				$v.parent().find(".control .full-screen").css("background-image","url(./efs.svg)");
 				$('body').css('overflow','hidden');
+				document.addEventListener('touchmove', function(e){e.preventDefault();},false);
 			}
 			
 		});
