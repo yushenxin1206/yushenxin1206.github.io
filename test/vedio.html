@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
 <style type="text/css">
 *{margin:0;padding:0; font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
-html{touch-action: manipulation;}/*不允许双击 解决click300ms问题*/	
+html{touch-action: manipulation;}	
 	
 /*横竖屏*/
 @media screen and (orientation : portrait){
@@ -393,7 +393,7 @@ section{padding:1px 0;}
 				$v.width("auto");
 				$v.parent().removeClass("fs");
 				$v.parent().find(".control .full-screen").css("background-image","url(./fs.svg)");
-				$v.parent().css("touch-action","auto");
+				$v.parent().css("touch-action","manipulation");
 			}else{
 				$fsVideo = $v;
 				$v.parent().addClass("fs");
@@ -404,7 +404,7 @@ section{padding:1px 0;}
 				}
 				$v.parent().find(".control .full-screen").css("background-image","url(./efs.svg)");
 				$('body').css('overflow','hidden');
-				$v.parent().css("touch-action","pan-x");
+				$v.parent().css("touch-action","manipulation pan-x");
 			}
 			
 		});
