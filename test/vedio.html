@@ -4,6 +4,7 @@
 	2、动效设计 以section为单位、块层叠交替，上滑叠起来、下滑展开、顶部滑动期间有阴影处理 
 	3、GIF如何提示网络未连接（目前点击提示）
 	4、横屏全屏退出时网页自动向上滑动
+	5、关于全屏方式问题，点击就全屏的应用不会随横屏而旋转，而玩机技巧目前会随横屏旋转
 -->
 <html>
 <head>
@@ -392,7 +393,7 @@ section{padding:1px 0;}
 				$v.width("auto");
 				$v.parent().removeClass("fs");
 				$v.parent().find(".control .full-screen").css("background-image","url(./fs.svg)");
-				document.removeEventListener('touchmove', function(e){e.preventDefault();},false);
+				$v.parent().css("touch-action","auto");
 			}else{
 				$fsVideo = $v;
 				$v.parent().addClass("fs");
@@ -403,7 +404,7 @@ section{padding:1px 0;}
 				}
 				$v.parent().find(".control .full-screen").css("background-image","url(./efs.svg)");
 				$('body').css('overflow','hidden');
-				document.addEventListener('touchmove', function(e){e.preventDefault();},false);
+				$v.parent().css("touch-action","pan-x");
 			}
 			
 		});
