@@ -404,6 +404,7 @@ section{
 				$v.parent().css("touch-action","manipulation");
 				//不在屏幕中停止播放
 				judgeOutScreen();
+				window.location.href = "fullScreen:out";
 			}else{
 				$fsVideo = $v;
 				$v.parent().addClass("fs");
@@ -414,6 +415,7 @@ section{
 				}
 				$v.parent().find(".control .full-screen").css("background-image","url(./efs.svg)");
 				$v.parent().css("touch-action","pan-x");
+				window.location.href = "fullScreen:in";
 			}
 			
 		});
