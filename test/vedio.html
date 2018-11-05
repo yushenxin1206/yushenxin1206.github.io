@@ -6,6 +6,8 @@
 	4、关于全屏方式问题，点击就全屏的应用不会随横屏而旋转，而玩机技巧目前会随横屏旋转(对齐 是否可以让activity不适应横屏)
 	5、横屏自动进入视频播放模式？
 	6、标题正文边距 
+	7、横屏再返回时页面会上滑一段距离
+	8、GIF有缓存时不触发load
 -->
 <html>
 <head>
@@ -328,6 +330,7 @@ section{
 		var vItvlList = [];
 		var $gifList;
 		var sectionTop = [];
+		var fsVideoTop;
 		
 		$section = $("section");
 		$video = $("video");
@@ -359,6 +362,7 @@ section{
 		$video.on('play',function(){
 			if(!navigator.onLine){
 				setToast("网络未连接",3000);
+				this.pause();
 			}
 			$(this).parent().find(".mask").hide();
 			pVideo = this;
@@ -417,7 +421,7 @@ section{
 		
 		/*监听外链事件*/
 		$('img,.jump-link').on("click",function(){
-			if($(this).hasClass(".gif-poster")){
+			if($(this).hasClass("gif-poster")){
 				if(!navigator.onLine){
 					setToast("网络未连接",3000);
 				}
@@ -442,7 +446,7 @@ section{
 				
 			}
 			
-			var $gifContainer;
+			/*var $gifContainer;
 			for(var i=0;i<$gifList.length;i++){
 				$gifContainer = $gifList.eq(i).parent();
 				if($gifContainer.offset()["top"]<$(window).scrollTop()-$gifContainer.height()){
@@ -453,7 +457,7 @@ section{
 					$gifContainer.find(".gif-poster").css("visibility","visible");
 				}
 				
-			}
+			}*/
 		}
 		
 		/*全屏按钮*/
@@ -466,13 +470,17 @@ section{
 				$v.width("auto");
 				$v.parent().removeClass("fs");
 				$v.parent().find(".control .full-screen").css("background-image","url(./fs.svg)");
-				$v.parent().css("touch-action","manipulation");
+				$v.parent().css("touch-action","manipulation");			
+				//还原滚动条位置
+				$(window).scrollTop(fsVideoTop);
 				//不在屏幕中则停止播放
 				judgeOutScreen();
 				//通知安卓显示顶部控件
 				window.location.href = "fullScreen:out";
 			}else{
 				$fsVideo = $v;
+				//记录滚动条位置
+				fsVideoTop = $(window).scrollTop();
 				$v.parent().addClass("fs");
 				if(mOrientation){
 					$fsVideo.height("100vh");
@@ -550,10 +558,6 @@ section{
 
 			var mIvl = setTimeout(function(v){
 				
-				/*if(v.paused){
-					$(v).parent().find(".pause").hide();
-					return false;
-				}*/
 				$(v).parent().find(".pause").hide();
 				$(v).parent().find(".control").slideUp();
 				
@@ -578,7 +582,6 @@ section{
 				}
 				return false;	
 			}
-			
 			
 		}
 		
@@ -628,7 +631,7 @@ section{
 			};
 		}
 
-		/*GIF加载完成显示GIF*/
+		/*GIF加载完成显示GIF 从上级页面返回时不会触发该动作*/
 		$('.gif').on("load",function(){
 			$(this).next(".gif-poster")[0].src = this.src;
 		}); 
