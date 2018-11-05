@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <!--
 	1、安卓native交互
-	2、动效设计 以section为单位、块层叠交替，上滑叠起来、下滑展开、顶部滑动期间有阴影处理 
-	3、GIF如何提示网络未连接（目前点击提示）
-	4、横屏全屏退出时网页自动向上滑动
-	5、关于全屏方式问题，点击就全屏的应用不会随横屏而旋转，而玩机技巧目前会随横屏旋转
+	2、动效设计 以section为单位、块层叠交替，上滑叠起来、下滑展开、顶部滑动期间有阴影处理(层叠时压缩回弹，展开是拉伸回弹)，
+	3、GIF如何提示网络未连接（目前点击提示）（UX参照tips toast）
+	4、关于全屏方式问题，点击就全屏的应用不会随横屏而旋转，而玩机技巧目前会随横屏旋转(对齐 是否可以让activity不适应横屏)
+	5、横屏自动进入视频播放模式？
+	6、标题正文边距 
 -->
 <html>
 <head>
 <title>normal template</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
 <style type="text/css">
-*{margin:0;padding:0; font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
+*{margin:0;padding:0;font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
 html{touch-action: manipulation;}	
 	
 /*横竖屏*/
@@ -19,6 +20,7 @@ html{touch-action: manipulation;}
 	
 }
 @media screen and (orientation : landscape){
+
 }
 
 @font-face{
@@ -33,7 +35,6 @@ html{touch-action: manipulation;}
 	line-height: 1;/*行间距*/
 }
 
-
 /*设置图片模块*/
 .img-md{
 	max-width: 100%;
@@ -44,6 +45,7 @@ html{touch-action: manipulation;}
 .img-md div{
 	display: inline-block;
 	max-width: 100%;
+	width: 100vw;
 	text-align: center;
 }
 .img-md img{
@@ -54,7 +56,7 @@ html{touch-action: manipulation;}
 	color: #999;
 	font-size: 12px;
 	text-align: center;
-	margin: 8px 0 0 0;
+	margin: 8px 0 0;
 	line-height: normal;
 }
 .gif-poster{
@@ -80,6 +82,7 @@ video{
 	margin: 0 auto;
 	transition: all 1s;
 }
+/*全屏样式*/
 .fs{
 	position: fixed;
 	top: 0;left: 0;right: 0;bottom: 0;
@@ -93,6 +96,7 @@ video{
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+	z-index: 2;
 }
 .ctime{
 	float: left;
@@ -127,19 +131,28 @@ video{
 	margin: 0 16px;
 	background: url("./fs.svg") 6px 6px / 20px 20px no-repeat;
 }
+/*其他组件*/
 .pause,.play{
 	display: none;
-	height: 32px;
-	width: 32px;
+	height: 24px;
+	width: 24px;
 	background: url("./ps.svg") 0 0 / 100% 100% no-repeat;
 	position: absolute;
-	top: calc(50% - 16px);
-	left: calc(50% - 16px);
+	top: calc(50% - 12px);
+	left: calc(50% - 12px);
+	z-index: 2;
 }
 .play{
 	display: block;
 	background: url("./pl.svg") 0 0 / 100% 100% no-repeat;
 }
+.mask{
+	position: absolute;
+	top: 0;left:0;right: 0;bottom: 0;
+	background: rgba(0,0,0,.26);
+	z-index: 1;
+}
+
 .toast{
 	display: none;
 	width: 150px;
@@ -155,70 +168,40 @@ video{
 	left: calc(50vw - 75px);
 	z-index: 9999;
 }
-h2,p{text-align: center; margin: 16px 0;padding: 0 32px;}
-h2{color: #000;font-size: 20px;margin-top: 32px;letter-spacing: 1px;}
+
+h2,p{text-align: center; margin: 16px 0; padding: 0 32px;}
+h2{color: #000;font-size: 20px; margin-top: 32px;letter-spacing: 1px;}
 p{color: #666;font-size: 13px;line-height: 20px;}
-section{padding:1px 0;}
+
+.jump-link{
+	color: #3592dc;
+}
+
+/*body::after{
+	content: "";
+	clear:both;
+}*/
+section{
+	/*position: relative;*/
+	background: #fff;
+	padding: 1px 0;
+	transition: all 1s;
+}
+.top-section{
+	position: fixed;
+	top: 0;
+}
+
 </style>
 <script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
-<div class="toast"></div>
-
-<div class="img-md">
-	<div>
-		<img src="https://img14.360buyimg.com/imgzone/jfs/t24919/276/2266247788/527363/3730485c/5bc7fd8fNa18cc65b.jpg" alt="MATE20 PRO" />
-	</div>
-</div>
-<div class="img-md">
-	<div>
-		<img src="./pic2.png" />
-	</div>
-</div>
 
 <section>
 	<div class="video-section">
 		
-		<video poster="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/intro-video.jpg"  src="https://consumer.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/homepage/hlep_teaser/43s_TVC.mp4">您的浏览器不支持 video 标签</video>
-		<div class="control">
-			<div class="ctime">000:00</div>
-			<div class="process"></div>
-			<div class="full-screen"></div>
-			<div class="ttime">000:00</div>
-		</div>
-		<div class="pause"></div>
-		<div class="play"></div>
-	</div>
-</section>
-
-<section>
-	<!-- 单张静态图片 -->
-	<h2>AI超级夜景, 记录真夜色</h2>
-	<p>打破微光局促, 方见真夜色。AI 手持超级夜景模式, 更能洞悉光线暗淡时难以捕捉的美感, 暗处更纯粹, 亮处更丰富。夜幕下的车水马龙、灯火阑珊, 从你的眼中, 到你的手上。</p>
-	<div class="img-md">
-		<div>
-			<img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-lowlight@2x.jpg" />
-		</div>
-	</div>
-<section>
-
-<!-- 单张静态图片 -->
-<section>
-	<h2>AI人像留色，释放无限创造力</h2>
-	<p>电影级 AI 人像留色，拍摄影片时实时识别人像，视频中只保留人像色彩，背景皆为黑白。更有多种电影滤镜随心切换，释放你的创造力。</p>
-	<div class="img-md">
-		<div>
-			<img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-filmmaker-color.jpg" />
-		</div>
-	</div>
-</section>
-
-<section style="">
-	<h2>3D仿生成像, 妙趣横生</h2>
-	<p>身为智能管家，前置 3D 深度感知相机的强大扫描能力, 配合先进算法, 为玩偶赋予新生命。对着玩偶随手一扫, 3D 模型跃然于屏内, 由静转动和你互动。</p>
-	<div class="video-section">
-		<video poster="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-Global.jpg" src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-China.mp4">您的浏览器不支持 video 标签</video>
+		<video poster="v1-poster.png"  src="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/image/video/1-10044531_f004_Face%20Unlock.mp4">您的浏览器不支持 video 标签</video>
 		<div class="control">
 			<div class="ctime">00:00</div>
 			<div class="process"></div>
@@ -227,65 +210,28 @@ section{padding:1px 0;}
 		</div>
 		<div class="pause"></div>
 		<div class="play"></div>
+		<div class="mask"></div>
 	</div>
 </section>
 
-<!-- 多静态图片 -->
-<section>
-	<h2>无线快充, 亦可无线反充</h2>
-	<p>支持 15W 华为无线快充8, 随手一放, 即刻充电; 德国莱茵 TÜV 权威安全认证, 稳定可靠。更有无线反向充电技术, 可为其他设备9应急充电, 变身全场救星。</p>
-	<div class="img-md">
-		<div><img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/power-wireless@2x.jpg"/></div>
-		<div><img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/power-reverse@2x.jpg"/></div>
-	</div>
-	<p class="more-img">向左滑动查看更多</p>
-</section>
-
-<!-- GIF图片 -->
-<section>
-	<h2>超级慢动作, 感受时间的流动</h2>
-	<p>用镜头改变时间的流速，捕捉最动人的那一刻。960FPS超级慢动作视频拍摄，感受摄影韵律之美。</p>
-	<div class="img-md">
-		<img class="gif" src="slow.gif" />
-		<img class="gif-poster" src="slow-poster.png" />
-	</div>
-</section>
-
-<section style="">
-	<h2>贴心懂你，聪明听话</h2>
-	<p>身为智能管家，自当一身才华：查机票、放歌曲、发微信、打电话······华为小艺不仅能听懂许多日常指令，还可通过自定义设置，一句话搞定复杂操作。</p>
-	<div class="video-section">
-		<video poster="pic3.png" src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/video/section8-video.mp4">您的浏览器不支持 video 标签</video>
-		<div class="control">
-			<div class="ctime">00:00</div>
-			<div class="process"></div>
-			<div class="full-screen"></div>
-			<div class="ttime">00:00</div>
-		</div>
-		<div class="pause"></div>
-		<div class="play"></div>
-	</div>
-</section>
-
-<div class="img-md" style="margin-top: 60px;">
-	<div>
-		<img src="tips.png" />
-	</div>
-</div>
 
 <script>
 	
 	$(function(){
-	
+		
+		var $section;
+		var $video;
 		var pVideo;
 		var mOrientation;
 		var process;
 		var $fsVideo;
 		var vItvlList = [];
 		var $gifList;
+		var sectionTop = [];
 		
-		var $video = $("video");
-		var $gifList = $(".gif");
+		$section = $("section");
+		$video = $("video");
+		$gifList = $(".gif");
 		console.log($video);
 		
 		/*初始化横竖屏值*/
@@ -301,7 +247,12 @@ section{padding:1px 0;}
 			}
 			
 		}
-		//setToast("网络未连接",3000);
+		/*初始化section顶部位置*/
+		for(var i=0;i<$section.length;i++){
+			sectionTop[i] = $section.eq(i).offset()["top"];
+		}
+		console.log(sectionTop);
+		
 		/*
 		* 设置同时只有一个视频处于播放状态
 		*/
@@ -309,6 +260,7 @@ section{padding:1px 0;}
 			if(!navigator.onLine){
 				setToast("网络未连接",3000);
 			}
+			$(this).parent().find(".mask").hide();
 			pVideo = this;
 			$(this).parent().find(".play").hide();
 			$(this).parent().find(".control").slideUp();
@@ -327,7 +279,7 @@ section{padding:1px 0;}
 		
 		/*视频停止、暂停*/
 		$video.on('pause',function(){
-			
+			$(this).parent().find(".mask").show();
 			//$(this).parent().find(".control").slideDown();
 			$(this).parent().find(".control").slideUp();
 			$(this).parent().find(".pause").hide();
@@ -355,8 +307,64 @@ section{padding:1px 0;}
 			pCtrlShow(v);
 		});
 		
-		/*不在屏幕范围内的视频停止播放 、GIF不显示*/
-		window.addEventListener('scroll', function () {
+		/*监听滚动事件*/
+		window.addEventListener('scroll', function(){
+		
+			//不在屏幕范围内的视频停止播放 、GIF不显示
+			judgeOutScreen();
+			
+			//设置section样式
+			//judgeSectionPositon();
+		});
+		
+		/*监听外链事件*/
+		$('img,.jump-link').on("click",function(){
+			if($(this).hasClass(".gif-poster")){
+				if(!navigator.onLine){
+					setToast("网络未连接",3000);
+				}
+			}
+
+			if(this.dataset.href){
+				console.log(this.dataset.href);
+				window.location.href = this.dataset.href;
+			}
+		});
+		
+		function judgeSectionPositon(){
+			
+			var top =0;
+			var bottom = 0;
+			for(var i=0;i<$section.length-1;i++){
+				if($section.eq(i).hasClass("top-section")){ continue;}
+				
+				//到达顶部则悬浮在顶部
+				if($section.eq(i).offset().top - $(window).scrollTop() < 0){
+					top = parseInt($("body").css("padding-top").split("px")[0]) + $section.eq(i).height();
+					console.log(top);
+					$("body").css("padding-top",top);
+					$section.eq(i).addClass("top-section");
+				}
+				console.log($section.eq(i).is(":visible"));
+			}
+			
+			/*for(var i=0;i<$section.length;i++){
+				if($section.eq(i).hasClass("top-section")){ continue;}
+				
+				//下一个section下滑到前一个fixed section底部时 则取消悬浮
+				if($section.eq(i).offset().top - $(window).scrollTop() > $section.eq(i-1).height()){
+					
+					top = parseInt($("body").css("padding-top").split("px")[0]) - $section.eq(i-1).height();
+					console.log(top);
+					$("body").css("padding-top",top);
+					$section.eq(i-1).removeClass("top-section");
+				}
+			}*/
+			
+		}
+		
+		function judgeOutScreen() {
+		
 			if(pVideo){
 				if($(pVideo).offset()["top"]<$(window).scrollTop()-$(pVideo).height()){
 					pVideo.pause();
@@ -380,9 +388,7 @@ section{padding:1px 0;}
 				}
 				
 			}
-			
-			
-		});
+		}
 		
 		/*全屏按钮*/
 		$(".full-screen").click(function(){
@@ -395,6 +401,8 @@ section{padding:1px 0;}
 				$v.parent().removeClass("fs");
 				$v.parent().find(".control .full-screen").css("background-image","url(./fs.svg)");
 				$v.parent().css("touch-action","manipulation");
+				//不在屏幕中停止播放
+				judgeOutScreen();
 			}else{
 				$fsVideo = $v;
 				$v.parent().addClass("fs");
@@ -404,8 +412,7 @@ section{padding:1px 0;}
 					$fsVideo.width("100vw");
 				}
 				$v.parent().find(".control .full-screen").css("background-image","url(./efs.svg)");
-				$('body').css('overflow','hidden');
-				$v.parent().css("touch-action","manipulation pan-x");
+				$v.parent().css("touch-action","pan-x");
 			}
 			
 		});
@@ -550,23 +557,12 @@ section{padding:1px 0;}
 				y:event.clientY + document.body.scrollTop - document.body.clientTop
 			};
 		}
-		
-		
-		/*
-		*	设置GIF 视频资源默认显示占位图
-		*/
-		
+
 		/*GIF加载完成显示GIF*/
 		$('.gif').on("load",function(){
-			$(this).parent().find(".gif-poster")[0].src = this.src;
+			$(this).next(".gif-poster")[0].src = this.src;
 		}); 
 		
-		/*点击GIF Poster 时提示网络状态*/
-		$('.gif-poster').on("click",function(){
-			if(!navigator.onLine){
-				setToast("网络未连接",3000);
-			}
-		});
 		
 		/*toast*/
 		function setToast(msg,t){
