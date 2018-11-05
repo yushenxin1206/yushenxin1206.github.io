@@ -8,6 +8,7 @@
 	6、标题正文边距 
 	7、横屏再返回时页面会上滑一段距离
 	8、GIF有缓存时不触发load
+	9、有时候蒙版和播放图标不显示
 -->
 <html>
 <head>
@@ -31,7 +32,7 @@ html{touch-action: manipulation;}
 }
 .s1{
 	font-family: Arail; /* 字体 */
-	font-size:; 14px/* 文字大小 */
+	font-size:; 14px/* 文字大小*/
 	color: #ccc;/*文字颜色*/
 	text-align: center; /*文字对齐样式 居中：center 左对齐：left 右对齐：right*/
 	line-height: 1;/*行间距*/
@@ -321,16 +322,14 @@ section{
 	
 	$(function(){
 		
-		var $section;
-		var $video;
-		var pVideo;
-		var mOrientation;
-		var process;
-		var $fsVideo;
-		var vItvlList = [];
-		var $gifList;
-		var sectionTop = [];
-		var fsVideoTop;
+		var $section; //section列表
+		var $video; //video列表
+		var pVideo; //正在播放的视频
+		var mOrientation; //横竖屏
+		var process; //进度条计时器
+		var $fsVideo; //全屏的视频
+		var vItvlList = []; //控件条计时器
+		var $gifList; //gif 列表
 		
 		$section = $("section");
 		$video = $("video");
@@ -350,11 +349,6 @@ section{
 			}
 			
 		}
-		/*初始化section顶部位置*/
-		for(var i=0;i<$section.length;i++){
-			sectionTop[i] = $section.eq(i).offset()["top"];
-		}
-		console.log(sectionTop);
 		
 		/*
 		* 设置同时只有一个视频处于播放状态
@@ -384,7 +378,6 @@ section{
 		/*视频停止、暂停*/
 		$video.on('pause',function(){
 			$(this).parent().find(".mask").show();
-			//$(this).parent().find(".control").slideDown();
 			$(this).parent().find(".control").slideUp();
 			$(this).parent().find(".pause").hide();
 			$(this).parent().find(".play").show();
@@ -405,7 +398,6 @@ section{
 		
 		$(".video-section").click(function(){
 			var v = $(this).find("video")[0];
-			
 			//已显示和暂停时不触发
 			if($(this).find(".control")[0].style.display != "none"){ return false;}
 			pCtrlShow(v);
@@ -413,10 +405,8 @@ section{
 		
 		/*监听滚动事件*/
 		window.addEventListener('scroll', function(){
-		
-			//不在屏幕范围内的视频停止播放 、GIF不显示
+			//不在屏幕范围内的视频停止播放
 			judgeOutScreen();
-			
 		});
 		
 		/*监听外链事件*/
@@ -445,19 +435,7 @@ section{
 				}
 				
 			}
-			
-			/*var $gifContainer;
-			for(var i=0;i<$gifList.length;i++){
-				$gifContainer = $gifList.eq(i).parent();
-				if($gifContainer.offset()["top"]<$(window).scrollTop()-$gifContainer.height()){
-					$gifContainer.find(".gif-poster").css("visibility","hidden");
-				}else if($gifContainer.offset()["top"] - $(window).scrollTop()- window.innerHeight >0){
-					$gifContainer.find(".gif-poster").css("visibility","hidden");
-				}else{
-					$gifContainer.find(".gif-poster").css("visibility","visible");
-				}
-				
-			}*/
+
 		}
 		
 		/*全屏按钮*/
@@ -472,7 +450,7 @@ section{
 				$v.parent().find(".control .full-screen").css("background-image","url(./fs.svg)");
 				$v.parent().css("touch-action","manipulation");			
 				//还原滚动条位置
-				$(window).scrollTop(fsVideoTop);
+				//$(window).scrollTop(fsVideoTop);
 				//不在屏幕中则停止播放
 				judgeOutScreen();
 				//通知安卓显示顶部控件
@@ -480,7 +458,7 @@ section{
 			}else{
 				$fsVideo = $v;
 				//记录滚动条位置
-				fsVideoTop = $(window).scrollTop();
+				//fsVideoTop = $(window).scrollTop();
 				$v.parent().addClass("fs");
 				if(mOrientation){
 					$fsVideo.height("100vh");
@@ -632,6 +610,13 @@ section{
 		}
 
 		/*GIF加载完成显示GIF 从上级页面返回时不会触发该动作*/
+		//有缓存直接用
+		for(var i=0;i<$gifList.length;i++){
+			if($gifList[i].complete){
+				$gifList.eq(i).next(".gif-poster")[0].src = $gifList.eq(i).src;
+			}
+		}
+		//无缓存则等待
 		$('.gif').on("load",function(){
 			$(this).next(".gif-poster")[0].src = this.src;
 		}); 
