@@ -5,8 +5,8 @@
 	4、关于全屏方式问题，点击就全屏的应用不会随横屏而旋转，而玩机技巧目前会随横屏旋转(对齐 是否可以让activity不适应横屏)
 	5、横屏自动进入视频播放模式？
 	6、标题正文边距 
-	7、横屏再返回时页面会上滑一段距离  //操作路径 播放 全屏 旋转 退出
-	8、GIF有缓存时不触发load(待验证)
+	7、横屏再返回时页面会上滑一段距离  //原因为横屏时SCROLL值为调整导致 通过设置锚点解决
+	8、GIF有缓存时不触发load(已解决)
 	9、横屏后某些视频蒙版和播放图标不显示（浏览器中未出现 为webview兼容问题？）
 	10、安卓视频在后台在播放(未复现)
 	11、全球化问题(可兼容)
@@ -137,7 +137,7 @@ video{
 	position: absolute;
 	top: calc(50% - 12px);
 	left: calc(50% - 12px);
-	z-index: 999;
+	z-index: 2;
 }
 .play{
 	display: block;
@@ -147,7 +147,7 @@ video{
 	position: absolute;
 	top: 0;left:0;right: 0;bottom: 0;
 	background: rgba(0,0,0,.26);
-	z-index: 998;
+	z-index: 1;
 }
 
 .toast{
@@ -213,12 +213,12 @@ section{
 	</div>
 </section>
  
+<!-- 单张静态图片 -->
 <section>
-	<!-- 单张静态图片 -->
 	<h2>AI超级夜景, 记录真夜色</h2>
 	<p>打破微光局促, 方见真夜色。AI 手持超级夜景模式, 更能洞悉光线暗淡时难以捕捉的美感, 暗处更纯粹, 亮处更丰富。夜幕下的车水马龙、灯火阑珊, 从你的眼中, 到你的手上。</p>
 	
-	<p class="jump-link" data-href="jumpToCard:SF-10044612_f001">点击前往 ></p>
+	<p class="jump-link" data-href="jumptocard:SF-10044612_f001">点击前往 ></p>
 	
 	<div class="img-md">
 		<div>
@@ -241,7 +241,7 @@ section{
 <section>
 	<h2>3D仿生成像, 妙趣横生</h2>
 	<p>身为智能管家，前置 3D 深度感知相机的强大扫描能力, 配合先进算法, 为玩偶赋予新生命。对着玩偶随手一扫, 3D 模型跃然于屏内, 由静转动和你互动。</p>
-	<p class="jump-link" data-href="jumpToBrowser:http://club.huawei.com/thread-17625435-1-1.html">点击前往 ></p>
+	<p class="jump-link" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">点击前往 ></p>
 	<div class="video-section">
 		<video poster="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-Global.jpg" src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-China.mp4">您的浏览器不支持 video 标签</video>
 		<div class="control">
@@ -271,7 +271,7 @@ section{
 <section>
 	<h2>超级慢动作, 感受时间的流动</h2>
 	<p>用镜头改变时间的流速，捕捉最动人的那一刻。960FPS超级慢动作视频拍摄，感受摄影韵律之美。</p>
-	<p class="jump-link" data-href="http://lfmemberdev.hwcloudtest.cn:9094/files/httpserver/MODEL/EMUI/C00B050TEMP/resource/card/20180820150724/content/2_greatphotos/SF-10044610_f001_tc.html">点击前往 ></p>
+	<p class="jump-link" data-href="jumptopage:/resource/card/20180820150724/content/2_greatphotos/SF-10044610_f001_tc.html">点击前往 ></p>
 	<div class="img-md">
 		<div>
 			<img class="gif" src="slow.gif" />
@@ -288,6 +288,7 @@ section{
 <section>
 	<h2>贴心懂你，聪明听话</h2>
 	<p>身为智能管家，自当一身才华：查机票、放歌曲、发微信、打电话······华为小艺不仅能听懂许多日常指令，还可通过自定义设置，一句话搞定复杂操作。</p>
+	<p class="jump-link" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">点击前往 ></p>
 	<div class="video-section">
 		<video poster="pic3.png" src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/video/section8-video.mp4">您的浏览器不支持 video 标签</video>
 		<div class="control">
@@ -303,9 +304,27 @@ section{
 </section>
 
 <section>
+	<h2>3D仿生成像, 妙趣横生</h2>
+	<p>身为智能管家，前置 3D 深度感知相机的强大扫描能力, 配合先进算法, 为玩偶赋予新生命。对着玩偶随手一扫, 3D 模型跃然于屏内, 由静转动和你互动。</p>
+	<p class="jump-link" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">点击前往 ></p>
+	<div class="video-section">
+		<video poster="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-Global.jpg" src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-China.mp4">您的浏览器不支持 video 标签</video>
+		<div class="control">
+			<div class="ctime">00:00</div>
+			<div class="process"></div>
+			<div class="full-screen"></div>
+			<div class="ttime">00:00</div>
+		</div>
+		<div class="pause"></div>
+		<div class="play"></div>
+		<div class="mask"></div>
+	</div>
+</section>
+
+<section>
 	<div class="img-md" style="margin-top: 60px;">
 		<div>
-			<img src="tips.png" data-href="jumpToBrowser:https://club.huawei.com/forum-2797-1.html" />
+			<img src="tips.png" data-href="jumptoweb:https://club.huawei.com/forum-2797-1.html" />
 		</div>
 	</div>
 <section>
@@ -324,6 +343,7 @@ section{
 		var $fsVideo; //全屏的视频
 		var vItvlList = []; //控件条计时器
 		var $gifList; //gif 列表
+		var URL = window.location.href.split("#")[0];//记录URL地址	
 		
 		$section = $("section");
 		$video = $("video");
@@ -384,7 +404,6 @@ section{
 			var $v = $(this).parent().find("video")[0];
 			if(!navigator.onLine){
 				setToast("网络未连接",3000);
-				this.pause();
 			}
 			$(this).parent().find(".mask").hide();
 			$v.play();
@@ -431,24 +450,35 @@ section{
 			}
 
 		}
-		
+
 		/*全屏按钮*/
 		$(".full-screen").click(function(){
 			
 			var $v = $(this).parent().parent().find("video").eq(0);
 			if($fsVideo){
+				
 				$fsVideo = null;
 				$v.parent().removeClass("fs");
 				$v.height("auto");
 				$v.width("auto");
 				$v.parent().find(".control .full-screen").css("background-image","url(./fs.svg)");
-				$v.parent().css("touch-action","manipulation");			
+				$v.parent().css("touch-action","manipulation");	
+				
+				/*保证退出后视频在视口中*/
+				window.location.href = URL + "#playing";
+				if(!mOrientation){
+					$(window).scrollTop($(window).scrollTop() - window.innerHeight/2 + $v.height()/2);
+				}
+				$v[0].id = "";
+				
 				//不在屏幕中则停止播放
 				judgeOutScreen();
 				//通知安卓显示顶部控件
 				window.location.href = "fullScreen:out";
+				
 			}else{
 				$fsVideo = $v;
+				$v[0].id = "playing";
 				$v.parent().addClass("fs");
 				if(mOrientation){
 					$fsVideo.height("100vh");
