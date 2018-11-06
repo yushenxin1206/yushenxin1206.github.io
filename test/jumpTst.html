@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<!--
+	1、安卓native交互
+	3、GIF如何提示网络未连接（目前点击提示）（UX参照tips toast）
+	4、关于全屏方式问题，点击就全屏的应用不会随横屏而旋转，而玩机技巧目前会随横屏旋转(对齐 是否可以让activity不适应横屏)
+	5、横屏自动进入视频播放模式？
+	6、标题正文边距 
+	7、横屏再返回时页面会上滑一段距离  //操作路径 播放 全屏 旋转 退出
+	8、GIF有缓存时不触发load(已解决)
+	9、横屏后某些视频蒙版和播放图标不显示（浏览器中未出现 为webview兼容问题？）
+	10、安卓视频在后台在播放(未复现)
+	11、全球化问题(可兼容)
+-->
+<html>
+<head>
+<title>normal template</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+<style type="text/css">
+*{margin:0;padding:0;font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
+html{touch-action: manipulation;}	
+
+@font-face{
+    font-family: '';
+    src : url('../fonts/yaheiconsolashybrid.ttf');
+}
+.example{
+	font-family: Arail; /* 字体 */
+	font-size:; 14px/* 文字大小*/
+	color: #ccc;/*文字颜色*/
+	text-align: center; /*文字对齐样式 居中：center 左对齐：left 右对齐：right*/
+	line-height: 1;/*行间距*/
+	background: #fff;/*背景颜色*/
+}
+
+/*图片模块*/
+.img-md{
+	max-width: 100%;
+	white-space: nowrap;
+	overflow-x: scroll;
+	position: relative;
+}
+.img-md div{
+	display: inline-block;
+	max-width: 100%;
+	width: 100vw;
+	text-align: center;
+}
+.img-md img{
+	max-width: 100%;
+	margin: 0 auto;
+}
+.more-img{
+	color: #999;
+	font-size: 12px;
+	text-align: center;
+	margin: 8px 0 0;
+	line-height: normal;
+}
+.gif-poster{
+	display: block;
+	max-width: 100%;
+	margin: 0 auto;
+}
+.gif{
+	display: none;
+}
+	
+/*视频模块*/
+.video-section{
+	position: relative;
+	display: flex;
+	max-width: 100%;
+	align-content: center;
+	align-items: center;
+}
+video{
+	display: block;
+	max-width: 100%;
+	margin: 0 auto;
+	transition: all 1s;
+}
+/*全屏样式*/
+.fs{
+	position: fixed;
+	top: 0;left: 0;right: 0;bottom: 0;
+	background: #000;
+	z-index: 999;
+}
+/*底部控件*/
+.control{
+	height: 32px;
+	background: rgba(0,0,0,.54);
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	z-index: 999;
+}
+.ctime{
+	float: left;
+	height: 32px;
+	line-height: 32px;
+	margin: 0 16px;
+	font-size: 13px;
+	color: #fff;
+}
+.process{
+	height: 4px;
+	background: rgba(255,255,255,.6);
+	position: absolute;
+	left: 64px;
+	right: 112px;
+	top: 14px;
+	border-radius: 2px;
+}
+.ttime{
+	float: right;
+	height: 32px;
+	line-height: 32px;
+	margin-left: 16px;
+	font-size: 13px;
+	color: #fff;
+}
+.full-screen{
+	height: 32px;
+	width: 32px;
+	line-height: 32px;
+	float: right;
+	margin: 0 16px;
+	background: url("./fs.svg") 6px 6px / 20px 20px no-repeat;
+}
+/*其他组件*/
+.pause,.play{
+	display: none;
+	height: 24px;
+	width: 24px;
+	background: url("./ps.svg") 0 0 / 100% 100% no-repeat;
+	position: absolute;
+	top: calc(50% - 12px);
+	left: calc(50% - 12px);
+	z-index: 999;
+}
+.play{
+	display: block;
+	background: url("./pl.svg") 0 0 / 100% 100% no-repeat;
+}
+.mask{
+	position: absolute;
+	top: 0;left:0;right: 0;bottom: 0;
+	background: rgba(0,0,0,.26);
+	z-index: 998;
+}
+
+.toast{
+	display: none;
+	width: 150px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 15px;
+	background: rgba(0,0,0,.42);
+	font-size: 13px;
+	color: #FFF;
+	position: fixed;
+	bottom: 40px;
+	left: calc(50vw - 75px);
+	z-index: 9999;
+}
+
+h2,p{text-align: center; margin: 16px 0; padding: 0 32px;}
+h2{color: #000;font-size: 20px; margin-top: 32px;letter-spacing: 1px;}
+p{color: #666;font-size: 13px;line-height: 20px;}
+
+.jump-link{
+	color: #3592dc;
+}
+
+section{
+	background: #fff;
+	padding: 1px 0;
+	transition: all 1s;
+}
+
+</style>
+<script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+
+
+	
+<p class="jump-link" data-href="jumpToCard:SF-10044612_f001">jumptocard:SF-10044612_f001</p>
+<br>
+<p class="jump-link" data-href="jumptopage:resource/banner/20180820170341/html/zh-CN/0626index14/index14.html">jumptopage:resource/banner/20180820170341/html/zh-CN/0626index14/index14.html</p>
+<br>
+<p class="jump-link" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">jumptoweb:http://club.huawei.com/thread-17625435-1-1.html</p>
+
+<script>
+	
+	$(function(){
+		
+		var $section; //section列表
+		var $video; //video列表
+		var pVideo; //正在播放的视频
+		var mOrientation; //横竖屏
+		var process; //进度条计时器
+		var $fsVideo; //全屏的视频
+		var vItvlList = []; //控件条计时器
+		var $gifList; //gif 列表
+		var $scrollTopY;
+		var $scrollTopX;
+		
+		$section = $("section");
+		$video = $("video");
+		$gifList = $(".gif");
+		console.log($video);
+		
+		/*初始化横竖屏值*/
+		getOrientation();
+		
+		/*初始化视频时间*/
+		for(var i=0;i<$video.length;i++){
+			$video.eq(i).parent().find(".control").hide();
+			$video[i].oncanplaythrough = function(){
+				var $ttime = $(this).parent().find(".control .ttime").eq(0);
+				var ttime = this.duration;
+				$ttime.html(sec2min(ttime));
+			}
+			
+		}
+		
+		/*
+		* 设置同时只有一个视频处于播放状态
+		*/
+		$video.on('play',function(){
+
+			pVideo = this;
+			$(this).parent().find(".play").hide();
+			$(this).parent().find(".control").slideUp();
+			
+			if(process){
+				clearInterval(process);
+			}
+			upDataProcess();
+			
+			for(var i=0;i<$video.length;i++){
+				if(this != $video[i]){
+					$video[i].pause();
+				}
+			}
+		});
+		
+		/*视频停止、暂停*/
+		$video.on('pause',function(){
+			$(this).parent().find(".mask").show();
+			$(this).parent().find(".control").slideUp();
+			$(this).parent().find(".pause").hide();
+			$(this).parent().find(".play").show();
+
+		});
+		
+		$(".pause").click(function(e){
+			var $v = $(this).parent().find("video")[0];
+			$v.pause();
+			e.stopPropagation();
+		});
+		
+		$(".play").click(function(e){
+			var $v = $(this).parent().find("video")[0];
+			if(!navigator.onLine){
+				setToast("网络未连接",3000);
+				this.pause();
+			}
+			$(this).parent().find(".mask").hide();
+			$v.play();
+			e.stopPropagation();
+		});
+		
+		$(".video-section").click(function(){
+			var v = $(this).find("video")[0];
+			//已显示和暂停时不触发
+			if($(this).find(".control")[0].style.display != "none"){ return false;}
+			pCtrlShow(v);
+		});
+		
+		/*监听滚动事件*/
+		window.addEventListener('scroll', function(){
+			//不在屏幕范围内的视频停止播放
+			judgeOutScreen();
+			console.log($(window).scrollTop());
+		});
+		
+		/*监听外链事件*/
+		$('img,.jump-link').on("click",function(){
+			if($(this).hasClass("gif-poster")){
+				if(!navigator.onLine){
+					setToast("网络未连接",3000);
+				}
+			}
+
+			if(this.dataset.href){
+				console.log(this.dataset.href);
+				window.location.href = this.dataset.href;
+			}
+		});
+		
+		function judgeOutScreen() {
+		
+			if(pVideo){
+				if($(pVideo).offset()["top"]<$(window).scrollTop()-$(pVideo).height()){
+					pVideo.pause();
+				}
+				
+				if($(pVideo).offset()["top"] - $(window).scrollTop()- window.innerHeight >0){
+					pVideo.pause();
+				}
+			}
+
+		}
+		console.log($(window).scrollTop());
+		/*全屏按钮*/
+		$(".full-screen").click(function(){
+			
+			var $v = $(this).parent().parent().find("video").eq(0);
+			console.log($(window).scrollTop());
+			if($fsVideo){
+				
+				$fsVideo = null;
+				$v.parent().removeClass("fs");
+				$v.height("auto");
+				$v.width("auto");
+				$v.parent().find(".control .full-screen").css("background-image","url(./fs.svg)");
+				$v.parent().css("touch-action","manipulation");			
+				//不在屏幕中则停止播放
+				judgeOutScreen();
+				//通知安卓显示顶部控件
+				window.location.href = "fullScreen:out";
+				
+			}else{
+				$fsVideo = $v;
+				$v.parent().addClass("fs");
+				if(mOrientation){
+					$fsVideo.height("100vh");
+				}else{
+					$fsVideo.width("100vw");
+				}
+				$v.parent().find(".control .full-screen").css("background-image","url(./efs.svg)");
+				$v.parent().css("touch-action","pan-x");
+				//通知安卓隐藏顶部控件
+				window.location.href = "fullScreen:in";
+			}
+			
+		});
+								 
+		/*判断横竖屏状态*/
+		function getOrientation(){
+			if(window.orientation==180||window.orientation==0){
+				mOrientation = 0;
+			}
+			if(window.orientation==90||window.orientation==-90){
+				mOrientation = 1;
+			}
+		}
+		
+		/*设置video状态*/
+		function setVideoOrientation(){
+			console.log($(window).scrollTop());
+			getOrientation();
+			if(!$fsVideo){return false;}
+			if(mOrientation){
+				$fsVideo.height("100vh");
+			}else{
+				$fsVideo.width("100vw");
+			}
+		}
+		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", setVideoOrientation, false);
+		
+		/*更新控件条*/
+		function upDataProcess(){
+			var $process = $(pVideo).parent().find(".control .process").eq(0);
+			var $ctime = $(pVideo).parent().find(".control .ctime").eq(0);
+			var $ttime = $(pVideo).parent().find(".control .ttime").eq(0);
+			var ttime = pVideo.duration;
+			
+				$ttime.html(sec2min(ttime));
+			
+			process = setInterval(function(){
+				var ctime = pVideo.currentTime;
+				var percent = ctime*100/ttime+"%";
+				$process.css("background","linear-gradient(to right, #FFFFFF "+percent+" , rgba(255,255,255,.6) "+percent+")");
+				$ctime.html(sec2min(ctime));
+			},100);
+	
+		}
+		
+		/*秒转分秒*/
+		function sec2min(t){
+			if(isNaN(t)){return "00:00";}
+			t = Math.round(t);
+			var m = Math.floor(t/60);
+			var s = t%60;
+			if(m<10){
+				m = "0"+m;
+			} 
+			if(s<10){
+				s = "0"+s;
+			}
+			return m+":"+s;
+		}
+		
+		/*播放时点击屏幕 控件条的显示与隐藏*/
+		function pCtrlShow(v){
+			
+			$(v).parent().find(".control").slideDown();
+			if(!v.paused){$(v).parent().find(".pause").show();}
+
+			var mIvl = setTimeout(function(v){
+				
+				$(v).parent().find(".pause").hide();
+				$(v).parent().find(".control").slideUp();
+				
+			},2000,v);
+			
+			/*已存在定时器则更新，否则添加*/
+			var iv = vExist(v);
+			
+			if(iv === false){
+				vItvlList.push({v:v,ivl:mIvl});
+			}else{
+				clearInterval(vItvlList[iv].ivl);
+				vItvlList[iv].ivl = mIvl;
+			}
+			
+			function vExist(v){
+			
+				for(var i=0;i<vItvlList.length;i++){
+					if(vItvlList[i].v == v){
+						return i;
+					}
+				}
+				return false;	
+			}
+			
+		}
+		
+		/*点击进度条调整视频时间*/
+		$(".process").click(function(e){
+			//获取点击处时间
+			var position = getXAndY(e,this);
+			console.log(position.x);
+			//更新视频播放时间
+			var length = $(this).width();
+			var v = $(this).parent().parent().find("video")[0];
+			v.currentTime = v.duration*position.x/length;
+			v.play();
+			pCtrlShow(v);
+			e.stopPropagation();
+		});
+		
+		
+		//获取鼠标点击区域中的相对位置坐标
+		function getXAndY(event,prcs){
+			//鼠标点击的绝对位置
+			Ev= event || window.event;
+			var mousePos = mouseCoords(event);
+			var x = mousePos.x;
+			var y = mousePos.y;
+			//alert("鼠标点击的绝对位置坐标："+x+","+y);
+
+			//获取div在body中的绝对位置
+			var x1 = $(prcs).offset().left;
+			var y1 = $(prcs).offset().top;
+			//alert("div在body中的绝对位置坐标："+x1+","+y1);
+
+			//鼠标点击位置相对于div的坐标
+			var x2 = x - x1;
+			var y2 = y - y1;
+			return {x:x2,y:y2};
+		}
+
+		//获取点击区域在Html绝对位置坐标
+		function mouseCoords(event){
+			if(event.pageX || event.pageY){
+				return {x:event.pageX, y:event.pageY};
+			}
+			return{
+				x:event.clientX + document.body.scrollLeft - document.body.clientLeft,
+				y:event.clientY + document.body.scrollTop - document.body.clientTop
+			};
+		}
+		
+		/*GIF已缓存直接显示，否则加载完成再显示*/
+		setGifDisplay();
+		function setGifDisplay(){
+			for(var i=0;i<$gifList.length;i++){
+				if($gifList[i].complete){
+					//alert("已存在于缓存中");
+					$gifList.eq(i).next(".gif-poster")[0].src = $gifList.eq(i).src;
+				}
+			}
+		}
+		/*GIF加载完成显示GIF*/
+		$gifList.on("load",function(){
+			$(this).next(".gif-poster")[0].src = this.src;
+		}); 
+		
+		/*toast*/
+		function setToast(msg,t){
+			$(".toast").html(msg);
+			$(".toast").show();
+			setTimeout(function(){
+				$(".toast").fadeOut();
+			},t);
+		}
+		
+	});
+	
+</script>
+</body>
+
+</html>
