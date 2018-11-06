@@ -591,8 +591,8 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			for(var i=0;i<$gifList.length;i++){
 				if($gifList[i].complete){
 					//alert("已存在于缓存中");
-					$gifList.eq(i).next(".gif-poster")[0].src = $gifList.eq(i).src;
-					alert($gifList.eq(i).src);
+					$gifList.eq(i).next(".gif-poster")[0].src = $gifList[i].src;
+					//alert($gifList.eq(i).src);
 				}
 			}
 		}
