@@ -5,10 +5,11 @@
 	4、关于全屏方式问题，点击就全屏的应用不会随横屏而旋转，而玩机技巧目前会随横屏旋转(对齐 是否可以让activity不适应横屏)
 	5、横屏自动进入视频播放模式？
 	6、标题正文边距 
-	7、横屏再返回时页面会上滑一段距离
-	8、GIF有缓存时不触发load!
-	9、横屏后某些视频蒙版和播放图标不显示（触发了play方法？）
+	7、横屏再返回时页面会上滑一段距离  //操作路径 播放 全屏 旋转 退出
+	8、GIF有缓存时不触发load(待验证)
+	9、横屏后某些视频蒙版和播放图标不显示（浏览器中未出现 为webview兼容问题？）
 	10、安卓视频在后台在播放(未复现)
+	11、全球化问题(可兼容)
 -->
 <html>
 <head>
@@ -92,7 +93,7 @@ video{
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	z-index: 2;
+	z-index: 999;
 }
 .ctime{
 	float: left;
@@ -136,7 +137,7 @@ video{
 	position: absolute;
 	top: calc(50% - 12px);
 	left: calc(50% - 12px);
-	z-index: 2;
+	z-index: 999;
 }
 .play{
 	display: block;
@@ -146,7 +147,7 @@ video{
 	position: absolute;
 	top: 0;left:0;right: 0;bottom: 0;
 	background: rgba(0,0,0,.26);
-	z-index: 1;
+	z-index: 998;
 }
 
 .toast{
@@ -603,8 +604,8 @@ section{
 		function setGifDisplay(){
 			for(var i=0;i<$gifList.length;i++){
 				if($gifList[i].complete){
-					alert("已存在于缓存中");
-					$gifList.eq(i).next(".gif-poster")[0].src = this.src;
+					//alert("已存在于缓存中");
+					$gifList.eq(i).next(".gif-poster")[0].src = $gifList.eq(i).src;
 				}
 			}
 		}
