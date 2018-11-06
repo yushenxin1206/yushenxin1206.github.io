@@ -299,15 +299,19 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		}
 		
 		/*初始化视频状态*/
-		for(var i=0;i<$video.length;i++){
-			var $vp = $video.eq(i).parent();
-			$vp.find(".mask").show();
-			$vp.find(".control").slideUp();
-			$vp.find(".pause").hide();
-			$vp.find(".play").show();
-		}
-		
-		
+		setInterval(function(){
+			for(var i=0;i<$video.length;i++){
+				if($video[i].paused){
+					var $vp = $video.eq(i).parent();
+					$vp.find(".mask").show();
+					$vp.find(".control").slideUp();
+					$vp.find(".pause").hide();
+					$vp.find(".play").show();
+					console.log("p");
+				}
+			}
+		},1000);
+
 		/*
 		* 设置同时只有一个视频处于播放状态
 		*/
@@ -594,8 +598,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		$gifList.on("load",function(){
 			$(this).next(".gif-poster")[0].src = this.src;
 		});
-		
-		alert("2");
+		alert("3");
 	});
 </script>
 </body>
