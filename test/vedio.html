@@ -283,8 +283,6 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 	</div>
 </div>
 
-<div class="toast"></div>
-
 <script>
 	
 	$(function(){
@@ -315,6 +313,18 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			
 		}
 		
+		/*轮询视频状态*/
+		setInterval(function(){
+			for(var i=0;i<$video.length;i++){
+				if($video[i].paused){
+					$(this).parent().find(".mask").show();
+					$(this).parent().find(".control").slideUp();
+					$(this).parent().find(".pause").hide();
+					$(this).parent().find(".play").show();
+				}
+			}
+		},1000);
+		
 		/*
 		* 设置同时只有一个视频处于播放状态
 		*/
@@ -339,6 +349,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		/*视频停止、暂停*/
 		$video.on('pause',function(){
 			pVideo = null;
+			clearInterval(process);
 			$(this).parent().find(".mask").show();
 			$(this).parent().find(".control").slideUp();
 			$(this).parent().find(".pause").hide();
@@ -355,7 +366,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		$(".play").click(function(e){
 			var $v = $(this).parent().find("video")[0];
 			if(!navigator.onLine){
-				setToast("网络未连接",3000);
+				console.log("offline")
 			}
 			$(this).parent().find(".mask").hide();
 			$v.play();
@@ -379,7 +390,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		$('img,.jump-link').on("click",function(){
 			if($(this).hasClass("gif-poster")){
 				if(!navigator.onLine){
-					setToast("网络未连接",3000);
+					console.log("offline");
 				}
 			}
 
@@ -602,8 +613,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		}); 
 		
 		/*toast*/
-		function setToast(msg,t){
-			$(".toast").html(msg);
+		function setToast(t){
 			$(".toast").show();
 			setTimeout(function(){
 				$(".toast").fadeOut();
