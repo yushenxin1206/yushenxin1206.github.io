@@ -19,10 +19,6 @@
 *{margin:0;padding:0;font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
 html{touch-action: manipulation;}	
 
-@font-face{
-    font-family: '';
-    src : url('../fonts/yaheiconsolashybrid.ttf');
-}
 .example{
 	font-family: Arail; /* 字体 */
 	font-size:; 14px/* 文字大小*/
@@ -149,7 +145,6 @@ video{
 	background: rgba(0,0,0,.26);
 	z-index: 1;
 }
-
 .toast{
 	display: none;
 	width: 150px;
@@ -174,160 +169,119 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 	color: #3592dc;
 }
 
-section{
-	background: #fff;
-	padding: 1px 0;
-	transition: all 1s;
-}
-
 </style>
 <script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
 
-<section>
-	<div class="img-md">
-		<div>
-			<img src="https://img14.360buyimg.com/imgzone/jfs/t24919/276/2266247788/527363/3730485c/5bc7fd8fNa18cc65b.jpg" alt="MATE20 PRO" />
-		</div>
+<div class="img-md">
+	<div>
+		<img src="https://img14.360buyimg.com/imgzone/jfs/t24919/276/2266247788/527363/3730485c/5bc7fd8fNa18cc65b.jpg" alt="MATE20 PRO" />
 	</div>
-	<div class="img-md">
-		<div>
-			<img src="./pic2.png" />
-		</div>
+</div>
+<div class="img-md">
+	<div>
+		<img src="./pic2.png" />
 	</div>
+</div>
 
-	<div class="video-section">
-		
-		<video poster="v1-poster.png"  src="https://consumer.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/homepage/hlep_teaser/43s_TVC.mp4">您的浏览器不支持 video 标签</video>
-		<div class="control">
-			<div class="ctime">00:00</div>
-			<div class="process"></div>
-			<div class="full-screen"></div>
-			<div class="ttime">00:00</div>
-		</div>
-		<div class="pause"></div>
-		<div class="play"></div>
-		<div class="mask"></div>
+<div class="video-section">
+	<video poster="v1-poster.png"  src="https://consumer.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/homepage/hlep_teaser/43s_TVC.mp4">您的浏览器不支持 video 标签</video>
+	<div class="control">
+		<div class="ctime">00:00</div>
+		<div class="process"></div>
+		<div class="full-screen"></div>
+		<div class="ttime">00:00</div>
 	</div>
-</section>
+	<div class="pause"></div>
+	<div class="play"></div>
+	<div class="mask"></div>
+</div>
  
 <!-- 单张静态图片 -->
-<section>
-	<h2>AI超级夜景, 记录真夜色</h2>
-	<p>打破微光局促, 方见真夜色。AI 手持超级夜景模式, 更能洞悉光线暗淡时难以捕捉的美感, 暗处更纯粹, 亮处更丰富。夜幕下的车水马龙、灯火阑珊, 从你的眼中, 到你的手上。</p>
-	
-	<p class="jump-link" data-href="jumptocard:SF-10044612_f001">点击前往 ></p>
-	
-	<div class="img-md">
-		<div>
-			<img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-lowlight@2x.jpg" />
-		</div>
+<h2>AI超级夜景, 记录真夜色</h2>
+<p>打破微光局促, 方见真夜色。AI 手持超级夜景模式, 更能洞悉光线暗淡时难以捕捉的美感, 暗处更纯粹, 亮处更丰富。夜幕下的车水马龙、灯火阑珊, 从你的眼中, 到你的手上。</p>
+
+<p class="jump-link" data-href="jumptocard:SF-10044612_f001">点击前往 ></p>
+
+<div class="img-md">
+	<div>
+		<img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-lowlight@2x.jpg" />
 	</div>
-</section>
+</div>
 
 <!-- 单张静态图片 -->
-<section>
-	<h2>AI人像留色，释放无限创造力</h2>
-	<p>电影级 AI 人像留色，拍摄影片时实时识别人像，视频中只保留人像色彩，背景皆为黑白。更有多种电影滤镜随心切换，释放你的创造力。</p>
-	<div class="img-md">
-		<div>
-			<img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-filmmaker-color.jpg" />
-		</div>
+<h2>AI人像留色，释放无限创造力</h2>
+<p>电影级 AI 人像留色，拍摄影片时实时识别人像，视频中只保留人像色彩，背景皆为黑白。更有多种电影滤镜随心切换，释放你的创造力。</p>
+<div class="img-md">
+	<div>
+		<img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-filmmaker-color.jpg" />
 	</div>
-</section>
+</div>
 
-<section>
-	<h2>3D仿生成像, 妙趣横生</h2>
-	<p>身为智能管家，前置 3D 深度感知相机的强大扫描能力, 配合先进算法, 为玩偶赋予新生命。对着玩偶随手一扫, 3D 模型跃然于屏内, 由静转动和你互动。</p>
-	<p class="jump-link" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">点击前往 ></p>
-	<div class="video-section">
-		<video poster="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-Global.jpg" src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-China.mp4">您的浏览器不支持 video 标签</video>
-		<div class="control">
-			<div class="ctime">00:00</div>
-			<div class="process"></div>
-			<div class="full-screen"></div>
-			<div class="ttime">00:00</div>
-		</div>
-		<div class="pause"></div>
-		<div class="play"></div>
-		<div class="mask"></div>
+<h2>3D仿生成像, 妙趣横生</h2>
+<p>身为智能管家，前置 3D 深度感知相机的强大扫描能力, 配合先进算法, 为玩偶赋予新生命。对着玩偶随手一扫, 3D 模型跃然于屏内, 由静转动和你互动。</p>
+<p class="jump-link" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">点击前往 ></p>
+<div class="video-section">
+	<video poster="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-Global.jpg" src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-China.mp4">您的浏览器不支持 video 标签</video>
+	<div class="control">
+		<div class="ctime">00:00</div>
+		<div class="process"></div>
+		<div class="full-screen"></div>
+		<div class="ttime">00:00</div>
 	</div>
-</section>
+	<div class="pause"></div>
+	<div class="play"></div>
+	<div class="mask"></div>
+</div>
 
 <!-- 多静态图片 -->
-<section>
-	<h2>无线快充, 亦可无线反充</h2>
-	<p>支持 15W 华为无线快充8, 随手一放, 即刻充电; 德国莱茵 TÜV 权威安全认证, 稳定可靠。更有无线反向充电技术, 可为其他设备9应急充电, 变身全场救星。</p>
-	<div class="img-md">
-		<div><img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/power-wireless@2x.jpg"/></div>
-		<div><img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/power-reverse@2x.jpg"/></div>
-	</div>
-	<p class="more-img">向左滑动查看更多</p>
-</section>
+<h2>无线快充, 亦可无线反充</h2>
+<p>支持 15W 华为无线快充8, 随手一放, 即刻充电; 德国莱茵 TÜV 权威安全认证, 稳定可靠。更有无线反向充电技术, 可为其他设备9应急充电, 变身全场救星。</p>
+<div class="img-md">
+	<div><img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/power-wireless@2x.jpg"/></div>
+	<div><img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/power-reverse@2x.jpg"/></div>
+</div>
+<p class="more-img">向左滑动查看更多</p>
 
 <!-- GIF图片 -->
-<section>
-	<h2>超级慢动作, 感受时间的流动</h2>
-	<p>用镜头改变时间的流速，捕捉最动人的那一刻。960FPS超级慢动作视频拍摄，感受摄影韵律之美。</p>
-	<p class="jump-link" data-href="jumptopage:/resource/card/20180820150724/content/2_greatphotos/SF-10044610_f001_tc.html">点击前往 ></p>
-	<div class="img-md">
-		<div>
-			<img class="gif" src="slow.gif" />
-			<img class="gif-poster" src="slow-poster.png" />
-		</div>
-		<div>
-			<img class="gif" src="slow.gif" />
-			<img class="gif-poster" src="slow-poster.png" />
-		</div>
+<h2>超级慢动作, 感受时间的流动</h2>
+<p>用镜头改变时间的流速，捕捉最动人的那一刻。960FPS超级慢动作视频拍摄，感受摄影韵律之美。</p>
+<p class="jump-link" data-href="jumptopage:/resource/card/20180820150724/content/2_greatphotos/SF-10044610_f001_tc.html">点击前往 ></p>
+<div class="img-md">
+	<div>
+		<img class="gif" src="slow.gif" />
+		<img class="gif-poster" src="slow-poster.png" />
 	</div>
-	<p class="more-img">向左滑动查看更多</p>
-</section>
+	<div>
+		<img class="gif" src="slow.gif" />
+		<img class="gif-poster" src="slow-poster.png" />
+	</div>
+</div>
+<p class="more-img">向左滑动查看更多</p>
 
-<section>
-	<h2>贴心懂你，聪明听话</h2>
-	<p>身为智能管家，自当一身才华：查机票、放歌曲、发微信、打电话······华为小艺不仅能听懂许多日常指令，还可通过自定义设置，一句话搞定复杂操作。</p>
-	<p class="jump-link" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">点击前往 ></p>
-	<div class="video-section">
-		<video poster="pic3.png" src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/video/section8-video.mp4">您的浏览器不支持 video 标签</video>
-		<div class="control">
-			<div class="ctime">00:00</div>
-			<div class="process"></div>
-			<div class="full-screen"></div>
-			<div class="ttime">00:00</div>
-		</div>
-		<div class="pause"></div>
-		<div class="play"></div>
-		<div class="mask"></div>
+<h2>贴心懂你，聪明听话</h2>
+<p>身为智能管家，自当一身才华：查机票、放歌曲、发微信、打电话······华为小艺不仅能听懂许多日常指令，还可通过自定义设置，一句话搞定复杂操作。</p>
+<p class="jump-link" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">点击前往 ></p>
+<div class="video-section">
+	<video poster="pic3.png" src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/video/section8-video.mp4">您的浏览器不支持 video 标签</video>
+	<div class="control">
+		<div class="ctime">00:00</div>
+		<div class="process"></div>
+		<div class="full-screen"></div>
+		<div class="ttime">00:00</div>
 	</div>
-</section>
+	<div class="pause"></div>
+	<div class="play"></div>
+	<div class="mask"></div>
+</div>
 
-<section>
-	<h2>3D仿生成像, 妙趣横生</h2>
-	<p>身为智能管家，前置 3D 深度感知相机的强大扫描能力, 配合先进算法, 为玩偶赋予新生命。对着玩偶随手一扫, 3D 模型跃然于屏内, 由静转动和你互动。</p>
-	<p class="jump-link" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">点击前往 ></p>
-	<div class="video-section">
-		<video poster="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-Global.jpg" src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-China.mp4">您的浏览器不支持 video 标签</video>
-		<div class="control">
-			<div class="ctime">00:00</div>
-			<div class="process"></div>
-			<div class="full-screen"></div>
-			<div class="ttime">00:00</div>
-		</div>
-		<div class="pause"></div>
-		<div class="play"></div>
-		<div class="mask"></div>
+<div class="img-md" style="margin-top: 60px;">
+	<div>
+		<img src="tips.png" data-href="jumptoweb:https://club.huawei.com/forum-2797-1.html" />
 	</div>
-</section>
-
-<section>
-	<div class="img-md" style="margin-top: 60px;">
-		<div>
-			<img src="tips.png" data-href="jumptoweb:https://club.huawei.com/forum-2797-1.html" />
-		</div>
-	</div>
-<section>
+</div>
 
 <div class="toast"></div>
 
@@ -335,7 +289,6 @@ section{
 	
 	$(function(){
 		
-		var $section; //section列表
 		var $video; //video列表
 		var pVideo; //正在播放的视频
 		var mOrientation; //横竖屏
@@ -345,10 +298,8 @@ section{
 		var $gifList; //gif 列表
 		var URL = window.location.href.split("#")[0];//记录URL地址	
 		
-		$section = $("section");
 		$video = $("video");
 		$gifList = $(".gif");
-		console.log($video);
 		
 		/*初始化横竖屏值*/
 		getOrientation();
@@ -467,7 +418,11 @@ section{
 				/*保证退出后视频在视口中*/
 				window.location.href = URL + "#playing";
 				if(!mOrientation){
-					$(window).scrollTop($(window).scrollTop() - window.innerHeight/2 + $v.height()/2);
+					if($v.offset().top > $(window).scrollTop() + 10){
+						$(window).scrollTop($v.offset().top - window.innerHeight/2 + $v.height()/2);
+					}else{
+						$(window).scrollTop($v.offset().top - window.innerHeight/2 + $v.height()/2);
+					}
 				}
 				$v[0].id = "";
 				
