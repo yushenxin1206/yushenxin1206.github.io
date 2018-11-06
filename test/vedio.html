@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <!--
 	1、安卓native交互
-	2、动效设计 以section为单位、块层叠交替，上滑叠起来、下滑展开、顶部滑动期间有阴影处理(层叠时压缩回弹，展开是拉伸回弹)，
 	3、GIF如何提示网络未连接（目前点击提示）（UX参照tips toast）
 	4、关于全屏方式问题，点击就全屏的应用不会随横屏而旋转，而玩机技巧目前会随横屏旋转(对齐 是否可以让activity不适应横屏)
 	5、横屏自动进入视频播放模式？
 	6、标题正文边距 
 	7、横屏再返回时页面会上滑一段距离
-	8、GIF有缓存时不触发load
-	9、有时候蒙版和播放图标不显示
+	8、GIF有缓存时不触发load!
+	9、横屏后某些视频蒙版和播放图标不显示（触发了play方法？）
+	10、安卓视频在后台在播放(未复现)
 -->
 <html>
 <head>
@@ -17,25 +17,18 @@
 <style type="text/css">
 *{margin:0;padding:0;font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
 html{touch-action: manipulation;}	
-	
-/*横竖屏*/
-@media screen and (orientation : portrait){
-	
-}
-@media screen and (orientation : landscape){
-
-}
 
 @font-face{
     font-family: '';
     src : url('../fonts/yaheiconsolashybrid.ttf');
 }
-.s1{
+.example{
 	font-family: Arail; /* 字体 */
 	font-size:; 14px/* 文字大小*/
 	color: #ccc;/*文字颜色*/
 	text-align: center; /*文字对齐样式 居中：center 左对齐：left 右对齐：right*/
 	line-height: 1;/*行间距*/
+	background: #fff;/*背景颜色*/
 }
 
 /*图片模块*/
@@ -354,11 +347,7 @@ section{
 		* 设置同时只有一个视频处于播放状态
 		*/
 		$video.on('play',function(){
-			if(!navigator.onLine){
-				setToast("网络未连接",3000);
-				this.pause();
-			}
-			$(this).parent().find(".mask").hide();
+
 			pVideo = this;
 			$(this).parent().find(".play").hide();
 			$(this).parent().find(".control").slideUp();
@@ -392,6 +381,11 @@ section{
 		
 		$(".play").click(function(e){
 			var $v = $(this).parent().find("video")[0];
+			if(!navigator.onLine){
+				setToast("网络未连接",3000);
+				this.pause();
+			}
+			$(this).parent().find(".mask").hide();
 			$v.play();
 			e.stopPropagation();
 		});
@@ -433,7 +427,6 @@ section{
 				if($(pVideo).offset()["top"] - $(window).scrollTop()- window.innerHeight >0){
 					pVideo.pause();
 				}
-				
 			}
 
 		}
@@ -444,21 +437,17 @@ section{
 			var $v = $(this).parent().parent().find("video").eq(0);
 			if($fsVideo){
 				$fsVideo = null;
+				$v.parent().removeClass("fs");
 				$v.height("auto");
 				$v.width("auto");
-				$v.parent().removeClass("fs");
 				$v.parent().find(".control .full-screen").css("background-image","url(./fs.svg)");
 				$v.parent().css("touch-action","manipulation");			
-				//还原滚动条位置
-				//$(window).scrollTop(fsVideoTop);
 				//不在屏幕中则停止播放
 				judgeOutScreen();
 				//通知安卓显示顶部控件
 				window.location.href = "fullScreen:out";
 			}else{
 				$fsVideo = $v;
-				//记录滚动条位置
-				//fsVideoTop = $(window).scrollTop();
 				$v.parent().addClass("fs");
 				if(mOrientation){
 					$fsVideo.height("100vh");
@@ -608,19 +597,21 @@ section{
 				y:event.clientY + document.body.scrollTop - document.body.clientTop
 			};
 		}
-
-		/*GIF加载完成显示GIF 从上级页面返回时不会触发该动作*/
-		//有缓存直接用
-		for(var i=0;i<$gifList.length;i++){
-			if($gifList[i].complete){
-				$gifList.eq(i).next(".gif-poster")[0].src = $gifList.eq(i).src;
+		
+		/*GIF已缓存直接显示，否则加载完成再显示*/
+		setGifDisplay();
+		function setGifDisplay(){
+			for(var i=0;i<$gifList.length;i++){
+				if($gifList[i].complete){
+					alert("已存在于缓存中");
+					$gifList.eq(i).next(".gif-poster")[0].src = this.src;
+				}
 			}
 		}
-		//无缓存则等待
-		$('.gif').on("load",function(){
+		/*GIF加载完成显示GIF*/
+		$gifList.on("load",function(){
 			$(this).next(".gif-poster")[0].src = this.src;
 		}); 
-		
 		
 		/*toast*/
 		function setToast(msg,t){
