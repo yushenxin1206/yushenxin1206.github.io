@@ -145,22 +145,7 @@ video{
 	background: rgba(0,0,0,.26);
 	z-index: 1;
 }
-.toast{
-	display: none;
-	width: 150px;
-	height: 30px;
-	text-align: center;
-	line-height: 30px;
-	border-radius: 15px;
-	background: rgba(0,0,0,.42);
-	font-size: 13px;
-	color: #FFF;
-	position: fixed;
-	bottom: 40px;
-	left: calc(50vw - 75px);
-	z-index: 9999;
-}
-
+	
 h2,p{text-align: center; margin: 16px 0; padding: 0 32px;}
 h2{color: #000;font-size: 20px; margin-top: 32px;letter-spacing: 1px;}
 p{color: #666;font-size: 13px;line-height: 20px;}
@@ -612,13 +597,6 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			$(this).next(".gif-poster")[0].src = this.src;
 		}); 
 		
-		/*toast*/
-		function setToast(t){
-			$(".toast").show();
-			setTimeout(function(){
-				$(".toast").fadeOut();
-			},t);
-		}
 		
 	});
 	
