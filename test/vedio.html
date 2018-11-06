@@ -124,6 +124,7 @@ video{
 	margin: 0 16px;
 	background: url("./fs.svg") 6px 6px / 20px 20px no-repeat;
 }
+
 /*其他组件*/
 .pause,.play{
 	display: none;
@@ -145,7 +146,7 @@ video{
 	background: rgba(0,0,0,.26);
 	z-index: 1;
 }
-	
+
 h2,p{text-align: center; margin: 16px 0; padding: 0 32px;}
 h2{color: #000;font-size: 20px; margin-top: 32px;letter-spacing: 1px;}
 p{color: #666;font-size: 13px;line-height: 20px;}
@@ -302,10 +303,11 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		setInterval(function(){
 			for(var i=0;i<$video.length;i++){
 				if($video[i].paused){
-					$(this).parent().find(".mask").show();
-					$(this).parent().find(".control").slideUp();
-					$(this).parent().find(".pause").hide();
-					$(this).parent().find(".play").show();
+					var $vp = 	$video.eq(i).parent();
+					$vp.find(".mask").show();
+					$vp.find(".control").slideUp();
+					$vp.find(".pause").hide();
+					$vp.find(".play").show();
 				}
 			}
 		},1000);
@@ -595,11 +597,9 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		/*GIF加载完成显示GIF*/
 		$gifList.on("load",function(){
 			$(this).next(".gif-poster")[0].src = this.src;
-		}); 
-		
-		
+		});
+		alert("1");
 	});
-	
 </script>
 </body>
 
