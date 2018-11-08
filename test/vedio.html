@@ -1,16 +1,4 @@
 <!DOCTYPE html>
-<!--
-	1、安卓native交互
-	3、GIF如何提示网络未连接（目前点击提示）（UX参照tips toast）
-	4、关于全屏方式问题，点击就全屏的应用不会随横屏而旋转，而玩机技巧目前会随横屏旋转(对齐 是否可以让activity不适应横屏)
-	5、横屏自动进入视频播放模式？
-	6、标题正文边距 
-	7、横屏再返回时页面会上滑一段距离  //原因为横屏时SCROLL值为调整导致 通过设置锚点解决
-	8、GIF有缓存时不触发load(已解决)
-	9、横屏后某些视频蒙版和播放图标不显示（浏览器中未出现 为webview兼容问题？）
-	10、安卓视频在后台在播放(未复现)
-	11、全球化问题(可兼容)
--->
 <html>
 <head>
 <title>normal template</title>
@@ -312,7 +300,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		/*初始化视频时间*/
 		for(var i=0;i<$video.length;i++){
 			$video.eq(i).parent().find(".control").hide();
-			$video[i].oncanplaythrough = function(){
+			$video[i].ondurationchange = function(){
 				var $ttime = $(this).parent().find(".control .ttime").eq(0);
 				var ttime = Math.ceil(this.duration);
 				$ttime.html(sec2min(ttime));
@@ -490,16 +478,9 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			var $process = $(pVideo).parent().find(".control .process").eq(0);
 			var $ctime = $(pVideo).parent().find(".control .ctime").eq(0);
 			var $ttime = $(pVideo).parent().find(".control .ttime").eq(0);
-			var ttime = pVideo.duration;
+			var ttime = Math.ceil(pVideo.duration);
 			
 				$ttime.html(sec2min(ttime));
-			
-			/*process = setInterval(function(){
-				var ctime = pVideo.currentTime;
-				var percent = ctime*100/ttime+"%";
-				$process.css("background","linear-gradient(to right, #FFFFFF "+percent+" , rgba(255,255,255,.6) "+percent+")");
-				$ctime.html(sec2min(ctime));
-			},300);*/
 			
 			process = requestAnimationFrame(function fn(){
 				var ctime = pVideo.currentTime;
@@ -582,12 +563,10 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			var mousePos = mouseCoords(event);
 			var x = mousePos.x;
 			var y = mousePos.y;
-			//alert("鼠标点击的绝对位置坐标："+x+","+y);
 
 			//获取div在body中的绝对位置
 			var x1 = $(prcs).offset().left;
 			var y1 = $(prcs).offset().top;
-			//alert("div在body中的绝对位置坐标："+x1+","+y1);
 
 			//鼠标点击位置相对于div的坐标
 			var x2 = x - x1;
@@ -611,9 +590,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		function setGifDisplay(){
 			for(var i=0;i<$gifList.length;i++){
 				if($gifList[i].complete){
-					//alert("已存在于缓存中");
 					$gifList.eq(i).next(".gif-poster")[0].src = $gifList[i].src;
-					//alert($gifList.eq(i).src);
 				}
 			}
 		}
@@ -621,7 +598,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		$gifList.on("load",function(){
 			$(this).next(".gif-poster")[0].src = this.src;
 		});
-		alert("xxx");
+		alert("4");
 	});
 </script>
 </body>
