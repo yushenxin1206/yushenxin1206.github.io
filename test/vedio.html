@@ -4,7 +4,8 @@
 <title>normal template</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
 <style type="text/css">
-*{-webkit-overflow-scrolling:touch;overflow-scrolling:touch;touch-action: manipulation;margin:0;padding:0;font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
+*{margin:0;padding:0;font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
+html{touch-action: manipulation;}
 
 .example{
 	font-family: Arail; /* 字体 */
@@ -14,15 +15,16 @@
 	line-height: 1;/*行间距*/
 	background: #fff;/*背景颜色*/
 }
-
+/*图片视频开启GPU渲染*/
+img,video{
+	transform: translatez(0);
+}
 /*图片模块*/
 .img-md{
 	max-width: 100%;
 	white-space: nowrap;
 	overflow-x: scroll;
 	position: relative;
-	-webkit-overflow-scrolling:touch;
-	overflow-scrolling:touch;
 }
 .img-md div{
 	display: inline-block;
@@ -167,12 +169,17 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 
 <div class="img-md">
 	<div>
+		<img src="https://img14.360buyimg.com/imgzone/jfs/t24919/276/2266247788/527363/3730485c/5bc7fd8fNa18cc65b.jpg" alt="MATE20 PRO" />
+	</div>
+</div>
+<div class="img-md">
+	<div>
 		<img src="./pic2.png" />
 	</div>
 </div>
 
 <div class="video-section">
-	<video poster="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-filmmaker-color.jpg"  src="https://consumer.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/homepage/hlep_teaser/43s_TVC.mp4">您的浏览器不支持 video 标签</video>
+	<video poster="v1-poster.png"  src="https://consumer.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/homepage/hlep_teaser/43s_TVC.mp4">您的浏览器不支持 video 标签</video>
 	<div class="control">
 		<div class="ctime">00:00</div>
 		<div class="process"></div>
@@ -192,7 +199,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 
 <div class="img-md">
 	<div>
-		<img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-filmmaker-color.jpg" />
+		<img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-lowlight@2x.jpg" />
 	</div>
 </div>
 
@@ -210,7 +217,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <p style=""><span style="" class="jump-link" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">进入花粉俱乐部查看 ></span></p>
 
 <div class="video-section">
-	<video poster="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-filmmaker-color.jpg" src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-China.mp4">您的浏览器不支持 video 标签</video>
+	<video poster="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-Global.jpg" src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/3D-AI-TOY-China.mp4">您的浏览器不支持 video 标签</video>
 	<div class="control">
 		<div class="ctime">00:00</div>
 		<div class="process"></div>
@@ -226,8 +233,8 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <h2 style=""><span style="">无线快充, 亦可无线反充</span></h2>
 <p style=""><span style="">支持 15W 华为无线快充8, 随手一放, 即刻充电; 德国莱茵 TÜV 权威安全认证, 稳定可靠。更有无线反向充电技术, 可为其他设备9应急充电, 变身全场救星。</span></p>
 <div class="img-md">
-	<div><img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-filmmaker-color.jpg"/></div>
-	<div><img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-filmmaker-color.jpg"/></div>
+	<div><img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/power-wireless@2x.jpg"/></div>
+	<div><img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/power-reverse@2x.jpg"/></div>
 </div>
 <p class="more-img">向左滑动查看更多</p>
 
@@ -237,11 +244,11 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <p style=""><span style="" class="jump-link" data-href="jumptopage:/resource/card/20180820150724/content/2_greatphotos/SF-10044610_f001_tc.html">查看对应内部网页 ></span></p>
 <div class="img-md">
 	<div>
-		<img class="gif" src="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-filmmaker-color.jpg" />
+		<img class="gif" src="slow.gif" />
 		<img class="gif-poster" src="slow-poster.png" />
 	</div>
 	<div>
-		<img class="gif" src="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-filmmaker-color.jpg" />
+		<img class="gif" src="slow.gif" />
 		<img class="gif-poster" src="slow-poster.png" />
 	</div>
 </div>
@@ -255,7 +262,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 
 <p style=""><span style="">身为智能管家，自当一身才华：查机票、放歌曲、发微信、打电话······华为小艺不仅能听懂许多日常指令，还可通过自定义设置，一句话搞定复杂操作。</span></p>
 <div class="video-section">
-	<video poster="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-filmmaker-color.jpg" src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/video/section8-video.mp4">您的浏览器不支持 video 标签</video>
+	<video poster="pic3.png" src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/video/section8-video.mp4">您的浏览器不支持 video 标签</video>
 	<div class="control">
 		<div class="ctime">00:00</div>
 		<div class="process"></div>
@@ -267,6 +274,11 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 	<div class="mask"></div>
 </div>
 
+<div class="img-md" style="margin-top: 60px;">
+	<div>
+		<img src="tips.png" data-href="jumptoweb:https://club.huawei.com/forum-2797-1.html" />
+	</div>
+</div>
 <p style=""><span style="" class="jump-link button" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">进入玩机技巧版块 ></span></p>
 
 <script>
@@ -380,7 +392,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		}
 		
 		// 滚动事件监听
-		//window.addEventListener('scroll', onScroll, false);
+		window.addEventListener('scroll', onScroll, false);
 		
 		function judgeOutScreen(){
 			//console.log("xxx");
@@ -407,7 +419,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 				$v.height("auto");
 				$v.width("auto");
 				$v.parent().find(".control .full-screen").css("background-image","url(./fs.svg)");
-				$v.parent().css("touch-action","auto");	
+				$v.parent().css("touch-action","manipulation");	
 				
 				/*保证退出后视频在视口中*/
 				window.location.href = URL + "#playing";
@@ -589,7 +601,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		$gifList.on("load",function(){
 			$(this).next(".gif-poster")[0].src = this.src;
 		});
-		alert("9");
+		alert("10");
 	});
 </script>
 </body>
