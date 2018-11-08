@@ -307,6 +307,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		var myScroll;
 		setTimeout(function(){
 			myScroll = new IScroll('#wrapper',{disableMouse:true,disablePointer:true});
+			document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 		},100);
 		
 		/*初始化视频时间*/
