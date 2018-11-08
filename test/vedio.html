@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
 <style type="text/css">
 *{margin:0;padding:0;font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
-html{touch-action: manipulation;}	
+<!--html{touch-action: manipulation;}-->
 
 .example{
 	font-family: Arail; /* 字体 */
@@ -416,7 +416,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 				$v.height("auto");
 				$v.width("auto");
 				$v.parent().find(".control .full-screen").css("background-image","url(./fs.svg)");
-				$v.parent().css("touch-action","manipulation");	
+				$v.parent().css("touch-action","auto");	
 				
 				/*保证退出后视频在视口中*/
 				window.location.href = URL + "#playing";
@@ -598,7 +598,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		$gifList.on("load",function(){
 			$(this).next(".gif-poster")[0].src = this.src;
 		});
-		alert("4");
+		alert("xxxxxx");
 	});
 </script>
 </body>
