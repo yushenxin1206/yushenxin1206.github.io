@@ -317,6 +317,9 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			$(this).parent().find(".play").hide();
 			$(this).parent().find(".control").slideUp();
 			
+			// 滚动事件监听
+			window.addEventListener('scroll', onScroll);
+			
 			if(process){
 				cancelAnimationFrame(process);
 			}
@@ -334,6 +337,8 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			if(process){
 				cancelAnimationFrame(process);
 			}
+			//移除滚动事件监听
+			window.removeEventListener('scroll', onScroll);
 			pVideo = null;
 			$(this).parent().find(".mask").show();
 			$(this).parent().find(".control").slideUp();
@@ -388,9 +393,6 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			ticking = true;
 		  }
 		}
-		
-		// 滚动事件监听
-		window.addEventListener('scroll', onScroll, {passive:true});
 		
 		function judgeOutScreen(){
 			//console.log("xxx");
