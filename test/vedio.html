@@ -6,18 +6,7 @@
 <style type="text/css">
 *{margin:0;padding:0;font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
 html{touch-action: manipulation;}
-body{
-	position:relative;
-	overflow:hidden;
-}
-.example{
-	font-family: Arail; /* 字体 */
-	font-size:; 14px/* 文字大小*/
-	color: #ccc;/*文字颜色*/
-	text-align: center; /*文字对齐样式 居中：center 左对齐：left 右对齐：right*/
-	line-height: 1;/*行间距*/
-	background: #fff;/*背景颜色*/
-}
+
 /*图片视频开启GPU渲染*/
 img,video{
 	transform: translatez(0);
@@ -161,15 +150,14 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 	background-position: 0 0;
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
-	<!--box-shadow:  0 4px 0 #35ace9,0 3px 12px 0 rgba(0,0,0,.54);-->
 }
 
 </style>
 
 </head>
 
-<body id="wrapper" style="background:#fff"><!-- 在此处更改页面背景色 默认为白色 -->
-<section>
+<body style="background:#fff"><!-- 在此处更改页面背景色 默认为白色 -->
+
 <div class="img-md">
 	<div>
 		<img src="https://img14.360buyimg.com/imgzone/jfs/t24919/276/2266247788/527363/3730485c/5bc7fd8fNa18cc65b.jpg" alt="MATE20 PRO" />
@@ -283,7 +271,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 	</div>
 </div>
 <p style=""><span style="" class="jump-link button" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">进入玩机技巧版块 ></span></p>
-</section>
+
 <script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="./iscroll.min.js"></script>
 <script>
@@ -302,13 +290,21 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		$video = $("video");
 		$gifList = $(".gif");
 		
+		var tStart = 0;
+		var tEnd = 0;
+		window.addEventListener("touchstart",function(){
+			tStart = event.changedTouches[0].screenY;
+			console.log(tStart);
+		});
+		
+		window.addEventListener("touchend",function(){
+			tEnd = event.changedTouches[0].screenY;
+			$(window).scrollTop($(window).scrollTop() + (tStart - tEnd)/3);
+			console.log(tEnd);
+		});
+		
 		/*初始化横竖屏值*/
 		getOrientation();
-		var myScroll;
-		setTimeout(function(){
-			myScroll = new IScroll('#wrapper',{disableMouse:true,disablePointer:true});
-			document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-		},100);
 		
 		/*初始化视频时间*/
 		for(var i=0;i<$video.length;i++){
@@ -329,6 +325,9 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			$(this).parent().find(".play").hide();
 			$(this).parent().find(".control").slideUp();
 			
+			//滚动事件监听
+			window.addEventListener('scroll', onScroll, false);
+			
 			if(process){
 				cancelAnimationFrame(process);
 			}
@@ -346,6 +345,10 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			if(process){
 				cancelAnimationFrame(process);
 			}
+			
+			//取消滚动事件监听
+			window.removeEventListener('scroll', onScroll, false);
+			
 			pVideo = null;
 			$(this).parent().find(".mask").show();
 			$(this).parent().find(".control").slideUp();
@@ -400,9 +403,6 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			ticking = true;
 		  }
 		}
-		
-		// 滚动事件监听
-		window.addEventListener('scroll', onScroll, false);
 		
 		function judgeOutScreen(){
 			//console.log("xxx");
@@ -611,7 +611,6 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		$gifList.on("load",function(){
 			$(this).next(".gif-poster")[0].src = this.src;
 		});
-		alert("19");
 	});
 </script>
 </body>
