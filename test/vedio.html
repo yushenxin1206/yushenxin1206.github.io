@@ -7,6 +7,13 @@
 *{margin:0;padding:0;font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
 html{touch-action: manipulation;}
 body::-webkit-scrollbar{display: none;}
+video::-webkit-media-controls {
+    overflow: hidden !important;
+}
+video::-webkit-media-controls-enclosure {
+    display: none;
+}
+
 /*图片视频开启GPU渲染*/
 img,video{
 	transform: translatez(0);
