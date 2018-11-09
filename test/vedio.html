@@ -377,6 +377,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			}
 			for(var i=0;i<$img.length;i++){
 				let offTop =  $img.eq(i).offset()["top"];
+				console.log(offTop);
 				if(offTop < scrollTop - $img.eq(i).height()){
 					$img.eq(i).css("display","none");
 					continue;
