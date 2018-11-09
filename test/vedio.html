@@ -202,7 +202,6 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <p style=""><span style="">支持 15W 华为无线快充8, 随手一放, 即刻充电; 德国莱茵 TÜV 权威安全认证, 稳定可靠。更有无线反向充电技术, 可为其他设备9应急充电, 变身全场救星。</span></p>
 <div class="img-md">
 	<img src="power-wireless@2x.jpg"/>
-	<img src="power-reverse@2x.jpg"/>
 </div>
 <p class="more-img">向左滑动查看更多</p>
 
@@ -211,9 +210,6 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <p style=""><span style="">用镜头改变时间的流速，捕捉最动人的那一刻。960FPS超级慢动作视频拍摄，感受摄影韵律之美。</span></p>
 <p style=""><span style="" class="jump-link" data-href="jumptopage:/resource/card/20180820150724/content/2_greatphotos/SF-10044610_f001_tc.html">查看对应内部网页 ></span></p>
 <div class="img-md">
-	<img class="gif" src="slow-new.gif" />
-	<img class="gif-poster" src="slow-poster.png" />
-	
 	<img class="gif" src="slow-new.gif" />
 	<img class="gif-poster" src="slow-poster.png" />
 </div>
@@ -253,7 +249,6 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		var vItvlList = []; //控件条计时器
 		var $gifList; //gif 列表
 		var URL = window.location.href.split("#")[0];//记录URL地址	
-		var $img = $("img");
 		$video = $("video");
 		$gifList = $(".gif");
 		
@@ -374,21 +369,6 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 				if(offTop - scrollTop - innerHeight >0){
 					pVideo.pause();
 				}
-			}
-			for(var i=0;i<$img.length;i++){
-				console.log(i);
-				let offTop =  $img.eq(i).offset()["top"];
-				console.log(offTop);
-				if(offTop < scrollTop - $img.eq(i).height()){
-					$img.eq(i).css("display","none");
-					continue;
-				}
-				
-				if(offTop - scrollTop - innerHeight >0){
-					$img.eq(i).css("display","none");
-					continue;
-				}
-				$img.eq(i).css("display","inline-block");
 			}
 			ticking = false;
 		}
