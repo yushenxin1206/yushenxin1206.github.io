@@ -378,15 +378,15 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			for(var i=0;i<$img.length;i++){
 				let offTop =  $img.eq(i).offset()["top"];
 				if(offTop < scrollTop - $img.eq(i).height()){
-					$img.eq(i).hide();
+					$img.eq(i).css("display","none");
 					continue;
 				}
 				
 				if(offTop - scrollTop - innerHeight >0){
-					$img.eq(i).hide();
+					$img.eq(i).css("display","none");
 					continue;
 				}
-				$img.eq(i).show();
+				$img.eq(i).css("display","inline-block");
 			}
 			ticking = false;
 		}
