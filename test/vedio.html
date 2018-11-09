@@ -6,8 +6,7 @@
 <style type="text/css">
 *{margin:0;padding:0;font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
 body::-webkit-scrollbar{display: none;}
-body,html{overflow:hidden;touch-action: manipulation;}
-body{overflow-y:scroll;-webkit-overflow-scrolling:touch;}	
+html{touch-action: manipulation;}	
 
 /*图片模块*/
 .img-md{
@@ -254,7 +253,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		var vItvlList = []; //控件条计时器
 		var $gifList; //gif 列表
 		var URL = window.location.href.split("#")[0];//记录URL地址	
-		var $img = $("img);
+		var $img = $("img");
 		$video = $("video");
 		$gifList = $(".gif");
 		
