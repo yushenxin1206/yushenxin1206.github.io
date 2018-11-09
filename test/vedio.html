@@ -10,7 +10,7 @@ body::-webkit-scrollbar{display: none;}
 
 /*图片模块*/
 .img-md{
-	max-width: 100%;
+	width: 100%;
 	white-space: nowrap;
 	overflow-x: scroll;
 }
@@ -35,7 +35,7 @@ img{
 .video-section{
 	position: relative;
 	display: flex;
-	max-width: 100%;
+	width: 100%;
 	align-content: center;
 	align-items: center;
 }
@@ -145,9 +145,9 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 
 <body style="background:#fff"><!-- 在此处更改页面背景色 默认为白色 -->
 
-<img src="https://img14.360buyimg.com/imgzone/jfs/t24919/276/2266247788/527363/3730485c/5bc7fd8fNa18cc65b.jpg" alt="MATE20 PRO" />
+<img class="lazy" data-original="https://img14.360buyimg.com/imgzone/jfs/t24919/276/2266247788/527363/3730485c/5bc7fd8fNa18cc65b.jpg" />
 
-<img src="./pic2.png" />
+<img class="lazy" data-original="./pic2.png" />
 
 
 <div class="video-section">
@@ -170,14 +170,14 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <p style=""><span style="" class="jump-link" data-href="jumptocard:SF-10044612_f001">查看对应卡片 ></span></p>
 
 
-<img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-lowlight@2x.jpg" />
+<img class="lazy" data-original="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-lowlight@2x.jpg" />
 
 
 <!-- 单张静态图片 -->
 <h2 style=""><span style="">AI人像留色，释放无限创造力</span></h2>
 <p style=""><span style="">电影级 AI 人像留色，拍摄影片时实时识别人像，视频中只保留人像色彩，背景皆为黑白。更有多种电影滤镜随心切换，释放你的创造力。</span></p>
 
-<img src="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-filmmaker-color.jpg" />
+<img class="lazy" data-original="https://consumer-img.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/photo-filmmaker-color.jpg" />
 
 
 <h2 style=""><span style="">3D仿生成像, 妙趣横生</span></h2>
@@ -201,8 +201,8 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <h2 style=""><span style="">无线快充, 亦可无线反充</span></h2>
 <p style=""><span style="">支持 15W 华为无线快充8, 随手一放, 即刻充电; 德国莱茵 TÜV 权威安全认证, 稳定可靠。更有无线反向充电技术, 可为其他设备9应急充电, 变身全场救星。</span></p>
 <div class="img-md">
-	<img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/power-wireless@2x.jpg"/>
-	<img src="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/power-reverse@2x.jpg"/>
+	<img class="lazy" data-original="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/power-wireless@2x.jpg"/>
+	<img class="lazy" data-original="https://consumer.huawei.com/content/dam/huawei-cbg-campaign/2018/mate20-pro/cn/img/power-reverse@2x.jpg"/>
 </div>
 <p class="more-img">向左滑动查看更多</p>
 
@@ -210,16 +210,22 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <h2 style=""><span style="">超级慢动作, 感受时间的流动</span></h2>
 <p style=""><span style="">用镜头改变时间的流速，捕捉最动人的那一刻。960FPS超级慢动作视频拍摄，感受摄影韵律之美。</span></p>
 <p style=""><span style="" class="jump-link" data-href="jumptopage:/resource/card/20180820150724/content/2_greatphotos/SF-10044610_f001_tc.html">查看对应内部网页 ></span></p>
-
-<img class="gif-poster" src="slow.gif" />
-
+<div class="img-md">
+	<img class="gif lazy" data-original="slow.gif" />
+	<img class="gif-poster lazy" data-original="slow-poster.png" />
+	
+	<img class="gif lazy" data-original="slow.gif" />
+	<img class="gif-poster lazy" data-original="slow-poster.png" />
+</div>
+<p class="more-img">向左滑动查看更多</p>
 
 
 
 <h2 style=""><span style="">贴心懂你，聪明听话</span></h2>
 
 
-<!--<p style=""><span style="">身为智能管家，自当一身才华：查机票、放歌曲、发微信、打电话······华为小艺不仅能听懂许多日常指令，还可通过自定义设置，一句话搞定复杂操作。</span></p>
+
+<p style=""><span style="">身为智能管家，自当一身才华：查机票、放歌曲、发微信、打电话······华为小艺不仅能听懂许多日常指令，还可通过自定义设置，一句话搞定复杂操作。</span></p>
 <div class="video-section">
 	<video poster="pic3.png" src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/video/section8-video.mp4">您的浏览器不支持 video 标签</video>
 	<div class="control">
@@ -231,30 +237,14 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 	<div class="pause"></div>
 	<div class="play"></div>
 	<div class="mask"></div>
-</div>-->
-
-<img class="gif-poster" src="slow.gif" />
-	
+</div>
 
 
-	
-<!-- GIF图片 -->
-<h2 style=""><span style="">超级慢动作, 感受时间的流动</span></h2>
-<p style=""><span style="">用镜头改变时间的流速，捕捉最动人的那一刻。960FPS超级慢动作视频拍摄，感受摄影韵律之美。</span></p>
-
-
-<img class="gif-poster" src="slow.gif" />
-
-
-
-<h2 style=""><span style="">贴心懂你，聪明听话</span></h2>
-
-
-
-<img src="tips.png" data-href="jumptoweb:https://club.huawei.com/forum-2797-1.html" />
+<img class="lazy" data-original="tips.png" data-href="jumptoweb:https://club.huawei.com/forum-2797-1.html" />
 <p style=""><span style="" class="jump-link button" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">进入玩机技巧版块 ></span></p>
 
-<script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="jquery.lazyload.min.js"></script>
 <script>
 	
 	$(function(){
@@ -271,6 +261,13 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		$video = $("video");
 		$gifList = $(".gif");
 		
+		/*图片懒加载*/
+		$("img.lazy").lazyload({
+			threshold :100,
+			placeholder: "default.png",
+			effects:"fadeIn", 
+			skip_invisible : false
+		});
 		
 		/*初始化横竖屏值*/
 		getOrientation();
@@ -314,7 +311,9 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			if(process){
 				cancelAnimationFrame(process);
 			}
-			
+			if(this.duration == this.currentTime){
+				$(this).parent().find(".control .ctime").html("00:00");
+			}
 			//取消滚动事件监听
 			window.removeEventListener('scroll', onScroll, false);
 			
