@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -145,9 +146,9 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 
 <body style="background:#fff"><!-- 在此处更改页面背景色 默认为白色 -->
 
-<img src="5bc7fd8fNa18cc65b.jpg" />
+<img class="lazy" data-original="5bc7fd8fNa18cc65b.jpg" />
 
-<img src="./pic2.png" />
+<img class="lazy" data-original="./pic2.png" />
 
 
 <div class="video-section">
@@ -170,14 +171,14 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <p style=""><span style="" class="jump-link" data-href="jumptocard:SF-10044612_f001">查看对应卡片 ></span></p>
 
 
-<img src="photo-lowlight@2x.jpg" />
+<img class="lazy" data-original="photo-lowlight@2x.jpg" />
 
 
 <!-- 单张静态图片 -->
 <h2 style=""><span style="">AI人像留色，释放无限创造力</span></h2>
 <p style=""><span style="">电影级 AI 人像留色，拍摄影片时实时识别人像，视频中只保留人像色彩，背景皆为黑白。更有多种电影滤镜随心切换，释放你的创造力。</span></p>
 
-<img src="photo-filmmaker-color.jpg" />
+<img class="lazy" data-original="photo-filmmaker-color.jpg" />
 
 
 <h2 style=""><span style="">3D仿生成像, 妙趣横生</span></h2>
@@ -201,8 +202,8 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <h2 style=""><span style="">无线快充, 亦可无线反充</span></h2>
 <p style=""><span style="">支持 15W 华为无线快充8, 随手一放, 即刻充电; 德国莱茵 TÜV 权威安全认证, 稳定可靠。更有无线反向充电技术, 可为其他设备9应急充电, 变身全场救星。</span></p>
 <div class="img-md">
-	<img src="power-wireless@2x.jpg"/>
-	<!--<img src="power-reverse@2x.jpg"/>-->
+	<img class="lazy" data-original="power-wireless@2x.jpg"/>
+	<img class="lazy" data-original="power-reverse@2x.jpg"/>
 </div>
 <p class="more-img">向左滑动查看更多</p>
 
@@ -211,16 +212,20 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <p style=""><span style="">用镜头改变时间的流速，捕捉最动人的那一刻。960FPS超级慢动作视频拍摄，感受摄影韵律之美。</span></p>
 <p style=""><span style="" class="jump-link" data-href="jumptopage:/resource/card/20180820150724/content/2_greatphotos/SF-10044610_f001_tc.html">查看对应内部网页 ></span></p>
 <div class="img-md">
-
-	<img src="power-wireless@2x.jpg"/>
-	<!--<img src="power-reverse@2x.jpg"/>-->
+	<img class="gif" src="slow-new.gif" />
+	<img class="gif-poster" src="slow-poster.png" />
 	
+	<img class="gif" src="slow-new.gif" />
+	<img class="gif-poster" src="slow-poster.png" />
 </div>
 <p class="more-img">向左滑动查看更多</p>
 
 
 
 <h2 style=""><span style="">贴心懂你，聪明听话</span></h2>
+
+
+
 <p style=""><span style="">身为智能管家，自当一身才华：查机票、放歌曲、发微信、打电话······华为小艺不仅能听懂许多日常指令，还可通过自定义设置，一句话搞定复杂操作。</span></p>
 <div class="video-section">
 	<video poster="pic3.png" src="https://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/campaign/emui9/video/section8-video.mp4">您的浏览器不支持 video 标签</video>
@@ -236,10 +241,11 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 </div>
 
 
-<img src="tips.png" data-href="jumptoweb:https://club.huawei.com/forum-2797-1.html" />
+<img class="lazy" data-original="tips.png" data-href="jumptoweb:https://club.huawei.com/forum-2797-1.html" />
 <p style=""><span style="" class="jump-link button" data-href="jumptoweb:http://club.huawei.com/thread-17625435-1-1.html">进入玩机技巧版块 ></span></p>
 
 <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="jquery.lazyload.min.js"></script>
 <script>
 	
 	$(function(){
@@ -256,10 +262,15 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		$video = $("video");
 		$gifList = $(".gif");
 		
+		/*图片懒加载*/
+		$("img.lazy").lazyload({
+			threshold :100,
+			effects:"fadeIn", 
+			skip_invisible : false
+		});
 		
 		/*初始化横竖屏值*/
 		getOrientation();
-
 		
 		/*初始化视频时间*/
 		for(var i=0;i<$video.length;i++){
@@ -362,16 +373,15 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		}
 		
 		function judgeOutScreen(){
-			
+			//console.log("xxx");
 			if(pVideo){	
 				var offTop = $(pVideo).offset()["top"];
 				var scrollTop = $(window).scrollTop();
-				var innerHeight = window.innerHeight;
 				if(offTop < scrollTop - $(pVideo).height()){
 					pVideo.pause();
 				}
 				
-				if(offTop - scrollTop - innerHeight >0){
+				if(offTop - scrollTop - window.innerHeight >0){
 					pVideo.pause();
 				}
 			}
