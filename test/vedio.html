@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
 <style type="text/css">
 *{margin:0;padding:0;font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;}
+html{touch-action: manipulation;}
 body::-webkit-scrollbar{display: none;}
-html{touch-action: manipulation;}	
 
 /*图片模块*/
 .img-md{
@@ -14,7 +14,9 @@ html{touch-action: manipulation;}
 	white-space: nowrap;
 	overflow-x: scroll;
 }
-
+.img-md img{
+		margin-right: 5px;
+}
 img{
 	display: inline-block;
 	width: 100%;
@@ -200,17 +202,26 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <!-- 多静态图片 -->
 <h2 style=""><span style="">无线快充, 亦可无线反充</span></h2>
 <p style=""><span style="">支持 15W 华为无线快充8, 随手一放, 即刻充电; 德国莱茵 TÜV 权威安全认证, 稳定可靠。更有无线反向充电技术, 可为其他设备9应急充电, 变身全场救星。</span></p>
+<div class="img-md">
 	<img src="power-wireless@2x.jpg"/>
+	<img src="power-reverse@2x.jpg"/>
+</div>
 <p class="more-img">向左滑动查看更多</p>
 
 <!-- GIF图片 -->
 <h2 style=""><span style="">超级慢动作, 感受时间的流动</span></h2>
 <p style=""><span style="">用镜头改变时间的流速，捕捉最动人的那一刻。960FPS超级慢动作视频拍摄，感受摄影韵律之美。</span></p>
 <p style=""><span style="" class="jump-link" data-href="jumptopage:/resource/card/20180820150724/content/2_greatphotos/SF-10044610_f001_tc.html">查看对应内部网页 ></span></p>
+<div class="img-md">
 
 	<img class="gif" src="slow-new.gif" />
 	<img class="gif-poster" src="slow-poster.png" />
 
+
+	<img class="gif" src="slow-new.gif" />
+	<img class="gif-poster" src="slow-poster.png" />
+	
+</div>
 <p class="more-img">向左滑动查看更多</p>
 
 
@@ -247,12 +258,14 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		var vItvlList = []; //控件条计时器
 		var $gifList; //gif 列表
 		var URL = window.location.href.split("#")[0];//记录URL地址	
+		
 		$video = $("video");
 		$gifList = $(".gif");
 		
 		
 		/*初始化横竖屏值*/
 		getOrientation();
+
 		
 		/*初始化视频时间*/
 		for(var i=0;i<$video.length;i++){
@@ -355,11 +368,11 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		}
 		
 		function judgeOutScreen(){
-			//console.log("xxx");
-			var scrollTop = $(window).scrollTop();
-			var innerHeight = window.innerHeight;
+			
 			if(pVideo){	
-				let offTop = $(pVideo).offset()["top"];
+				var offTop = $(pVideo).offset()["top"];
+				var scrollTop = $(window).scrollTop();
+				var innerHeight = window.innerHeight;
 				if(offTop < scrollTop - $(pVideo).height()){
 					pVideo.pause();
 				}
