@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -258,6 +257,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		var vItvlList = []; //控件条计时器
 		var $gifList; //gif 列表
 		var URL = window.location.href.split("#")[0];//记录URL地址	
+		var $links = $(".jump-link,img");
 		
 		$video = $("video");
 		$gifList = $(".gif");
@@ -268,6 +268,49 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			effects:"fadeIn", 
 			skip_invisible : false
 		});
+		
+		getJumpLink();
+		
+		/*隐藏不存在的入口*/
+		function getJumpLink(){
+			var report = "";
+			var href = "";
+			for(var i=0;i<$links.length;i++){
+				 href = $links[i].dataset.href;
+				if(!href){
+					continue;
+				}
+				if(href.indexOf("jumptocard")>-1){
+					report = report + href.split(":")[1] + "#";
+				}
+			}
+			console.log(report);
+			if(report){
+				window.location.href = "hidelink:"+report;
+			}
+		}
+		
+		function setJumpLink(data){
+			for(var i=0;i<$links.length;i++){
+				 href = $links[i].dataset.href;
+				if(!href){
+					continue;
+				}
+				if(href.indexOf("jumptocard")<0){
+					continue;
+				}
+				if(data.indexOf(href.split(":")[1])>-1){
+					$links.eq(i).hide();
+				}
+			}
+		}
+		
+		/*是否有视频或GIF 传递给native判断是否需要显示网络未连接*/
+		function getVG(){
+			if($video.length || $gifList.length ){
+				window.location.href = "setnet:";
+			}
+		}
 		
 		/*初始化横竖屏值*/
 		getOrientation();
@@ -583,6 +626,68 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		$gifList.on("load",function(){
 			$(this).next(".gif-poster")[0].src = this.src;
 		});
+		
+		
+		/*图片组滑动优化*/
+		var touchStart = 0;
+		$(".img-md img").on("touchstart",function(e){
+		
+			touchStart= e.originalEvent.changedTouches[0];
+			
+		});
+		
+		$(".img-md img").on("touchend",function(e){
+		
+			var touchEnd = e.originalEvent.changedTouches[0];
+			
+			if(Math.abs(touchEnd.pageX - touchStart.pageX) < Math.abs(touchEnd.pageY - touchStart.pageY)){
+				return;
+			}
+			
+			var val = touchEnd.pageX - touchStart.pageX;
+			var $this = $(this);
+			
+			console.log(val);
+			
+			if($this.hasClass("gif") || $this.hasClass("gif-poster")){
+					
+				if(val>0){
+					
+					if(!$this.prev().prev().length){return;}
+					$this.parent().animate({
+						scrollLeft: $this.prev().prev().offset().left
+					}, 500);
+
+				}else{
+					
+					if(!$this.next().next().length){return;}
+					$this.parent().animate({
+						scrollLeft: $this.next().next().offset().left
+					}, 500);
+					
+				}
+				
+				return;
+			}
+			
+			if(val>0){
+				
+				if(!$this.prev().length){return;}
+				$this.parent().animate({
+					scrollLeft: $this.prev().offset().left
+				}, 500);
+
+			}else{
+				
+				if(!$this.next().length){return;}
+				$this.parent().animate({
+					scrollLeft: $this.next().offset().left
+				}, 500);
+				
+			}
+			
+		});
+		 
 	});
 </script>
 </body>
