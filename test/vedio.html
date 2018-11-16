@@ -14,6 +14,7 @@ body::-webkit-scrollbar{display: none;}
 	white-space: nowrap;
 	overflow-x: scroll;
 	touch-action: pan-y;
+	font-size: 0;
 }
 
 img{
@@ -202,9 +203,9 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <h2 style=""><span style="">无线快充, 亦可无线反充</span></h2>
 <p style=""><span style="">支持 15W 华为无线快充8, 随手一放, 即刻充电; 德国莱茵 TÜV 权威安全认证, 稳定可靠。更有无线反向充电技术, 可为其他设备9应急充电, 变身全场救星。</span></p>
 <div class="img-md">
-	<img class="lazy" data-original="power-wireless@2x.jpg"/>
-	<img class="lazy" data-original="power-reverse@2x.jpg"/>
-	<img class="lazy" data-original="power-reverse@2x.jpg"/>
+	<img src="power-wireless@2x.jpg"/>
+	<img src="power-reverse@2x.jpg"/>
+	<img src="power-reverse@2x.jpg"/>
 </div>
 <p class="more-img">向左滑动查看更多</p>
 
@@ -653,40 +654,21 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			var $this = $(this);
 			
 			console.log(val);
+			console.log(this);
 			
-			if($this.hasClass("gif") || $this.hasClass("gif-poster")){
-					
-				if(val>0){
-					
-					if(!$this.prev().prev().length){return;}
-					$this.parent().animate({
-						scrollLeft: $this.prev().prev().offset().left+1
-					}, 500);
-
-				}else{
-					
-					if(!$this.next().next().length){return;}
-					$this.parent().animate({
-						scrollLeft: $this.next().next().offset().left+1
-					}, 500);
-					
-				}
-				
-				return;
-			}
 			
 			if(val>0){
 				
 				if(!$this.prev().length){return;}
 				$this.parent().animate({
-					scrollLeft: $this.prev().offset().left+1
+					scrollLeft: $this.parent().scrollLeft() - $(window).width()
 				}, 500);
 
 			}else{
 				
 				if(!$this.next().length){return;}
 				$this.parent().animate({
-					scrollLeft: $this.next().offset().left+1
+					scrollLeft: $this.parent().scrollLeft() + $(window).width()
 				}, 500);
 				
 			}
