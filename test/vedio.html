@@ -32,7 +32,7 @@ img{
 	line-height: normal;
 }
 
-.gif{
+.img-md .gif{
 	display: none;
 }
 	
@@ -659,7 +659,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			console.log(val);
 			console.log(this);
 			
-			if(Math.abs(val)<10){
+			if(Math.abs(val)<5){
 				return;
 			}
 			
@@ -668,14 +668,18 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 				if(!$this.prev().length){return;}
 				$this.parent().animate({
 					scrollLeft: $this.parent().scrollLeft() - $(window).width()
-				}, 500);
+				}, 500 ,function(){
+						$(".img-md").scrollLeft(Math.round($(".img-md").scrollLeft()/$(window).width())*$(window).width());
+				});
 
 			}else{
 				
 				if(!$this.next().length){return;}
 				$this.parent().animate({
 					scrollLeft: $this.parent().scrollLeft() + $(window).width()
-				}, 500);
+				}, 500,function(){
+						$(".img-md").scrollLeft(Math.round($(".img-md").scrollLeft()/$(window).width())*$(window).width());
+				});
 				
 			}
 			
