@@ -279,6 +279,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		});
 		
 		getJumpLink();
+		getVG();
 		
 		/*隐藏不存在的入口*/
 		function getJumpLink(){
@@ -437,6 +438,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 					pVideo.pause();
 				}
 			}
+			$(".img-md").scrollLeft(Math.round($(".img-md").scrollLeft()/$(window).width())*$(window).width());
 			ticking = false;
 		}
 
@@ -668,18 +670,14 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 				if(!$this.prev().length){return;}
 				$this.parent().animate({
 					scrollLeft: $this.parent().scrollLeft() - $(window).width()
-				}, 500 ,function(){
-						$(".img-md").scrollLeft(Math.round($(".img-md").scrollLeft()/$(window).width())*$(window).width());
-				});
+				}, 500);
 
 			}else{
 				
 				if(!$this.next().length){return;}
 				$this.parent().animate({
 					scrollLeft: $this.parent().scrollLeft() + $(window).width()
-				}, 500,function(){
-						$(".img-md").scrollLeft(Math.round($(".img-md").scrollLeft()/$(window).width())*$(window).width());
-				});
+				}, 500);
 				
 			}
 			
