@@ -438,7 +438,12 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 					pVideo.pause();
 				}
 			}
-			$(".img-md").scrollLeft(Math.round($(".img-md").scrollLeft()/$(window).width())*$(window).width());
+			
+			var imgMd = $(".img-md");
+			for(var i=0;i<imgMd.length;i++){
+				$(".img-md").eq(i).scrollLeft(Math.round($(".img-md").eq(i).scrollLeft()/$(window).width())*$(window).width());
+			}
+			
 			ticking = false;
 		}
 
