@@ -438,12 +438,6 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 					pVideo.pause();
 				}
 			}
-			
-			var imgMd = $(".img-md");
-			for(var i=0;i<imgMd.length;i++){
-				$(".img-md").eq(i).scrollLeft(Math.round($(".img-md").eq(i).scrollLeft()/$(window).width())*$(window).width());
-			}
-			
 			ticking = false;
 		}
 
@@ -679,14 +673,18 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 				if(!$this.prev().length){return;}
 				$this.parent().animate({
 					scrollLeft: $this.parent().scrollLeft() - $(window).width()
-				}, 500);
+				}, 500,function(){
+					$this.parent().scrollLeft(Math.round($this.parent().scrollLeft()/$(window).width())*$(window).width());
+				});
 
 			}else{
 				
 				if(!$this.next().length){return;}
 				$this.parent().animate({
 					scrollLeft: $this.parent().scrollLeft() + $(window).width()
-				}, 500);
+				}, 500,function(){
+					$this.parent().scrollLeft(Math.round($this.parent().scrollLeft()/$(window).width())*$(window).width());
+				});
 				
 			}
 			
