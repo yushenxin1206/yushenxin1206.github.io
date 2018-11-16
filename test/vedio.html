@@ -674,7 +674,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 				if(!$this.prev().length){return;}
 				animating = 1;
 				$this.parent().animate({
-					scrollLeft: $this.parent().scrollLeft() - $(window).width()
+					scrollLeft: Math.round(($this.parent().scrollLeft() - $(window).width())/$(window).width())*$(window).width()
 				}, 500,function(){
 					animating = 0;
 				});
@@ -684,7 +684,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 				if(!$this.next().length){return;}
 				animating = 1;
 				$this.parent().animate({
-					scrollLeft: $this.parent().scrollLeft() + $(window).width()
+					scrollLeft: Math.round(($this.parent().scrollLeft() + $(window).width())/$(window).width())*$(window).width()
 				}, 500,function(){
 					animating = 0;
 				});
