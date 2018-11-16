@@ -18,8 +18,11 @@ body::-webkit-scrollbar{display: none;}
 }
 
 img{
-	display: inline-block;
+	display: block;
 	width: 100%;
+}
+.img-md img{
+	display: inline-block;
 }
 .more-img{
 	color: #999;
@@ -656,6 +659,9 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			console.log(val);
 			console.log(this);
 			
+			if(Math.abs(val)<10){
+				return;
+			}
 			
 			if(val>0){
 				
