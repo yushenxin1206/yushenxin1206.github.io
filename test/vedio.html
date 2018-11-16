@@ -275,7 +275,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		$("img.lazy").lazyload({
 			threshold :100,
 			effects:"fadeIn", 
-			skip_invisible : false
+			skip_invisible : false		
 		});
 		
 		getJumpLink();
@@ -318,7 +318,9 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		/*是否有视频或GIF 传递给native判断是否需要显示网络未连接*/
 		function getVG(){
 			if($video.length || $gifList.length ){
-				window.location.href = "setnet:";
+				window.location.href = "setnet:hasmedia";
+			}else{
+				window.location.href = "setnet:nomedia";
 			}
 		}
 		
