@@ -655,8 +655,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			
 			var touchEnd = e.originalEvent.changedTouches[0];
 			
-			
-			if(Math.abs(touchEnd.pageX - touchStart.pageX) < 0.3*Math.abs(touchEnd.pageY - touchStart.pageY)){
+			if(Math.abs(touchEnd.pageY - touchStart.pageY)>5){
 				return;
 			}
 
