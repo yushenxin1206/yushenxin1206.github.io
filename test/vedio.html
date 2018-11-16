@@ -640,7 +640,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		
 		/*图片组滑动优化*/
 		var touchStart = 0;
-
+		var animating = 0;
 		$(".img-md img").on("touchstart",function(e){
 		
 			touchStart= e.originalEvent.changedTouches[0];
@@ -649,11 +649,14 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		
 		$(".img-md img").on("touchend",function(e){
 			
-		
+			if(animating){
+				return;
+			}
+			
 			var touchEnd = e.originalEvent.changedTouches[0];
 			
 			
-			if(Math.abs(touchEnd.pageX - touchStart.pageX) < 2*Math.abs(touchEnd.pageY - touchStart.pageY)){
+			if(Math.abs(touchEnd.pageX - touchStart.pageX) < 3*Math.abs(touchEnd.pageY - touchStart.pageY)){
 				return;
 			}
 
@@ -669,18 +672,22 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			if(val>0){
 				
 				if(!$this.prev().length){return;}
-
+				animating = 1;
 				$this.parent().animate({
 					scrollLeft: Math.round(($this.parent().scrollLeft() - $(window).width())/$(window).width())*$(window).width()
-				}, 500);
+				}, 500,function(){
+					animating = 0;
+				});
 
 			}else{
 				
 				if(!$this.next().length){return;}
-
+				animating = 1;
 				$this.parent().animate({
 					scrollLeft: Math.round(($this.parent().scrollLeft() + $(window).width())/$(window).width())*$(window).width()
-				}, 500);
+				}, 500,function(){
+					animating = 0;
+				});
 				
 			}
 			
