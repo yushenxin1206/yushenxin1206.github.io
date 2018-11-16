@@ -204,6 +204,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <div class="img-md">
 	<img class="lazy" data-original="power-wireless@2x.jpg"/>
 	<img class="lazy" data-original="power-reverse@2x.jpg"/>
+	<img class="lazy" data-original="power-reverse@2x.jpg"/>
 </div>
 <p class="more-img">向左滑动查看更多</p>
 
@@ -212,6 +213,9 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <p style=""><span style="">用镜头改变时间的流速，捕捉最动人的那一刻。960FPS超级慢动作视频拍摄，感受摄影韵律之美。</span></p>
 <p style=""><span style="" class="jump-link" data-href="jumptopage:/resource/card/20180820150724/content/2_greatphotos/SF-10044610_f001_tc.html">查看对应内部网页 ></span></p>
 <div class="img-md">
+	<img class="gif" src="slow-new.gif" />
+	<img class="gif-poster" src="slow-poster.png" />
+	
 	<img class="gif" src="slow-new.gif" />
 	<img class="gif-poster" src="slow-poster.png" />
 	
@@ -656,14 +660,14 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 					
 					if(!$this.prev().prev().length){return;}
 					$this.parent().animate({
-						scrollLeft: $this.prev().prev().offset().left
+						scrollLeft: $this.prev().prev().offset().left+1
 					}, 500);
 
 				}else{
 					
 					if(!$this.next().next().length){return;}
 					$this.parent().animate({
-						scrollLeft: $this.next().next().offset().left
+						scrollLeft: $this.next().next().offset().left+1
 					}, 500);
 					
 				}
@@ -675,14 +679,14 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 				
 				if(!$this.prev().length){return;}
 				$this.parent().animate({
-					scrollLeft: $this.prev().offset().left
+					scrollLeft: $this.prev().offset().left+1
 				}, 500);
 
 			}else{
 				
 				if(!$this.next().length){return;}
 				$this.parent().animate({
-					scrollLeft: $this.next().offset().left
+					scrollLeft: $this.next().offset().left+1
 				}, 500);
 				
 			}
