@@ -282,7 +282,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		
 		
 		getVG();
-		//getJumpLink();
+		getJumpLink();
 		/*隐藏不存在的入口*/
 		function getJumpLink(){
 			var report = "";
@@ -296,11 +296,8 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 					report = report + href.split(":")[1] + "#";
 				}
 			}
-			console.log(report);
 			if(report){
 				window.location.href = "hidelink:"+report;
-				//window.location.href = "setnet:hasnomedia";
-				alert("hidelink:"+report);
 			}
 		}
 		
