@@ -280,7 +280,6 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			skip_invisible : false		
 		});
 		
-		//getJumpLink();	
 		getVG();
 		/*隐藏不存在的入口*/
 		function getJumpLink(){
@@ -322,6 +321,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			}else{
 				window.location.href = "setnet:nomedia";
 			}
+			setTimeout(function(){	getJumpLink();	},500);
 		}
 		
 		/*初始化横竖屏值*/
