@@ -280,11 +280,8 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			skip_invisible : false		
 		});
 		
-		
-		setTimeout(function(){
-			getVG();
-			getJumpLink();	
-		},500);
+		getJumpLink();	
+		getVG();
 		/*隐藏不存在的入口*/
 		function getJumpLink(){
 			var report = "";
