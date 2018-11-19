@@ -283,7 +283,6 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		getVG();
 		/*隐藏不存在的入口*/
 		function getJumpLink(){
-			alert("getjumplink");
 			var report = "";
 			var href = "";
 			for(var i=0;i<$links.length;i++){
@@ -301,6 +300,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 		}
 		
 		function setJumpLink(data){
+			alert("setjumplink");
 			for(var i=0;i<$links.length;i++){
 				 href = $links[i].dataset.href;
 				if(!href){
