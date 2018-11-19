@@ -280,9 +280,9 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			skip_invisible : false		
 		});
 		
-		getJumpLink();
-		getVG();
 		
+		getVG();
+		getJumpLink();
 		/*隐藏不存在的入口*/
 		function getJumpLink(){
 			var report = "";
@@ -298,8 +298,8 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 			}
 			console.log(report);
 			if(report){
-				//window.location.href = "hidelink:"+report;
-				window.location.href = "setnet:hasnomedia";
+				window.location.href = "hidelink:"+report;
+				//window.location.href = "setnet:hasnomedia";
 				alert("hidelink:"+report);
 			}
 		}
