@@ -257,23 +257,7 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="jquery.lazyload.min.js"></script>
 <script>
-	
-	function setJumpLink(){
-		alert("setjumplink");
-		for(var i=0;i<$links.length;i++){
-			 href = $links[i].dataset.href;
-			if(!href){
-				continue;
-			}
-			if(href.indexOf("jumptocard")<0){
-				continue;
-			}
-			if(data.indexOf(href.split(":")[1])>-1){
-				$links.eq(i).hide();
-			}
-		}
-	}
-	
+
 	
 	$(function(){
 		
@@ -316,6 +300,24 @@ p{color: #666;font-size: 13px;line-height: 20px;}
 				window.location.href = "hidelink:"+report;
 			}
 		}
+		
+			
+		function setJumpLink(){
+			alert("setjumplink");
+			for(var i=0;i<$links.length;i++){
+				 href = $links[i].dataset.href;
+				if(!href){
+					continue;
+				}
+				if(href.indexOf("jumptocard")<0){
+					continue;
+				}
+				if(data.indexOf(href.split(":")[1])>-1){
+					$links.eq(i).hide();
+				}
+			}
+		}
+
 		
 		
 		/*是否有视频或GIF 传递给native判断是否需要显示网络未连接*/
