@@ -1,107 +1,177 @@
-<!--点击网页唤起应用-->
+<!--扫描二维码唤起应用-->
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
-<title></title>
+<title>玩机技巧 - 您的全能向导</title>
 <style type="text/css">
-	p{
-		margin: 50px;
-		font-size: 16px;
-		color: rgba(0,0,0,.54);
+	*{padding:0;margin:0;}
+	body{
+		box-sizing: border-box;
+		height: 100vh;
+		width: 100vw;
+		padding: 0 16px;
+		background: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	/*正在打开*/
+	.loading-wrap{
+		display: none;
+	}
+	.loading-icon{
+		display: block;
+		margin: 0 auto;
+		-webkit-animation: spin 2s linear infinite;
+		animation: spin 1.5s linear infinite;
+	}
+	/*图标动画*/
+	@-webkit-keyframes spin {
+        0%   {
+            -webkit-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+	@keyframes spin {
+		0% {
+			-webkit-transform: rotate(0deg);
+			-ms-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+		100% {
+			-webkit-transform: rotate(360deg);
+			-ms-transform: rotate(360deg);
+			transform: rotate(360deg);
+		}
+    }
+	.loading-text{
+		font-size: 13px;
+		color: rgba(25,25,25,.5);
 		text-align: center;
-		pointer-events: none;
 	}
-	.open-app{
-		color: rgba(0,0,0,.87);
-		pointer-events: auto;
+	/*提示信息*/
+	.warning-wrap{
+		display: none;
 	}
+	.warning-icon{
+		display: block;
+		margin: 0 auto;
+		padding: 11px;
+	}
+	.warning-text{
+		font-size: 13px;
+		color: #808080;
+		text-align: left;
+	}
+	.warning-img{
+		max-width: 100%;
+	}
+	img{display:none;}
 </style>
 </head>
-<body id="body">
-<p class="open-app"></p>
-<script src="../vConsole-3.2.0/dist/vconsole.min.js"></script>
-<script src="./libs/jquery.min.js"></script>
+<body>
+<div class="warning-wrap">
+	<img class="warning-img"src="./images/nobrowser.png">
+</div>
+<div class="loading-wrap">
+	<img width="72" height="72" class="loading-icon" src="./images/loading.svg"/>
+	<p class="loading-text"></p>
+</div>
 <script type="text/javascript">
 
-//初始化vConsole
-/*var vConsole = new VConsole(); 
+//获取页面连接参数
+var parameter = '';
+var pageUrl = location.href;
+if( pageUrl.indexOf('?') > -1 ){
+	parameter = pageUrl.substr( pageUrl.indexOf('?')+1 );
+}
+//deep links和应用市场地址  
+var appURL="emuitips://dl";
+var downloadURL=" https://club.huawei.com/forum-2797-1.html";
 
-var ifr = document.createElement('iframe');
-        ifr.src = "alipayqr://platformapi/startapp";//打开app的协议，有app同事提供
-        ifr.style.display = 'none';
+//语言数据
+var langData = {
+	"zh":{//中文
+		notSp:"抱歉，该平台无法使用玩机技巧",
+		openApp:"正在尝试打开玩机技巧...",
+		openInBrowser:"当前非浏览器环境，请点击右上角在浏览器中打开"
+	}
+};
 
-		//绑定onload和onerror
-		ifr.onload = function(){ //协议头能解析就能进,http/https协议能进，其他不能进
-				alert("load"); 
-			}; 
-		
-		document.body.appendChild(ifr);*/
-
-//deep links和应用市场地址
-var appURL="alipayqr://platformapi/startapp";
-//var appURL="emuitips://www.huawei.com/hwemuimanual";
-//var appURL="emuitips://www.huawei.com/hwemuimanual";
-var downloadURL="http://a.vmall.com/uowap/index.html#/detailApp/C5373";
+//更新文本内容
+var txtData = langData['zh'];
 
 //判断设备属于哪类平台
-var u = navigator.userAgent,//UserAgent字段之所以那么混乱，是因为其认为自己可以很好的渲染专门为其他浏览器编写的网页代码，因此主动添加其它浏览器的标识名称，使其能在自己的平台上运行
-app = navigator.appVersion;
-var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
-var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+var u = navigator.userAgent.toLowerCase();
+var isQQWxAli = u.match(/MicroMessenger\/[0-9]/i) || u.match(/QQ\/[0-9]/i) || u.match(/Alipay/i);//QQ微信支付宝
+var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1;
+var isHuawei = u.indexOf('huawei') > -1; //华为手机
 
-//IOS提示不能使用玩机技巧
-if(isIOS){  
-	$("p").eq(0).html("抱歉，IOS平台无法使用玩机技巧"); 
-	$("p").eq(0).removeClass('open-app');	
-}
-
-//安卓平台
-if(isAndroid){ 
+window.onload = function(){
 	
-	//判断是否为QQ或微信，不是则打开应用，否则提示在浏览器中打开
-	var ua = navigator.userAgent.toLowerCase();
-	var isQQWexin = ua.match(/MicroMessenger\/[0-9]/i) || ua.match(/QQ\/[0-9]/i);
+	if(isQQWxAli === null){
 	
-	if(isQQWexin === null){ 
+		//打开应用(只是尝试打开app，并不能返回app是否打开成功的结果，即app是否安装)
+		if( parameter ){
+			appURL = appURL + '?' + parameter;
+		}
 		
-		//为标签绑定事件
-		$("p").eq(0).click(openApp);
+		if(isAndroid){
+			window.location.href = appURL;
+		}
 		
+		document.getElementsByClassName("loading-text")[0].innerHTML = txtData.openApp;
+		document.getElementsByClassName("loading-wrap")[0].style.display = 'block';	
+		
+		setTimeout(function(){
+			if(isHuawei){
+		
+				//document.getElementsByClassName("loading-text")[0].innerHTML = txtData.openApp;
+				
+			
+				//进入提示页
+				window.location.replace("default.html");
+			
+				
+			}else{
+				window.location.replace("nohuawei.html");	
+			}
+		
+		},2000);
+			
+			
 	}else{
-	
-		//在QQ微信中提示点击右上角在浏览器中打开
-		$("p").eq(0).html("检测到当前非浏览器环境，请点击右上角在浏览器中打开"); 
-		$("p").eq(0).removeClass('open-app');
-		
+		//在QQ微信支付宝中提示点击右上角在浏览器中打开
+		//warningText.innerHTML = txtData.openInBrowser;
+		document.getElementsByClassName("warning-wrap")[0].style.display = 'block';
+			
 	}
 	
 }
 
-openApp();
+setWidth();
+window.onresize=setWidth;
 
+function setWidth(){
+	var warningImg= document.getElementsByClassName("warning-img")[0];
+	var winWidth = window.screen.width < window.screen.height ? window.screen.width:window.screen.height;
 
-//打开玩机技巧
-function openApp(){
-
-	$("p").eq(0).html("正在打开支付宝..."); 
-	$("p").eq(0).removeClass('open-app');
-	
-	
-	//打开应用
-	setTimeout(function(){
-		window.location.href = appURL;
-	},100);
-	
-	//延时2000ms则进入下载页
-	setTimeout(function(){
-	
-		window.location.href = downloadURL;
-		
-	},2000);
-	
+	warningImg.style.width = 0.54*winWidth+"px";
 }
+var imgs = document.getElementsByTagName("img");
+for(var i=0;i<imgs.length;i++){
+	imgs[i].onload = function(){
+		this.style.display = "block";
+	}
+}	
 
 </script>
 </body>
