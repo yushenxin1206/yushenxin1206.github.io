@@ -27,7 +27,7 @@
 <script type="text/javascript">
 window.location.href = "weixin://dl";	
 //初始化vConsole
-var vConsole = new VConsole(); //有奇怪的bug 不必深究(加个document.write就好了？)
+//var vConsole = new VConsole(); //有奇怪的bug 不必深究(加个document.write就好了？)
 
 var u = navigator.userAgent.toLowerCase();
 var isQQWxAli = u.match(/MicroMessenger\/[0-9]/i) || u.match(/QQ\/[0-9]/i) || u.match(/Alipay/i);//QQ微信支付宝
@@ -35,10 +35,10 @@ var isAndroid = u.indexOf('android') > -1 || u.indexOf('linux') > -1;
 var isHuawei = u.indexOf('huawei') > -1; //华为手机
 
 //判断设备属于哪类平台
-console.log(u);
+/*console.log(u);
 console.log(isQQWxAli);
 console.log(isAndroid);
-console.log(isHuawei);	
+console.log(isHuawei);	*/
 </script>
 </body>
 </html>
